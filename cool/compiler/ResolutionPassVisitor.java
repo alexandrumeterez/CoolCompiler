@@ -307,8 +307,21 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
 
             }
         }
-        if(callSymbol.getType().getName().equals("SELF_TYPE"))
+
+        // if the return type is self type
+        if (callSymbol.getType().getName().equals("SELF_TYPE")) {
+            // check the caller type
+            // if caller type is self_type, then return the type of the class where the dispatch appears
+            if (callerType.getName().equals("SELF_TYPE")) {
+                var currentClass = dispatch.getScope();
+                while (!(currentClass instanceof ClassSymbol)) {
+                    currentClass = currentClass.getParent();
+                }
+                return SymbolTable.globals.lookupClassSymbol(((ClassSymbol) currentClass).getName());
+            }
+            // if caller type is not self_type, then return the caller type
             return callerType;
+        }
         return callSymbol.getType();
     }
 

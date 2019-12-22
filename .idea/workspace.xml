@@ -3,16 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4d2c2ad1-7397-4f12-a05c-877ffc53c253" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/BuildClassGraphPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/BuildClassGraphPassVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/DefinitionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/DefinitionPassVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/cool/structures/ClassSymbol.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/structures/ClassSymbol.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/compiler/BuildClassGraphPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/BuildClassGraphPassVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/compiler/DefinitionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/DefinitionPassVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/structures/ClassSymbol.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/structures/ClassSymbol.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tema2/19-self_type.out" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/19-self_type.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tema2/20-basic-classes.out" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/20-basic-classes.out" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

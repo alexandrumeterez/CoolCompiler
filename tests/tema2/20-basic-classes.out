@@ -1,6 +1,6 @@
 "20-basic-classes.cl", line 1:18, Semantic error: Class A has undefined parent IO
 Exception in thread "main" java.lang.NullPointerException
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:310)
+	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:312)
 	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:8)
 	at cool.compiler.Dispatch.accept(ASTNode.java:185)
 	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:221)
@@ -9,13 +9,13 @@ Exception in thread "main" java.lang.NullPointerException
 	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:221)
 	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:8)
 	at cool.compiler.Dispatch.accept(ASTNode.java:185)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:662)
+	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:675)
 	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:8)
 	at cool.compiler.VarDef.accept(ASTNode.java:89)
 	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:179)
 	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:8)
 	at cool.compiler.ClassDef.accept(ASTNode.java:143)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:629)
+	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:642)
 	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:8)
 	at cool.compiler.Program.accept(ASTNode.java:538)
 	at cool.compiler.Compiler.main(Compiler.java:795)
