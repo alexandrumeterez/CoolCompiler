@@ -9,5 +9,4 @@
 "19-self_type.cl", line 45:22, Semantic error: Type A of assigned expression is incompatible with declared type B of identifier b
 "19-self_type.cl", line 46:21, Semantic error: Undefined method g in class A
 "19-self_type.cl", line 47:26, Semantic error: Undefined method g in class A
-"19-self_type.cl", line 49:27, Semantic error: Undefined method f1 in class SELF_TYPE
 Compilation halted
