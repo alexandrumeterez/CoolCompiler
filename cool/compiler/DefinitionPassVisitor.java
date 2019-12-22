@@ -89,6 +89,19 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
 
         // set current scope as current class
         currentScope = classSymbol;
+
+        // set self types: the type itself and its children
+        var currentType = classSymbol;
+        while (BuildClassGraphPassVisitor.parentToChild.containsKey(currentType.getName())) {
+            classSymbol.getSelfTypesList().add(currentType);
+            var childTypeName = BuildClassGraphPassVisitor.parentToChild.get(currentType.getName());
+            currentType = SymbolTable.globals.lookupClassSymbol(childTypeName);
+            if (currentType == null) {
+                break;
+            }
+        }
+
+
         classDef.class_type.setSymbol(classSymbol);
         classDef.setScope(currentScope);
         for (var member : classDef.features) {

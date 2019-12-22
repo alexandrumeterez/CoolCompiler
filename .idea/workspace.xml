@@ -2,12 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4d2c2ad1-7397-4f12-a05c-877ffc53c253" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/BuildClassGraphPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/BuildClassGraphPassVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/DefinitionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/DefinitionPassVisitor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/cool/structures/MethodSymbol.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/structures/MethodSymbol.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/structures/ClassSymbol.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/structures/ClassSymbol.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/compiler/BuildClassGraphPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/BuildClassGraphPassVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/compiler/DefinitionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/DefinitionPassVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/structures/MethodSymbol.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/structures/MethodSymbol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/structures/ClassSymbol.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/structures/ClassSymbol.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/tema2/19-self_type.out" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/19-self_type.out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/tema2/20-basic-classes.out" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/20-basic-classes.out" afterDir="false" />
     </list>
@@ -89,10 +92,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="710" y="328" width="489" height="382" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1576706165746" />
-    <state x="851" y="22" width="376" height="568" key="#com.intellij.ide.util.MemberChooser" timestamp="1576971676569">
+    <state x="850" y="0" width="376" height="568" key="#com.intellij.ide.util.MemberChooser" timestamp="1577016586653">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="851" y="22" width="376" height="568" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1576971676569" />
+    <state x="850" y="0" width="376" height="568" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1577016586653" />
     <state x="213" y="250" width="526" height="494" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1576776280409">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

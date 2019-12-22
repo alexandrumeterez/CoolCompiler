@@ -9,16 +9,7 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
 
     @Override
     public Symbol visit(TypeId id) {
-
-//        if (id.token.getText().equals("SELF_TYPE")) {
-//            var actualType = id.getScope();
-//            while (!(actualType instanceof ClassSymbol)) {
-//                actualType = actualType.getParent();
-//            }
-//            id.setSymbol(SymbolTable.globals.lookupClassSymbol(((ClassSymbol) actualType).getName()));
-//        } else {
         id.setSymbol(SymbolTable.globals.lookupClassSymbol(id.token.getText()));
-//        }
         return id.getSymbol();
     }
 
@@ -316,7 +307,8 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
 
             }
         }
-
+        if(callSymbol.getType().getName().equals("SELF_TYPE"))
+            return callerType;
         return callSymbol.getType();
     }
 

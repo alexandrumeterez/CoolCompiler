@@ -14,6 +14,7 @@ public class BuildClassGraphPassVisitor implements ASTVisitor<Void> {
     ArrayList<String> classesList = ClassesDefinitionPassVisitor.classesList;
     public static HashMap<String, ClassDef> stringToClassDef = new LinkedHashMap<>();
     public static HashMap<String, String> classGraph = new LinkedHashMap<>(); //key is child, value is parent
+    public static HashMap<String, String> parentToChild = new LinkedHashMap<>(); //key is parent, value is child
 
     @Override
     public Void visit(TypeId id) {
@@ -58,6 +59,7 @@ public class BuildClassGraphPassVisitor implements ASTVisitor<Void> {
         } else {
 //            SymbolTable.globals.add(new ClassSymbol(SymbolTable.globals, baseClass.token.getText()));
             classGraph.put(classType.token.getText(), baseClass.token.getText());
+            parentToChild.put(baseClass.token.getText(), classType.token.getText());
         }
 
         return null;

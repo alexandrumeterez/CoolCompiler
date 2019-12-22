@@ -1,6 +1,8 @@
 package cool.structures;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ClassSymbol extends Symbol implements Scope {
@@ -9,6 +11,16 @@ public class ClassSymbol extends Symbol implements Scope {
     protected Map<String, MethodSymbol> methodSymbols = new LinkedHashMap<>();
     protected Map<String, AttributeSymbol> attributeSymbols = new LinkedHashMap<>();
     protected Scope parent;
+
+    public List<ClassSymbol> getSelfTypesList() {
+        return selfTypesList;
+    }
+
+    public void setSelfTypesList(List<ClassSymbol> selfTypesList) {
+        this.selfTypesList = selfTypesList;
+    }
+
+    protected List<ClassSymbol> selfTypesList = new ArrayList<>();
 
     public ClassSymbol getParentClassSymbol() {
         return parentClassSymbol;
