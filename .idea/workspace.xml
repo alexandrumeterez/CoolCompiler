@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4d2c2ad1-7397-4f12-a05c-877ffc53c253" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1V7PXYLpShoTcTcJKCTqB71pb2w" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../antlr-4.7.2-complete.jar!/" />
+    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cool/parser" />
+    </key>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4d2c2ad1-7397-4f12-a05c-877ffc53c253" name="Default Changelist" comment="" />
+      <created>1576601199219</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1576601199219</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="710" y="328" width="489" height="382" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1576706165746">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="710" y="328" width="489" height="382" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1576706165746" />
+    <state x="851" y="22" width="376" height="568" key="#com.intellij.ide.util.MemberChooser" timestamp="1576971676569">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="851" y="22" width="376" height="568" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1576971676569" />
+    <state x="213" y="250" width="526" height="494" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1576776280409">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="213" y="250" width="526" height="494" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1576776280409" />
+    <state x="692" y="272" width="526" height="494" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1576622888892">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="692" y="272" width="526" height="494" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1576622888892" />
+    <state x="642" y="197" width="612" height="505" key="FileChooserDialogImpl" timestamp="1576603464206">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="642" y="197" width="612" height="505" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1576603464206" />
+    <state x="440" y="56" width="1026" height="838" key="SettingsEditor" timestamp="1576701074760">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="440" y="56" width="1026" height="838" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1576701074760" />
+    <state x="1100" y="251" width="672" height="677" key="run.anything.popup" timestamp="1576684987138">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1100" y="251" width="672" height="677" key="run.anything.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1576684987138" />
+    <state x="623" y="245" width="672" height="678" key="search.everywhere.popup" timestamp="1576956163814">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="623" y="245" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1576956163814" />
+  </component>
+</project>

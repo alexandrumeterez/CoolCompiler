@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Tema2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Lab6-sol.zip!/" />
+      <root url="jar://$PROJECT_DIR$/Tema2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tema2nitu.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

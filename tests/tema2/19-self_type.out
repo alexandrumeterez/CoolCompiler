@@ -1,0 +1,2 @@
+"19-self_type.cl", line 2:22, Semantic error: Type A of initialization expression of attribute x is incompatible with declared type SELF_TYPE
+Compilation halted
