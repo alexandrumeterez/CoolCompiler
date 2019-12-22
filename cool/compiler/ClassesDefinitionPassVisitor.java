@@ -11,6 +11,14 @@ public class ClassesDefinitionPassVisitor implements ASTVisitor<Void> {
     Scope currentScope = SymbolTable.globals;
     public static ArrayList<String> classesList = new ArrayList<>();
 
+    public ClassesDefinitionPassVisitor() {
+        classesList.add("IO");
+        classesList.add("String");
+        classesList.add("Bool");
+        classesList.add("Int");
+        classesList.add("Object");
+    }
+
     @Override
     public Void visit(TypeId id) {
         return null;

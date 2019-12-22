@@ -1,22 +1,5 @@
-"20-basic-classes.cl", line 1:18, Semantic error: Class A has undefined parent IO
-Exception in thread "main" java.lang.NullPointerException
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:361)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:8)
-	at cool.compiler.Dispatch.accept(ASTNode.java:185)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:254)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:8)
-	at cool.compiler.Dispatch.accept(ASTNode.java:185)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:254)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:8)
-	at cool.compiler.Dispatch.accept(ASTNode.java:185)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:725)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:8)
-	at cool.compiler.VarDef.accept(ASTNode.java:89)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:188)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:8)
-	at cool.compiler.ClassDef.accept(ASTNode.java:143)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:692)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:8)
-	at cool.compiler.Program.accept(ASTNode.java:538)
-	at cool.compiler.Compiler.main(Compiler.java:795)
-make[1]: *** [Makefile:54: run] Error 1
+"20-basic-classes.cl", line 2:16, Semantic error: Type Object of initialization expression of attribute x is incompatible with declared type Int
+"20-basic-classes.cl", line 4:16, Semantic error: Type SELF_TYPE of initialization expression of attribute a is incompatible with declared type Int
+"20-basic-classes.cl", line 7:20, Semantic error: Type Int of initialization expression of attribute s2 is incompatible with declared type String
+"20-basic-classes.cl", line 11:33, Semantic error: In call to method substr of class String, actual type String of formal parameter l is incompatible with declared type Int
+Compilation halted

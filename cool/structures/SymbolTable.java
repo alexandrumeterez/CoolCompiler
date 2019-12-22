@@ -6,6 +6,7 @@ import cool.parser.CoolParser;
 import org.antlr.v4.runtime.*;
 
 import cool.compiler.Compiler;
+import cool.compiler.ASTNode;
 
 public class SymbolTable {
     public static Scope globals;
@@ -22,18 +23,61 @@ public class SymbolTable {
         BasicClasses.STRING.setParent(BasicClasses.OBJECT);
         BasicClasses.IO.setParent(BasicClasses.OBJECT);
 
-        BasicClasses.OBJECT.add(new MethodSymbol(BasicClasses.OBJECT, "abort"));
-        BasicClasses.OBJECT.add(new MethodSymbol(BasicClasses.OBJECT, "type_name"));
-        BasicClasses.OBJECT.add(new MethodSymbol(BasicClasses.OBJECT, "copy"));
+        // Set methods and formals of OBJECT
+        var abortMethodSymbol = new MethodSymbol(BasicClasses.OBJECT, "abort");
+        abortMethodSymbol.setType(BasicClasses.OBJECT);
+        var typeNameMethodSymbol = new MethodSymbol(BasicClasses.OBJECT, "type_name");
+        typeNameMethodSymbol.setType(BasicClasses.STRING);
+        var copyMethodSymbol = new MethodSymbol(BasicClasses.OBJECT, "copy");
+        copyMethodSymbol.setType(BasicClasses.SELF_TYPE);
+        BasicClasses.OBJECT.add(abortMethodSymbol);
+        BasicClasses.OBJECT.add(typeNameMethodSymbol);
+        BasicClasses.OBJECT.add(copyMethodSymbol);
 
-        BasicClasses.STRING.add(new MethodSymbol(BasicClasses.STRING, "length"));
-        BasicClasses.STRING.add(new MethodSymbol(BasicClasses.STRING, "concat"));
-        BasicClasses.STRING.add(new MethodSymbol(BasicClasses.STRING, "substr"));
+        // Set methods and formals of STRING
+        var lengthMethodSymbol = new MethodSymbol(BasicClasses.STRING, "length");
+        lengthMethodSymbol.setType(BasicClasses.INT);
 
-        BasicClasses.IO.add(new MethodSymbol(BasicClasses.IO, "out_string"));
-        BasicClasses.IO.add(new MethodSymbol(BasicClasses.IO, "out_int"));
-        BasicClasses.IO.add(new MethodSymbol(BasicClasses.IO, "in_string"));
-        BasicClasses.IO.add(new MethodSymbol(BasicClasses.IO, "in_int"));
+        var concatMethodSymbol = new MethodSymbol(BasicClasses.STRING, "concat");
+        concatMethodSymbol.setType(BasicClasses.STRING);
+        var concatFormal1 = new AttributeSymbol("s");
+        concatFormal1.setType(BasicClasses.STRING);
+        concatMethodSymbol.add(concatFormal1);
+
+        var substrMethodSymbol = new MethodSymbol(BasicClasses.STRING, "substr");
+        substrMethodSymbol.setType(BasicClasses.STRING);
+        var substrFormal1 = new AttributeSymbol("i");
+        substrFormal1.setType(BasicClasses.INT);
+        var substrFormal2 = new AttributeSymbol("l");
+        substrFormal2.setType(BasicClasses.INT);
+        substrMethodSymbol.add(substrFormal1);
+        substrMethodSymbol.add(substrFormal2);
+
+        BasicClasses.STRING.add(lengthMethodSymbol);
+        BasicClasses.STRING.add(concatMethodSymbol);
+        BasicClasses.STRING.add(substrMethodSymbol);
+
+        // Set methods and formals of IO
+        var outStringMethodSymbol = new MethodSymbol(BasicClasses.IO, "out_string");
+        outStringMethodSymbol.setType(BasicClasses.SELF_TYPE);
+        var outStringFormal1 = new AttributeSymbol("x");
+        outStringFormal1.setType(BasicClasses.STRING);
+        outStringMethodSymbol.add(outStringFormal1);
+
+        var outIntMethodSymbol = new MethodSymbol(BasicClasses.IO, "out_int");
+        outIntMethodSymbol.setType(BasicClasses.SELF_TYPE);
+        var outIntFormal1 = new AttributeSymbol("x");
+        outIntFormal1.setType(BasicClasses.INT);
+        outIntMethodSymbol.add(outIntFormal1);
+
+        var inStringMethodSymbol = new MethodSymbol(BasicClasses.IO, "in_string");
+        inStringMethodSymbol.setType(BasicClasses.STRING);
+        var inIntMethodSymbol = new MethodSymbol(BasicClasses.IO, "in_int");
+        inIntMethodSymbol.setType(BasicClasses.INT);
+        BasicClasses.IO.add(outStringMethodSymbol);
+        BasicClasses.IO.add(outIntMethodSymbol);
+        BasicClasses.IO.add(inStringMethodSymbol);
+        BasicClasses.IO.add(inIntMethodSymbol);
 
         BasicClasses.INT.setParentClassSymbol(BasicClasses.OBJECT);
         BasicClasses.BOOL.setParentClassSymbol(BasicClasses.OBJECT);

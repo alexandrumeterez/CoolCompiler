@@ -3,10 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="4d2c2ad1-7397-4f12-a05c-877ffc53c253" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/ClassesDefinitionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/ClassesDefinitionPassVisitor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/structures/SymbolTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/structures/SymbolTable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/compiler/ClassesDefinitionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/ClassesDefinitionPassVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tema2/19-self_type.cl" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/19-self_type.cl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tema2/19-self_type.out" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/19-self_type.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/structures/SymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/structures/SymbolTable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/tema2/20-basic-classes.out" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/20-basic-classes.out" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -87,10 +89,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="710" y="328" width="489" height="382" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1576706165746" />
-    <state x="850" y="0" width="376" height="568" key="#com.intellij.ide.util.MemberChooser" timestamp="1577016586653">
+    <state x="848" y="-44" width="376" height="568" key="#com.intellij.ide.util.MemberChooser" timestamp="1577025377798">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="850" y="0" width="376" height="568" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1577016586653" />
+    <state x="848" y="-44" width="376" height="568" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1577025377798" />
     <state x="213" y="250" width="526" height="494" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1576776280409">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
