@@ -5,7 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tema2/18-type-dispatch.cl" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/18-type-dispatch.cl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/tema2/19-self_type.cl" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/19-self_type.cl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/tema2/19-self_type.out" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/19-self_type.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/tema2/20-basic-classes.out" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/20-basic-classes.out" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

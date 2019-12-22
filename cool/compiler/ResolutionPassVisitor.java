@@ -148,12 +148,13 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
                 return methodReturnType;
             }
 
+
             // check for SELF_TYPE in the function definition
+            if(bodyType.getName().equals("SELF_TYPE") && methodReturnType.getName().equals("SELF_TYPE")) {
+                return methodReturnType;
+            }
             if (bodyType.getName().equals("SELF_TYPE")) {
-                // check if the return type is among the self types of the class
-                if (classScope.getSelfTypesList().contains(methodReturnType.getName())) {
-                    bodyType = methodReturnType;
-                }
+                bodyType = (ClassSymbol)funcDef.getScope().getParent();
             }
 
             var parent = ((ClassSymbol) bodyType).getParentClassSymbol();
@@ -194,30 +195,33 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
         var left = assignExpr.name.accept(this);
         var right = assignExpr.e.accept(this);
         // check if the left is SELF_TYPE
-        if (left.getName().equals("SELF_TYPE")) {
-            // if left is self_type, then set left as the type of the class it's in
-            var currentScope = assignExpr.getScope();
-            while (!(currentScope instanceof ClassSymbol)) {
-                currentScope = currentScope.getParent();
-            }
-            left = SymbolTable.globals.lookupClassSymbol(((ClassSymbol) currentScope).getName());
-        }
+//        if (left.getName().equals("SELF_TYPE")) {
+//            // if left is self_type, then set left as the type of the class it's in
+//            var currentScope = assignExpr.getScope();
+//            while (!(currentScope instanceof ClassSymbol)) {
+//                currentScope = currentScope.getParent();
+//            }
+//            left = SymbolTable.globals.lookupClassSymbol(((ClassSymbol) currentScope).getName());
+//        }
 
 
         // if there is no assignment, then return the left type
         if (right == null) {
             return left;
         }
-
-        // check if the right is SELF_TYPE
-        if (right.getName().equals("SELF_TYPE")) {
-            // if right is self_type, then set right as the type of the class it's in
-            var currentScope = assignExpr.getScope();
-            while (!(currentScope instanceof ClassSymbol)) {
-                currentScope = currentScope.getParent();
-            }
-            right = SymbolTable.globals.lookupClassSymbol(((ClassSymbol) currentScope).getName());
+        if(left.getName().equals(right.getName())) {
+            return right;
         }
+
+//        // check if the right is SELF_TYPE
+//        if (right.getName().equals("SELF_TYPE")) {
+//            // if right is self_type, then set right as the type of the class it's in
+//            var currentScope = assignExpr.getScope();
+//            while (!(currentScope instanceof ClassSymbol)) {
+//                currentScope = currentScope.getParent();
+//            }
+//            right = SymbolTable.globals.lookupClassSymbol(((ClassSymbol) currentScope).getName());
+//        }
 
         // search on the type tree to see if the right expression
         // matches the type with the left
@@ -248,7 +252,7 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
     public Symbol visit(Dispatch dispatch) {
         var caller = dispatch.object;
         var callerType = (ClassSymbol) caller.accept(this);
-
+        var deepestCallerType = callerType;
 //        System.out.println(callerType);
         // check if callerType is self type
         if (callerType.getName().equals("SELF_TYPE")) {
@@ -261,8 +265,9 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
         }
 
         var atClass = dispatch.class_name;
+        ClassSymbol atClassType = null;
         if (atClass != null) {
-            var atClassType = (ClassSymbol) atClass.accept(this);
+            atClassType = (ClassSymbol) atClass.accept(this);
             if (atClass.token.getText().equals("SELF_TYPE")) {
                 SymbolTable.error(atClass.ctx, atClass.token, "Type of static dispatch cannot be SELF_TYPE");
                 return null;
@@ -300,6 +305,9 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
         }
         // check if method exists in caller type class
         var callSymbol = (MethodSymbol) callerType.lookupMethodSymbol(dispatch.call.name.token.getText());
+        if(atClass != null) {
+            callSymbol = (MethodSymbol) atClassType.lookupMethodSymbol(dispatch.call.name.token.getText());
+        }
         var call = dispatch.call;
 
 //        System.out.println(callSymbol.getType());
@@ -353,6 +361,7 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
         if (callSymbol.getType().getName().equals("SELF_TYPE")) {
             // check the caller type
             // if caller type is self_type, then return the type of the class where the dispatch appears
+            // TODO: REDO THIS
             if (callerType.getName().equals("SELF_TYPE")) {
                 var currentClass = dispatch.getScope();
                 while (!(currentClass instanceof ClassSymbol)) {
@@ -361,7 +370,7 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
                 return SymbolTable.globals.lookupClassSymbol(((ClassSymbol) currentClass).getName());
             }
             // if caller type is not self_type, then return the caller type
-            return callerType;
+            return deepestCallerType;
         }
         return callSymbol.getType();
     }
