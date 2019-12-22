@@ -1,22 +1,6 @@
 "20-basic-classes.cl", line 1:18, Semantic error: Class A has undefined parent IO
-Exception in thread "main" java.lang.NullPointerException
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:282)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:8)
-	at cool.compiler.Dispatch.accept(ASTNode.java:185)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:231)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:8)
-	at cool.compiler.Dispatch.accept(ASTNode.java:185)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:231)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:8)
-	at cool.compiler.Dispatch.accept(ASTNode.java:185)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:681)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:8)
-	at cool.compiler.VarDef.accept(ASTNode.java:89)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:189)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:8)
-	at cool.compiler.ClassDef.accept(ASTNode.java:143)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:648)
-	at cool.compiler.ResolutionPassVisitor.visit(ResolutionPassVisitor.java:8)
-	at cool.compiler.Program.accept(ASTNode.java:538)
-	at cool.compiler.Compiler.main(Compiler.java:795)
-make[1]: *** [Makefile:54: run] Error 1
+"20-basic-classes.cl", line 6:20, Semantic error: Method out_string of class A is applied to wrong number of arguments
+"20-basic-classes.cl", line 7:20, Semantic error: Method out_string of class A is applied to wrong number of arguments
+"20-basic-classes.cl", line 10:23, Semantic error: Method concat of class String is applied to wrong number of arguments
+"20-basic-classes.cl", line 11:23, Semantic error: Method substr of class String is applied to wrong number of arguments
+Compilation halted

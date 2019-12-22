@@ -6,7 +6,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
-    ClassSymbol typeToReplaceSelfTypeWith = null;
 
     @Override
     public Symbol visit(TypeId id) {
@@ -95,7 +94,7 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
         var name = funcDef.name;
         // class that contains this function
         var classScope = (ClassSymbol) funcDef.getScope().getParent();
-        if (!funcDef.return_type.token.getText().equals("SELF_TYPE") && SymbolTable.globals.lookupClassSymbol(type.token.getText()) == null) {
+        if (SymbolTable.globals.lookupClassSymbol(type.token.getText()) == null) {
             SymbolTable.error(funcDef.ctx, funcDef.token, "Class " +
                     classScope + " has method " + name.token.getText() +
                     " with undefined return type " + type.token.getText());
@@ -273,15 +272,10 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
 
 //        System.out.println(callSymbol.getType());
 
-        if (!callerType.getName().equals("SELF_TYPE") && callSymbol == null) {
+        if (callSymbol == null) {
             SymbolTable.error(call.ctx, call.name.token, "Undefined method " +
                     call.name.token.getText() + " in class " + callerType);
             return null;
-        }
-
-        if (callSymbol.getType().getName().equals("SELF_TYPE")) {
-            callSymbol.setType(SymbolTable.globals.lookupClassSymbol(callerType.getName()));
-            callSymbol.setMustResetToSelfType(true);
         }
 
         // check
@@ -323,12 +317,7 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
             }
         }
 
-        var returnType = callSymbol.getType();
-        if (callSymbol.mustResetToSelfType()) {
-            callSymbol.setType(SymbolTable.globals.lookupClassSymbol("SELF_TYPE"));
-            callSymbol.setMustResetToSelfType(false);
-        }
-        return returnType;
+        return callSymbol.getType();
     }
 
     @Override
@@ -675,11 +664,6 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
         var lvalueType = ((AttributeSymbol) name.getSymbol()).getType();
         if (lvalueType == null) {
             return null;
-        }
-
-        System.out.println(varDef.token + " " + lvalueType);
-        if(lvalueType.getName().equals("SELF_TYPE")) {
-            lvalueType = scopeClass;
         }
 
         if (varDef.init != null) {

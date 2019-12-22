@@ -11,15 +11,6 @@ public class MethodSymbol extends Symbol implements Scope {
         return attributeSymbols;
     }
 
-    public boolean mustResetToSelfType() {
-        return mustResetToSelfType;
-    }
-
-    public void setMustResetToSelfType(boolean mustResetToSelfType) {
-        this.mustResetToSelfType = mustResetToSelfType;
-    }
-
-    protected boolean mustResetToSelfType = false;
     protected Map<String, AttributeSymbol> attributeSymbols = new LinkedHashMap<>();
     protected Scope parent;
 
