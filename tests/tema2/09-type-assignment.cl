@@ -3,15 +3,15 @@ class A {
     y : Int;
     b : B;
     c : C;
-    
+
     f() : Object {
         b <- b
     };
-    
+
     g() : Object {
         b <- c
     };
-    
+
     h() : Object {
         c <- b
     };
@@ -19,7 +19,7 @@ class A {
     i() : Object {
         self <- self
     };
-    
+
     j() : Object {
         x <- y
     };

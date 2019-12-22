@@ -148,6 +148,14 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
                 return methodReturnType;
             }
 
+            // check for SELF_TYPE in the function definition
+            if (bodyType.getName().equals("SELF_TYPE")) {
+                // check if the return type is among the self types of the class
+                if (classScope.getSelfTypesList().contains(methodReturnType.getName())) {
+                    bodyType = methodReturnType;
+                }
+            }
+
             var parent = ((ClassSymbol) bodyType).getParentClassSymbol();
             while (parent != null) {
                 if (parent.getName().equals(BasicClasses.OBJECT.getName())) {
@@ -185,9 +193,30 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
     public Symbol visit(AssignExpr assignExpr) {
         var left = assignExpr.name.accept(this);
         var right = assignExpr.e.accept(this);
+        // check if the left is SELF_TYPE
+        if (left.getName().equals("SELF_TYPE")) {
+            // if left is self_type, then set left as the type of the class it's in
+            var currentScope = assignExpr.getScope();
+            while (!(currentScope instanceof ClassSymbol)) {
+                currentScope = currentScope.getParent();
+            }
+            left = SymbolTable.globals.lookupClassSymbol(((ClassSymbol) currentScope).getName());
+        }
+
+
         // if there is no assignment, then return the left type
         if (right == null) {
             return left;
+        }
+
+        // check if the right is SELF_TYPE
+        if (right.getName().equals("SELF_TYPE")) {
+            // if right is self_type, then set right as the type of the class it's in
+            var currentScope = assignExpr.getScope();
+            while (!(currentScope instanceof ClassSymbol)) {
+                currentScope = currentScope.getParent();
+            }
+            right = SymbolTable.globals.lookupClassSymbol(((ClassSymbol) currentScope).getName());
         }
 
         // search on the type tree to see if the right expression

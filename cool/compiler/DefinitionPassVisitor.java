@@ -92,13 +92,16 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
 
         // set self types: the type itself and its children
         var currentType = classSymbol;
+        classSymbol.getSelfTypesList().add(currentType.getName());
         while (BuildClassGraphPassVisitor.parentToChild.containsKey(currentType.getName())) {
-            classSymbol.getSelfTypesList().add(currentType);
             var childTypeName = BuildClassGraphPassVisitor.parentToChild.get(currentType.getName());
+
             currentType = SymbolTable.globals.lookupClassSymbol(childTypeName);
             if (currentType == null) {
                 break;
             }
+            classSymbol.getSelfTypesList().add(currentType.getName());
+
         }
 
 
@@ -108,7 +111,7 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
             member.accept(this);
         }
         var self = new AttributeSymbol("self");
-        self.setType(classSymbol);
+        self.setType(SymbolTable.globals.lookupClassSymbol("SELF_TYPE"));
         classSymbol.add(self);
         currentScope = currentScope.getParent();
 
@@ -117,6 +120,7 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
 
     @Override
     public Void visit(AssignExpr assignExpr) {
+        assignExpr.setScope(currentScope);
         if (assignExpr.name.token.getText().equals("self")) {
             SymbolTable.error(assignExpr.ctx, assignExpr.name.token, "Cannot assign to self");
         }

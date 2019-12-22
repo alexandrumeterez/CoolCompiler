@@ -12,15 +12,15 @@ public class ClassSymbol extends Symbol implements Scope {
     protected Map<String, AttributeSymbol> attributeSymbols = new LinkedHashMap<>();
     protected Scope parent;
 
-    public List<ClassSymbol> getSelfTypesList() {
+    public List<String> getSelfTypesList() {
         return selfTypesList;
     }
 
-    public void setSelfTypesList(List<ClassSymbol> selfTypesList) {
+    public void setSelfTypesList(List<String> selfTypesList) {
         this.selfTypesList = selfTypesList;
     }
 
-    protected List<ClassSymbol> selfTypesList = new ArrayList<>();
+    protected List<String> selfTypesList = new ArrayList<>();
 
     public ClassSymbol getParentClassSymbol() {
         return parentClassSymbol;
