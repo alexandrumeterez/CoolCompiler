@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4d2c2ad1-7397-4f12-a05c-877ffc53c253" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/ClassesDefinitionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/ClassesDefinitionPassVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/cool/structures/SymbolTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/structures/SymbolTable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/compiler/ClassesDefinitionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/ClassesDefinitionPassVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/structures/SymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/structures/SymbolTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tema2/20-basic-classes.out" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/20-basic-classes.out" afterDir="false" />
-    </list>
+    <list default="true" id="4d2c2ad1-7397-4f12-a05c-877ffc53c253" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
