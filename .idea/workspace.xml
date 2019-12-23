@@ -1,7 +1,205 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4d2c2ad1-7397-4f12-a05c-877ffc53c253" name="Default Changelist" comment="" />
+    <list default="true" id="4d2c2ad1-7397-4f12-a05c-877ffc53c253" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/cool/template.stg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tester.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/01-class.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/01-class.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/01-class.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/02-attr-no-init.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/02-attr-no-init.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/02-attr-no-init.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/03-attr-init.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/03-attr-init.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/03-attr-init.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/04-method-def.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/04-method-def.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/04-method-def.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/05-dispatch-explicit-abort.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/05-dispatch-explicit-abort.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/05-dispatch-explicit-abort.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/06-dispatch-implicit-abort.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/06-dispatch-implicit-abort.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/06-dispatch-implicit-abort.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/07-dispatch-on-void-abort.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/07-dispatch-on-void-abort.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/07-dispatch-on-void-abort.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/08-dispatch-block-IO.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/08-dispatch-block-IO.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/08-dispatch-block-IO.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/09-dispatch-chain-IO.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/09-dispatch-chain-IO.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/09-dispatch-chain-IO.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/10-dispatch-Object.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/10-dispatch-Object.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/10-dispatch-Object.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/11-dispatch-String.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/11-dispatch-String.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/11-dispatch-String.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/12-attr-no-init-ref.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/12-attr-no-init-ref.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/12-attr-no-init-ref.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/13-attr-init-ref-assign.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/13-attr-init-ref-assign.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/13-attr-init-ref-assign.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/14-formals-ref-assign.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/14-formals-ref-assign.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/14-formals-ref-assign.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/15-let-no-init-ref.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/15-let-no-init-ref.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/15-let-no-init-ref.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/16-let-init-ref-assign.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/16-let-init-ref-assign.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/16-let-init-ref-assign.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/17-new-class-name.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/17-new-class-name.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/17-new-class-name.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/18-new-self_type.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/18-new-self_type.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/18-new-self_type.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/19-dynamic-dispatch.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/19-dynamic-dispatch.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/19-dynamic-dispatch.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/20-static-dispatch.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/20-static-dispatch.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/20-static-dispatch.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/21-if.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/21-if.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/21-if.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/22-isvoid.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/22-isvoid.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/22-isvoid.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/23-not.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/23-not.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/23-not.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/24-arithm-plus.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/24-arithm-plus.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/24-arithm-plus.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/25-arithm-paren.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/25-arithm-paren.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/25-arithm-paren.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/26-equality.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/26-equality.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/26-equality.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/27-compare.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/27-compare.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/27-compare.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/28-while.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/28-while.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/28-while.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/29-case.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/29-case.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/29-case.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/30-case-on-void.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/30-case-on-void.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/30-case-on-void.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/31-case-unmatched.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/31-case-unmatched.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/31-case-unmatched.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/32-big.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/32-big.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/tests/tema3/32-big.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Tester3/trap.handler.nogc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/coolc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/01-class.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/01-class.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/01-class.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/02-attr-no-init.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/02-attr-no-init.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/02-attr-no-init.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/03-attr-init.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/03-attr-init.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/03-attr-init.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/04-method-def.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/04-method-def.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/04-method-def.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/05-dispatch-explicit-abort.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/05-dispatch-explicit-abort.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/05-dispatch-explicit-abort.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/06-dispatch-implicit-abort.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/06-dispatch-implicit-abort.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/06-dispatch-implicit-abort.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/07-dispatch-on-void-abort.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/07-dispatch-on-void-abort.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/07-dispatch-on-void-abort.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/08-dispatch-block-IO.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/08-dispatch-block-IO.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/08-dispatch-block-IO.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/09-dispatch-chain-IO.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/09-dispatch-chain-IO.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/09-dispatch-chain-IO.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/10-dispatch-Object.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/10-dispatch-Object.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/10-dispatch-Object.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/11-dispatch-String.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/11-dispatch-String.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/11-dispatch-String.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/12-attr-no-init-ref.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/12-attr-no-init-ref.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/12-attr-no-init-ref.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/13-attr-init-ref-assign.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/13-attr-init-ref-assign.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/13-attr-init-ref-assign.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/14-formals-ref-assign.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/14-formals-ref-assign.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/14-formals-ref-assign.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/15-let-no-init-ref.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/15-let-no-init-ref.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/15-let-no-init-ref.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/16-let-init-ref-assign.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/16-let-init-ref-assign.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/16-let-init-ref-assign.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/17-new-class-name.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/17-new-class-name.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/17-new-class-name.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/18-new-self_type.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/18-new-self_type.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/18-new-self_type.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/19-dynamic-dispatch.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/19-dynamic-dispatch.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/19-dynamic-dispatch.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/20-static-dispatch.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/20-static-dispatch.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/20-static-dispatch.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/21-if.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/21-if.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/21-if.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/22-isvoid.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/22-isvoid.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/22-isvoid.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/23-not.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/23-not.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/23-not.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/24-arithm-plus.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/24-arithm-plus.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/24-arithm-plus.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/25-arithm-paren.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/25-arithm-paren.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/25-arithm-paren.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/26-equality.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/26-equality.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/26-equality.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/27-compare.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/27-compare.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/27-compare.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/28-while.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/28-while.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/28-while.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/29-case.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/29-case.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/29-case.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/30-case-on-void.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/30-case-on-void.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/30-case-on-void.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/31-case-unmatched.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/31-case-unmatched.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/31-case-unmatched.s-model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/32-big.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/32-big.ref" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/tema3/32-big.s-model" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -76,10 +274,10 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="710" y="328" width="489" height="382" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1576706165746">
+    <state x="709" y="306" width="509" height="382" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1577121905906">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="710" y="328" width="489" height="382" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1576706165746" />
+    <state x="709" y="306" width="509" height="382" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1577121905906" />
     <state x="848" y="-44" width="376" height="568" key="#com.intellij.ide.util.MemberChooser" timestamp="1577025377798">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
