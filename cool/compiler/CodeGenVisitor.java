@@ -58,7 +58,7 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
     }
 
     private void createClassNameToClassObjectMap() {
-        for(Map.Entry<String, Integer> entry : classNameToIndexMap.entrySet()) {
+        for (Map.Entry<String, Integer> entry : classNameToIndexMap.entrySet()) {
             String className = entry.getKey();
 
             ClassObject classObject = createClassObject(className);
@@ -97,7 +97,7 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
             if (entry.getKey().equals(""))
                 continue;
             ;
-            classNameTab.add("tag", entry.getValue());
+            classNameTab.add("tag", ".word " + entry.getValue());
         }
         return classNameTab;
     }
@@ -107,8 +107,8 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         for (String v : classNameToIndexMap.keySet()) {
             if (v.equals(""))
                 continue;
-            classObjTab.add("tag", v + "_protObj");
-            classObjTab.add("tag", v + "_init");
+            classObjTab.add("tag", ".word " + v + "_protObj");
+            classObjTab.add("tag", ".word " + v + "_init");
         }
         return classObjTab;
     }
@@ -120,8 +120,8 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
     ST dataSection;
     ST textSection;
 
-    static int strConstIndex = 6; //starts at 6 because first 5 are default classes
-    static int intConstIndex = 5; //TODO: why
+    static int strConstIndex = 1; //starts at 6 because first 5 are default classes
+    static int intConstIndex = 1; //TODO: why
 
     static HashMap<String, ClassObject> classNameToClassObjectMap = new LinkedHashMap<>();
     static HashMap<String, Integer> classNameToIndexMap = new LinkedHashMap<>();
@@ -170,39 +170,64 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         intConstantsList.add(int_const0);
 
         System.out.println(classNameToIndexMap);
+        for (Map.Entry<String, Integer> entry : classNameToIndexMap.entrySet()) {
+            String className = entry.getKey();
+            int tag = entry.getValue();
 
-        ST str_const1 = createStringConstant(1, 6, "int_const1", "Object", classNameToIndexMap.get("String"));
-        stringConstantsList.add(str_const1);
-        classNameToStrConstMap.put("Object", "str_const1");
-        strConstToClassNameMap.put("str_const1", "Object");
-        ST int_const1 = createAndAddIntConstant(1, 6, classNameToIndexMap.get("Int"));
-        intConstantsList.add(int_const1);
+            // computer wordDim for the str const
+            int length = className.length() + 1;
+            int wordDim = length / 4;
+            if (length % 4 != 0) {
+                wordDim = length / 4 + 1;
+            }
+            wordDim += 4;
 
-        ST str_const2 = createStringConstant(2, 5, "int_const2", "IO", classNameToIndexMap.get("String"));
-        stringConstantsList.add(str_const2);
-        classNameToStrConstMap.put("IO", "str_const2");
-        strConstToClassNameMap.put("str_const2", "IO");
-        ST int_const2 = createAndAddIntConstant(2, 2, classNameToIndexMap.get("Int"));
-        intConstantsList.add(int_const2);
-
-        ST str_const3 = createStringConstant(3, 5, "int_const3", "Int", classNameToIndexMap.get("String"));
-        stringConstantsList.add(str_const3);
-        classNameToStrConstMap.put("Int", "str_const3");
-        strConstToClassNameMap.put("str_const3", "Int");
-        ST int_const3 = createAndAddIntConstant(3, 3, classNameToIndexMap.get("Int"));
-        intConstantsList.add(int_const3);
-
-        ST str_const4 = createStringConstant(4, 6, "int_const1", "String", classNameToIndexMap.get("String"));
-        stringConstantsList.add(str_const4);
-        classNameToStrConstMap.put("String", "str_const4");
-        strConstToClassNameMap.put("str_const4", "String");
-
-        ST str_const5 = createStringConstant(5, 6, "int_const4", "Bool", classNameToIndexMap.get("String"));
-        stringConstantsList.add(str_const5);
-        classNameToStrConstMap.put("Bool", "str_const5");
-        strConstToClassNameMap.put("str_const5", "Bool");
-        ST int_const4 = createAndAddIntConstant(4, 4, classNameToIndexMap.get("Int"));
-        intConstantsList.add(int_const4);
+            if (!intConstValueToIntConstName.containsKey(className.length())) {
+                ST int_const = createAndAddIntConstant(intConstIndex, className.length(), classNameToIndexMap.get("Int"));
+                intConstantsList.add(int_const);
+                intConstIndex++;
+            }
+            ST str_const = createStringConstant(strConstIndex, wordDim, intConstValueToIntConstName.get(className.length()), className, classNameToIndexMap.get("String"));
+            stringConstantsList.add(str_const);
+            classNameToStrConstMap.put(className, "str_const" + strConstIndex);
+            strConstToClassNameMap.put("str_const" + strConstIndex, className);
+            strConstIndex++;
+        }
+        System.out.println(Compiler.reverseGraph);
+//
+//
+//        ST str_const1 = createStringConstant(1, 6, "int_const1", "Object", classNameToIndexMap.get("String"));
+//        stringConstantsList.add(str_const1);
+//        classNameToStrConstMap.put("Object", "str_const1");
+//        strConstToClassNameMap.put("str_const1", "Object");
+//        ST int_const1 = createAndAddIntConstant(1, 6, classNameToIndexMap.get("Int"));
+//        intConstantsList.add(int_const1);
+//
+//        ST str_const2 = createStringConstant(2, 5, "int_const2", "IO", classNameToIndexMap.get("String"));
+//        stringConstantsList.add(str_const2);
+//        classNameToStrConstMap.put("IO", "str_const2");
+//        strConstToClassNameMap.put("str_const2", "IO");
+//        ST int_const2 = createAndAddIntConstant(2, 2, classNameToIndexMap.get("Int"));
+//        intConstantsList.add(int_const2);
+//
+//        ST str_const3 = createStringConstant(3, 5, "int_const3", "Int", classNameToIndexMap.get("String"));
+//        stringConstantsList.add(str_const3);
+//        classNameToStrConstMap.put("Int", "str_const3");
+//        strConstToClassNameMap.put("str_const3", "Int");
+//        ST int_const3 = createAndAddIntConstant(3, 3, classNameToIndexMap.get("Int"));
+//        intConstantsList.add(int_const3);
+//
+//        ST str_const4 = createStringConstant(4, 6, "int_const1", "String", classNameToIndexMap.get("String"));
+//        stringConstantsList.add(str_const4);
+//        classNameToStrConstMap.put("String", "str_const4");
+//        strConstToClassNameMap.put("str_const4", "String");
+//
+//        ST str_const5 = createStringConstant(5, 6, "int_const4", "Bool", classNameToIndexMap.get("String"));
+//        stringConstantsList.add(str_const5);
+//        classNameToStrConstMap.put("Bool", "str_const5");
+//        strConstToClassNameMap.put("str_const5", "Bool");
+//        ST int_const4 = createAndAddIntConstant(4, 4, classNameToIndexMap.get("Int"));
+//        intConstantsList.add(int_const4);
 
     }
 

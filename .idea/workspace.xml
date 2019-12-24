@@ -4,10 +4,9 @@
     <list default="true" id="4d2c2ad1-7397-4f12-a05c-877ffc53c253" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/cool/compiler/Compiler.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/Compiler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/cool/structures/SymbolTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/structures/SymbolTable.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cool/compiler/CodeGenVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/CodeGenVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cool/compiler/Compiler.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/Compiler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/structures/SymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/structures/SymbolTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/template.stg" beforeDir="false" afterPath="$PROJECT_DIR$/cool/template.stg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,6 +98,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="692" y="272" width="526" height="494" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1576622888892" />
+    <state x="967" y="21" width="941" height="1047" key="DiffContextDialog" timestamp="1577213412561">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="967" y="21" width="941" height="1047" key="DiffContextDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1577213412561" />
     <state x="642" y="197" width="612" height="505" key="FileChooserDialogImpl" timestamp="1576603464206">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

@@ -1,5 +1,4 @@
 sequence(e) ::= "<e; separator=\"\n\">"
-
 str_const(index, word_dim, int_const_name, text, tag) ::= <<
 str_const<index>:
     .word <tag>
