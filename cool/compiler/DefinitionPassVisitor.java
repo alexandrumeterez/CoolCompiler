@@ -9,12 +9,16 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
     @Override
     public Void visit(TypeId id) {
         id.setScope(currentScope);
+//        id.setSymbol(SymbolTable.globals.lookupClassSymbol(id.token.getText()));
+
         return null;
     }
 
     @Override
     public Void visit(ObjectId objectId) {
         objectId.setScope(currentScope);
+//        objectId.setSymbol(objectId.getScope().lookupAttributeSymbol(objectId.token.getText()));
+
         return null;
     }
 
@@ -65,7 +69,7 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
 
         currentScope = methodSymbol;
         methodSymbol.setFunctionNode(funcDef);
-        funcDef.name.setSymbol(methodSymbol);
+        funcDef.setSymbol(methodSymbol);
         // set method scope
         funcDef.setScope(currentScope);
         // visit parameters and body
@@ -105,7 +109,7 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
         }
 
 
-        classDef.class_type.setSymbol(classSymbol);
+        classDef.setSymbol(classSymbol);
         classDef.setScope(currentScope);
         for (var member : classDef.features) {
             member.accept(this);
@@ -311,7 +315,7 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
         }
 
         varDef.setScope(currentScope);
-        varDef.name.setSymbol(attributeSymbol);
+        varDef.setSymbol(attributeSymbol);
         if (varDef.init != null) {
             varDef.init.accept(this);
         }
@@ -340,7 +344,7 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
         }
         currentScope = letSymbol;
         currentScope.add(letLocalSymbol);
-        letLocal.name.setSymbol(letLocalSymbol);
+        letLocal.setSymbol(letLocalSymbol);
 
         return null;
     }
@@ -357,7 +361,7 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
             SymbolTable.error(caseBranch.ctx, caseBranch.token, "Case variable has illegal name " + name.token.getText());
         }
         caseBranch.setScope(currentScope);
-        caseBranch.name.setSymbol(caseBranchAttributeSymbol);
+        caseBranch.setSymbol(caseBranchAttributeSymbol);
         caseBranch.expression.accept(this);
         currentScope = currentScope.getParent();
 

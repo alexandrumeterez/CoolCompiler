@@ -31,7 +31,7 @@ bool_const1:
     .word 1
 >>
 
-program(e, int, string, bool) ::= <<
+program(data, text, int, string, bool) ::= <<
     .data
     .align 2
     .globl class_nameTab
@@ -49,7 +49,89 @@ program(e, int, string, bool) ::= <<
         .word <string>
     _bool_tag:
         .word <bool>
-    <sequence(e)>
+    <sequence(data)>
+
+
+
+    .globl  heap_start
+    heap_start:
+        .word   0
+        .text
+        .globl  Int_init
+        .globl  String_init
+        .globl  Bool_init
+        .globl  Main_init
+        .globl  Main.main
+    Object_init:
+        addiu   $sp $sp -12
+        sw      $fp 12($sp)
+        sw      $s0 8($sp)
+        sw      $ra 4($sp)
+        addiu   $fp $sp 4
+        move    $s0 $a0
+        move    $a0 $s0
+        lw      $fp 12($sp)
+        lw      $s0 8($sp)
+        lw      $ra 4($sp)
+        addiu   $sp $sp 12
+        jr      $ra
+    IO_init:
+        addiu   $sp $sp -12
+        sw      $fp 12($sp)
+        sw      $s0 8($sp)
+        sw      $ra 4($sp)
+        addiu   $fp $sp 4
+        move    $s0 $a0
+        jal     Object_init
+        move    $a0 $s0
+        lw      $fp 12($sp)
+        lw      $s0 8($sp)
+        lw      $ra 4($sp)
+        addiu   $sp $sp 12
+        jr      $ra
+    Int_init:
+        addiu   $sp $sp -12
+        sw      $fp 12($sp)
+        sw      $s0 8($sp)
+        sw      $ra 4($sp)
+        addiu   $fp $sp 4
+        move    $s0 $a0
+        jal     Object_init
+        move    $a0 $s0
+        lw      $fp 12($sp)
+        lw      $s0 8($sp)
+        lw      $ra 4($sp)
+        addiu   $sp $sp 12
+        jr      $ra
+    String_init:
+        addiu   $sp $sp -12
+        sw      $fp 12($sp)
+        sw      $s0 8($sp)
+        sw      $ra 4($sp)
+        addiu   $fp $sp 4
+        move    $s0 $a0
+        jal     Object_init
+        move    $a0 $s0
+        lw      $fp 12($sp)
+        lw      $s0 8($sp)
+        lw      $ra 4($sp)
+        addiu   $sp $sp 12
+        jr      $ra
+    Bool_init:
+        addiu   $sp $sp -12
+        sw      $fp 12($sp)
+        sw      $s0 8($sp)
+        sw      $ra 4($sp)
+        addiu   $fp $sp 4
+        move    $s0 $a0
+        jal     Object_init
+        move    $a0 $s0
+        lw      $fp 12($sp)
+        lw      $s0 8($sp)
+        lw      $ra 4($sp)
+        addiu   $sp $sp 12
+        jr      $ra
+    <sequence(text)>
 >>
 
 classnametab(tag) ::= <<
@@ -145,87 +227,6 @@ obj_init(e, name, parent) ::= <<
     move    $s0 $a0
     jal     <parent>_init
     <e>
-    move    $a0 $s0
-    lw      $fp 12($sp)
-    lw      $s0 8($sp)
-    lw      $ra 4($sp)
-    addiu   $sp $sp 12
-    jr      $ra
->>
-
-text_begin() ::= <<
-    .globl  heap_start
-heap_start:
-    .word   0
-    .text
-    .globl  Int_init
-    .globl  String_init
-    .globl  Bool_init
-    .globl  Main_init
-    .globl  Main.main
-Object_init:
-    addiu   $sp $sp -12
-    sw      $fp 12($sp)
-    sw      $s0 8($sp)
-    sw      $ra 4($sp)
-    addiu   $fp $sp 4
-    move    $s0 $a0
-    move    $a0 $s0
-    lw      $fp 12($sp)
-    lw      $s0 8($sp)
-    lw      $ra 4($sp)
-    addiu   $sp $sp 12
-    jr      $ra
-IO_init:
-    addiu   $sp $sp -12
-    sw      $fp 12($sp)
-    sw      $s0 8($sp)
-    sw      $ra 4($sp)
-    addiu   $fp $sp 4
-    move    $s0 $a0
-    jal     Object_init
-    move    $a0 $s0
-    lw      $fp 12($sp)
-    lw      $s0 8($sp)
-    lw      $ra 4($sp)
-    addiu   $sp $sp 12
-    jr      $ra
-Int_init:
-    addiu   $sp $sp -12
-    sw      $fp 12($sp)
-    sw      $s0 8($sp)
-    sw      $ra 4($sp)
-    addiu   $fp $sp 4
-    move    $s0 $a0
-    jal     Object_init
-    move    $a0 $s0
-    lw      $fp 12($sp)
-    lw      $s0 8($sp)
-    lw      $ra 4($sp)
-    addiu   $sp $sp 12
-    jr      $ra
-String_init:
-    addiu   $sp $sp -12
-    sw      $fp 12($sp)
-    sw      $s0 8($sp)
-    sw      $ra 4($sp)
-    addiu   $fp $sp 4
-    move    $s0 $a0
-    jal     Object_init
-    move    $a0 $s0
-    lw      $fp 12($sp)
-    lw      $s0 8($sp)
-    lw      $ra 4($sp)
-    addiu   $sp $sp 12
-    jr      $ra
-Bool_init:
-    addiu   $sp $sp -12
-    sw      $fp 12($sp)
-    sw      $s0 8($sp)
-    sw      $ra 4($sp)
-    addiu   $fp $sp 4
-    move    $s0 $a0
-    jal     Object_init
     move    $a0 $s0
     lw      $fp 12($sp)
     lw      $s0 8($sp)

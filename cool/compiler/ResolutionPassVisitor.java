@@ -137,7 +137,7 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
             formal.accept(this);
         }
         // get method return type
-        var methodReturnType = ((MethodSymbol) funcDef.name.getSymbol()).getType();
+        var methodReturnType = ((MethodSymbol) funcDef.getSymbol()).getType();
         if (methodReturnType == null) {
             return null;
         }
@@ -717,7 +717,7 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
             SymbolTable.error(varDef.ctx, type.token, "Class " + scopeClass + " has attribute " + name.token.getText() + " with undefined type " + type.token.getText());
         }
 
-        var lvalueType = ((AttributeSymbol) name.getSymbol()).getType();
+        var lvalueType = ((AttributeSymbol) varDef.getSymbol()).getType();
         if (lvalueType == null) {
             return null;
         }
@@ -761,7 +761,7 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
                     "Let variable " + name.token.getText()
                             + " has undefined type " + type.token.getText());
         }
-        var nameType = ((AttributeSymbol) name.getSymbol()).getType();
+        var nameType = ((AttributeSymbol) letLocal.getSymbol()).getType();
         if (nameType == null) {
             return null;
         }

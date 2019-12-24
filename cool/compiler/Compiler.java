@@ -797,6 +797,11 @@ public class Compiler {
             System.err.println("Compilation halted");
             return;
         }
+
+        var codeGenVisitor = new CodeGenVisitor();
+        var t = ast.accept(codeGenVisitor);
+        final String out = t.render();
+        System.out.println(out);
     }
 
 }
