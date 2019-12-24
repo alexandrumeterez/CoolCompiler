@@ -79,6 +79,7 @@ public class SymbolTable {
         BasicClasses.IO.add(inStringMethodSymbol);
         BasicClasses.IO.add(inIntMethodSymbol);
 
+        BasicClasses.OBJECT.setParentClassSymbol(null);
         BasicClasses.INT.setParentClassSymbol(BasicClasses.OBJECT);
         BasicClasses.BOOL.setParentClassSymbol(BasicClasses.OBJECT);
         BasicClasses.STRING.setParentClassSymbol(BasicClasses.OBJECT);

@@ -1,17 +1,78 @@
 package cool.compiler;
 
+import cool.structures.*;
 import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STGroupFile;
 
 import java.util.*;
 
+class ClassProtObj {
+    LinkedList<AttributeSymbol> attributes = new LinkedList<>();
+}
+
+class ClassDispatchTable {
+    LinkedList<MethodSymbol> methods = new LinkedList<>();
+}
+
+class ClassObject {
+    ClassProtObj protObjList = new ClassProtObj();
+    ClassDispatchTable dispatchTable = new ClassDispatchTable();
+};
+
+
 public class CodeGenVisitor implements ASTVisitor<ST> {
+
+    private ClassObject createClassObject(String name) {
+        ClassObject classObject = new ClassObject();
+
+        // find inheritnace chain of current class
+        ArrayList<String> inheritanceChain = new ArrayList<>();
+        var current = SymbolTable.globals.lookupClassSymbol(name);
+        while (current != null) {
+            inheritanceChain.add(current.getName());
+            current = current.getParentClassSymbol();
+        }
+        Collections.reverse(inheritanceChain);
+
+        // go from Object down the inheritance chain to current class and add all attributes and methods
+        for (var c : inheritanceChain) {
+            ClassSymbol classSymbol = SymbolTable.globals.lookupClassSymbol(c);
+            // add all variables
+            for (Map.Entry<String, AttributeSymbol> entry : classSymbol.getAttributeSymbols().entrySet()) {
+                AttributeSymbol attributeSymbol = entry.getValue();
+                // append symbols to the current classobject
+                if (attributeSymbol.getName().equals("self")) {
+                    continue;
+                }
+                classObject.protObjList.attributes.add(attributeSymbol);
+            }
+            // add all methods
+            for (Map.Entry<String, MethodSymbol> entry : classSymbol.getMethodSymbols().entrySet()) {
+                MethodSymbol methodSymbol = entry.getValue();
+                // append symbols to the current classobject
+                classObject.dispatchTable.methods.add(methodSymbol);
+            }
+        }
+
+        return classObject;
+    }
+
+    private void createClassNameToClassObjectMap() {
+        for(Map.Entry<String, Integer> entry : classNameToIndexMap.entrySet()) {
+            String className = entry.getKey();
+
+            ClassObject classObject = createClassObject(className);
+            classNameToClassObjectMap.put(className, classObject);
+        }
+    }
+
     private ST createStringConstant(int index, int word_dim, String int_const_name, String text, int tag) {
         ST str_constant = templates.getInstanceOf("str_const");
         str_constant.add("index", index);
         str_constant.add("word_dim", word_dim);
         str_constant.add("int_const_name", int_const_name);
         str_constant.add("tag", tag);
+        str_constant.add("text", text);
         return str_constant;
     }
 
@@ -32,9 +93,10 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
 
     private ST createClassNameTab() {
         ST classNameTab = templates.getInstanceOf("classnametab");
-        for(Map.Entry<String, String> entry : classNameToStrConstMap.entrySet()) {
-            if(entry.getKey().equals(""))
-                continue;;
+        for (Map.Entry<String, String> entry : classNameToStrConstMap.entrySet()) {
+            if (entry.getKey().equals(""))
+                continue;
+            ;
             classNameTab.add("tag", entry.getValue());
         }
         return classNameTab;
@@ -42,8 +104,8 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
 
     private ST createClassObjTab() {
         ST classObjTab = templates.getInstanceOf("classobjtab");
-        for(String v : classNameToStrConstMap.keySet()) {
-            if(v.equals(""))
+        for (String v : classNameToIndexMap.keySet()) {
+            if (v.equals(""))
                 continue;
             classObjTab.add("tag", v + "_protObj");
             classObjTab.add("tag", v + "_init");
@@ -58,13 +120,10 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
     ST dataSection;
     ST textSection;
 
-    int intTag = 2;
-    int stringTag = 3;
-    int boolTag = 4;
-
     static int strConstIndex = 6; //starts at 6 because first 5 are default classes
-    static int intConstIndex = 6; //TODO: why
+    static int intConstIndex = 5; //TODO: why
 
+    static HashMap<String, ClassObject> classNameToClassObjectMap = new LinkedHashMap<>();
     static HashMap<String, Integer> classNameToIndexMap = new LinkedHashMap<>();
     static HashMap<Integer, String> classIndexToClassNameMap = new LinkedHashMap<>();
     static HashMap<String, String> classNameToStrConstMap = new LinkedHashMap<>();
@@ -110,6 +169,7 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         ST int_const0 = createAndAddIntConstant(0, 0, classNameToIndexMap.get("Int"));
         intConstantsList.add(int_const0);
 
+        System.out.println(classNameToIndexMap);
 
         ST str_const1 = createStringConstant(1, 6, "int_const1", "Object", classNameToIndexMap.get("String"));
         stringConstantsList.add(str_const1);
@@ -297,8 +357,6 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
             mainSection.add("e", e.accept(this));
         }
 
-        // TODO: Modify this to actual values
-        System.out.println(classNameToIndexMap);
         programST.add("int", classNameToIndexMap.get("Int"));
         programST.add("string", classNameToIndexMap.get("String"));
         programST.add("bool", classNameToIndexMap.get("Bool"));
@@ -306,8 +364,12 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         dataSection.add("e", stringConstantsList);
         dataSection.add("e", intConstantsList);
         dataSection.add("e", createBoolConstant(classNameToIndexMap.get("Bool")));
+
         dataSection.add("e", createClassNameTab());
         dataSection.add("e", createClassObjTab());
+
+        createClassNameToClassObjectMap();
+
 
         programST.add("data", dataSection);
 //        programST.add("text", textSection);
