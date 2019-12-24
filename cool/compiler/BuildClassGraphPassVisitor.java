@@ -49,6 +49,9 @@ public class BuildClassGraphPassVisitor implements ASTVisitor<Void> {
         stringToClassDef.put(classType.token.getText(), classDef);
 
         if (baseClass == null) {
+            classGraph.put(classType.token.getText(), BasicClasses.OBJECT.getName());
+            parentToChild.put(BasicClasses.OBJECT.getName(), classType.token.getText());
+
             return null;
         }
 

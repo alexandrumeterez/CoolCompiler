@@ -798,10 +798,12 @@ public class Compiler {
             return;
         }
 
+        var classGraph = BuildClassGraphPassVisitor.classGraph;
+//        System.out.println(classGraph);
         var codeGenVisitor = new CodeGenVisitor();
         var t = ast.accept(codeGenVisitor);
         final String out = t.render();
-        System.out.println(out);
+//        System.out.println(out);
     }
 
 }
