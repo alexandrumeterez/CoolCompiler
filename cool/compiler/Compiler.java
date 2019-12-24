@@ -16,7 +16,7 @@ import cool.structures.*;
 public class Compiler {
     // Annotates class nodes with the names of files where they are defined.
     public static ParseTreeProperty<String> fileNames = new ParseTreeProperty<>();
-
+    public static HashMap<String, ArrayList<String>> reverseGraph = new LinkedHashMap<>();
     private static ArrayList<ArrayList<String>> findCycles(HashMap<String, String> graph, ArrayList<String> classesList) {
         ArrayList<ArrayList<String>> cycles = new ArrayList<>();
 
@@ -798,12 +798,35 @@ public class Compiler {
             return;
         }
 
+        BuildClassGraphPassVisitor.classGraph.put("Bool", "Object");
+        BuildClassGraphPassVisitor.classGraph.put("String", "Object");
+        BuildClassGraphPassVisitor.classGraph.put("Int", "Object");
+        BuildClassGraphPassVisitor.classGraph.put("IO", "Object");
+
         var classGraph = BuildClassGraphPassVisitor.classGraph;
-//        System.out.println(classGraph);
+
+        // form reverse graph -- parent to children
+        for (Map.Entry<String, String> entry : classGraph.entrySet()) {
+            String child = entry.getKey(); // child
+            String parent = entry.getValue(); // parent
+
+            if (!reverseGraph.containsKey(parent)) {
+                ArrayList<String> array = new ArrayList<>();
+                array.add(child);
+                reverseGraph.put(parent, array);
+            } else {
+                ArrayList<String> array = (ArrayList<String>) reverseGraph.get(parent);
+                array.add(child);
+                reverseGraph.put(parent, array);
+            }
+        }
+
+        System.out.println(classGraph);
+        System.out.println(reverseGraph);
         var codeGenVisitor = new CodeGenVisitor();
         var t = ast.accept(codeGenVisitor);
         final String out = t.render();
-//        System.out.println(out);
+        System.out.println(out);
     }
 
 }

@@ -8,7 +8,25 @@ import java.util.Map;
 public class ClassSymbol extends Symbol implements Scope {
 
     protected Map<String, ClassSymbol> classSymbols = new LinkedHashMap<>();
+
+    public Map<String, MethodSymbol> getMethodSymbols() {
+        return methodSymbols;
+    }
+
+    public void setMethodSymbols(Map<String, MethodSymbol> methodSymbols) {
+        this.methodSymbols = methodSymbols;
+    }
+
     protected Map<String, MethodSymbol> methodSymbols = new LinkedHashMap<>();
+
+    public Map<String, AttributeSymbol> getAttributeSymbols() {
+        return attributeSymbols;
+    }
+
+    public void setAttributeSymbols(Map<String, AttributeSymbol> attributeSymbols) {
+        this.attributeSymbols = attributeSymbols;
+    }
+
     protected Map<String, AttributeSymbol> attributeSymbols = new LinkedHashMap<>();
     protected Scope parent;
 

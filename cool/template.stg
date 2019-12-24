@@ -135,13 +135,13 @@ program(data, text, int, string, bool) ::= <<
 >>
 
 classnametab(tag) ::= <<
-    class_nameTab:
-        <sequence(tag)>
+class_nameTab:
+    <sequence(tag)>
 >>
 
 classobjtab(tag) ::= <<
-    class_objTab:
-        <sequence(tag)>
+class_objTab:
+    <sequence(tag)>
 >>
 
 dispTab(name, e) ::= <<

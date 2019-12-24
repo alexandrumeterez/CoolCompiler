@@ -97,6 +97,7 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
         // set self types: the type itself and its children
         var currentType = classSymbol;
         classSymbol.getSelfTypesList().add(currentType.getName());
+        // TODO: Modify this to work with multiple inheritances
         while (BuildClassGraphPassVisitor.parentToChild.containsKey(currentType.getName())) {
             var childTypeName = BuildClassGraphPassVisitor.parentToChild.get(currentType.getName());
 
