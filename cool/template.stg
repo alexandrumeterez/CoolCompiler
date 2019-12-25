@@ -164,24 +164,7 @@ obj_init(e, name, parent) ::= <<
     sw      $ra 4($sp)
     addiu   $fp $sp 4
     move    $s0 $a0
-    jal     <parent>_init
-    <e>
-    move    $a0 $s0
-    lw      $fp 12($sp)
-    lw      $s0 8($sp)
-    lw      $ra 4($sp)
-    addiu   $sp $sp 12
-    jr      $ra
->>
-
-obj_init_no_parent(e, name, parent) ::= <<
-<name>_init:
-    addiu   $sp $sp -12
-    sw      $fp 12($sp)
-    sw      $s0 8($sp)
-    sw      $ra 4($sp)
-    addiu   $fp $sp 4
-    move    $s0 $a0
+    <parent>
     <e>
     move    $a0 $s0
     lw      $fp 12($sp)

@@ -136,6 +136,7 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
     static ArrayList<ST> stringConstantsList = new ArrayList<>();
     static ArrayList<ST> protObjList = new ArrayList<>();
     static ArrayList<ST> dispTabList = new ArrayList<>();
+    static ArrayList<ST> classesInitList = new ArrayList<>();
 
     public CodeGenVisitor() {
         // Build class name to index mapping
@@ -266,13 +267,28 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
 
             ST dispTab = templates.getInstanceOf("dispTab");
             dispTab.add("name", className);
-            for(var v : methodsNames){
+            for (var v : methodsNames) {
                 dispTab.add("e", ".word " + v + "\n");
             }
 
             dispTabList.add(dispTab);
         }
 
+
+        // TODO: THIS IS STUPID
+        // build the classes init list
+        for (Map.Entry<String, Integer> entry : classNameToIndexMap.entrySet()) {
+            var className = entry.getKey();
+            var classGraph = BuildClassGraphPassVisitor.classGraph;
+            ST objInit = templates.getInstanceOf("obj_init");
+            objInit.add("name", className);
+            if (classGraph.containsKey(className)) {
+                var parent = classGraph.get(className);
+                objInit.add("parent", "jal " + parent + "_init\n");
+            }
+
+            classesInitList.add(objInit);
+        }
     }
 
     @Override
@@ -302,6 +318,9 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(ClassDef classDef) {
+        for (var v : classDef.features) {
+            v.accept(this);
+        }
 
         return null;
     }
@@ -440,13 +459,18 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         dataSection.add("e", protObjList);
         dataSection.add("e", dispTabList);
 
+        textSection.add("e", classesInitList);
+
         programST.add("data", dataSection);
-//        programST.add("text", textSection);
+        programST.add("text", textSection);
         return programST;
     }
 
     @Override
     public ST visit(VarDef varDef) {
+        System.out.println(varDef.token);
+        if(varDef.init != null)
+            System.out.println(varDef.init.token);
         return null;
     }
 
