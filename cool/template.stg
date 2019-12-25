@@ -156,66 +156,6 @@ protObj(index, e, name, dim) ::= <<
 	<e>
 >>
 
-protObjBasic(io, int, string, bool) ::= <<
-Object_protObj:
-    .word   0
-    .word   3
-    .word   Object_dispTab
-
-IO_protObj:
-    .word   <io>
-    .word   3
-    .word   IO_dispTab
-
-Int_protObj:
-    .word   <int>
-    .word   4
-    .word   Int_dispTab
-    .word   0
-String_protObj:
-    .word   <string>
-    .word   5
-    .word   String_dispTab
-    .word   int_const0
-    .asciiz ""
-    .align  2
-Bool_protObj:
-    .word   <bool>
-    .word   4
-    .word   Bool_dispTab
-    .word   0
->>
-
-dispTabBasic() ::= <<
-Object_dispTab:
-    .word   Object.abort
-    .word   Object.type_name
-    .word   Object.copy
-IO_dispTab:
-    .word   Object.abort
-    .word   Object.type_name
-    .word   Object.copy
-    .word   IO.out_string
-    .word   IO.out_int
-    .word   IO.in_string
-    .word   IO.in_int
-Int_dispTab:
-    .word   Object.abort
-    .word   Object.type_name
-    .word   Object.copy
-String_dispTab:
-    .word   Object.abort
-    .word   Object.type_name
-    .word   Object.copy
-    .word   String.length
-    .word   String.concat
-    .word   String.substr
-Bool_dispTab:
-    .word   Object.abort
-    .word   Object.type_name
-    .word   Object.copy
->>
-
 obj_init(e, name, parent) ::= <<
 <name>_init:
     addiu   $sp $sp -12
@@ -225,6 +165,23 @@ obj_init(e, name, parent) ::= <<
     addiu   $fp $sp 4
     move    $s0 $a0
     jal     <parent>_init
+    <e>
+    move    $a0 $s0
+    lw      $fp 12($sp)
+    lw      $s0 8($sp)
+    lw      $ra 4($sp)
+    addiu   $sp $sp 12
+    jr      $ra
+>>
+
+obj_init_no_parent(e, name, parent) ::= <<
+<name>_init:
+    addiu   $sp $sp -12
+    sw      $fp 12($sp)
+    sw      $s0 8($sp)
+    sw      $ra 4($sp)
+    addiu   $fp $sp 4
+    move    $s0 $a0
     <e>
     move    $a0 $s0
     lw      $fp 12($sp)
