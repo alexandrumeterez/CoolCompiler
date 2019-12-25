@@ -143,11 +143,6 @@ public class SetParentClassVisitor implements ASTVisitor<Void> {
     }
 
     @Override
-    public Void visit(Simple simple) {
-        return null;
-    }
-
-    @Override
     public Void visit(Int int1) {
         return null;
     }

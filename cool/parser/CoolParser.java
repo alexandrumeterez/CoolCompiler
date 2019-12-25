@@ -722,24 +722,6 @@ public class CoolParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class SimpleContext extends ExprContext {
-		public Token name;
-		public TerminalNode OBJECTID() { return getToken(CoolParser.OBJECTID, 0); }
-		public SimpleContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CoolParserListener ) ((CoolParserListener)listener).enterSimple(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CoolParserListener ) ((CoolParserListener)listener).exitSimple(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CoolParserVisitor ) return ((CoolParserVisitor<? extends T>)visitor).visitSimple(this);
-			else return visitor.visitChildren(this);
-		}
-	}
 	public static class WhileContext extends ExprContext {
 		public ExprContext cond;
 		public ExprContext whileBody;
@@ -1150,6 +1132,24 @@ public class CoolParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	public static class ObjectIdContext extends ExprContext {
+		public Token name;
+		public TerminalNode OBJECTID() { return getToken(CoolParser.OBJECTID, 0); }
+		public ObjectIdContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CoolParserListener ) ((CoolParserListener)listener).enterObjectId(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CoolParserListener ) ((CoolParserListener)listener).exitObjectId(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CoolParserVisitor ) return ((CoolParserVisitor<? extends T>)visitor).visitObjectId(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 
 	public final ExprContext expr() throws RecognitionException {
 		return expr(0);
@@ -1381,11 +1381,11 @@ public class CoolParser extends Parser {
 				break;
 			case 13:
 				{
-				_localctx = new SimpleContext(_localctx);
+				_localctx = new ObjectIdContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(150);
-				((SimpleContext)_localctx).name = match(OBJECTID);
+				((ObjectIdContext)_localctx).name = match(OBJECTID);
 				}
 				break;
 			case 14:

@@ -278,8 +278,8 @@ public class Compiler {
             }
 
             @Override
-            public ASTNode visitSimple(CoolParser.SimpleContext ctx) {
-                return new Simple(ctx, new ObjectId(ctx, ctx.name), ctx.start);
+            public ASTNode visitObjectId(CoolParser.ObjectIdContext ctx) {
+                return new ObjectId(ctx, ctx.start);
             }
 
             @Override
@@ -674,12 +674,6 @@ public class Compiler {
             }
 
             @Override
-            public Void visit(Simple simple) {
-                simple.name.accept(this);
-                return null;
-            }
-
-            @Override
             public Void visit(Int int1) {
                 printIndent(int1.token.getText());
                 return null;
@@ -821,12 +815,12 @@ public class Compiler {
             }
         }
 
-        System.out.println(classGraph);
-        System.out.println(reverseGraph);
-        var codeGenVisitor = new CodeGenVisitor();
+//        System.out.println(classGraph);
+//        System.out.println(reverseGraph);
+        var codeGenVisitor = new CodeGenConstGenVisitor();
         var t = ast.accept(codeGenVisitor);
         final String out = t.render();
-//        System.out.println(out);
+        System.out.println(out);
     }
 
 }

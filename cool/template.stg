@@ -173,3 +173,8 @@ obj_init(e, name, parent) ::= <<
     addiu   $sp $sp 12
     jr      $ra
 >>
+
+id(offset, location) ::= <<
+lw      $a0 <offset>($<location>)
+>>
+

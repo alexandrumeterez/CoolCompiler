@@ -3,9 +3,60 @@
   <component name="ChangeListManager">
     <list default="true" id="4d2c2ad1-7397-4f12-a05c-877ffc53c253" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/ASTVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/ASTVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/Bool.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/Bool.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/BuildClassGraphPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/BuildClassGraphPassVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/ClassesDefinitionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/ClassesDefinitionPassVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/Compiler$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/Compiler$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/Compiler$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/Compiler$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/cool/compiler/Compiler.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/Compiler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/compiler/CodeGenVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/CodeGenVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/DefinitionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/DefinitionPassVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/FindInheritanceCyclesVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/FindInheritanceCyclesVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/Int.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/Int.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/Program.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/Program.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/SetParentClassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/SetParentClassVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/Simple.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/Str.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/Str.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/parser/CoolParser$AssignExprContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/parser/CoolParser$AssignExprContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/parser/CoolParser$BlockContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/parser/CoolParser$BlockContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/parser/CoolParser$CallContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/parser/CoolParser$CallContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/parser/CoolParser$CaseContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/parser/CoolParser$CaseContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/parser/CoolParser$EqualContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/parser/CoolParser$EqualContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/parser/CoolParser$IfContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/parser/CoolParser$IfContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/parser/CoolParser$IntContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/parser/CoolParser$IntContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/parser/CoolParser$IsVoidExprContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/parser/CoolParser$IsVoidExprContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/parser/CoolParser$LetContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/parser/CoolParser$LetContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/parser/CoolParser$MultDivContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/parser/CoolParser$MultDivContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/parser/CoolParser$NotExprContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/parser/CoolParser$NotExprContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/parser/CoolParser$ParenContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/parser/CoolParser$ParenContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/parser/CoolParser$RelationalContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/parser/CoolParser$RelationalContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/parser/CoolParser$SelfContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/parser/CoolParser$SelfContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/parser/CoolParser$SimpleContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/parser/CoolParser$StrContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/parser/CoolParser$StrContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/parser/CoolParser$TildeExprContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/parser/CoolParser$TildeExprContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/parser/CoolParser$WhileContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/parser/CoolParser$WhileContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/parser/CoolParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/parser/CoolParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/parser/CoolParserBaseVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/parser/CoolParserBaseVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/parser/CoolParserListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/parser/CoolParserListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/parser/CoolParserVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/parser/CoolParserVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/compiler/ASTNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/ASTNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/compiler/ASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/ASTVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/compiler/BuildClassGraphPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/BuildClassGraphPassVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/compiler/ClassesDefinitionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/ClassesDefinitionPassVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/compiler/CodeGenVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/CodeGenConstGenVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cool/compiler/Compiler.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/Compiler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/compiler/DefinitionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/DefinitionPassVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/compiler/FindInheritanceCyclesVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/FindInheritanceCyclesVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/compiler/SetParentClassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/SetParentClassVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/parser/CoolParser.g4" beforeDir="false" afterPath="$PROJECT_DIR$/cool/parser/CoolParser.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/parser/CoolParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/parser/CoolParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/parser/CoolParserBaseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/parser/CoolParserBaseListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/parser/CoolParserBaseVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/parser/CoolParserBaseVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/parser/CoolParserListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/parser/CoolParserListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/parser/CoolParserVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/parser/CoolParserVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/structures/IdSymbol.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/structures/IdSymbol.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cool/template.stg" beforeDir="false" afterPath="$PROJECT_DIR$/cool/template.stg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,10 +137,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="709" y="306" width="509" height="382" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1577121905906" />
-    <state x="886" y="54" width="376" height="568" key="#com.intellij.ide.util.MemberChooser" timestamp="1577195902188">
+    <state x="883" y="-12" width="376" height="568" key="#com.intellij.ide.util.MemberChooser" timestamp="1577274156579">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="886" y="54" width="376" height="568" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1577195902188" />
+    <state x="883" y="-12" width="376" height="568" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1577274156579" />
     <state x="213" y="250" width="526" height="494" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1576776280409">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

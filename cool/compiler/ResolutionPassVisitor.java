@@ -15,6 +15,13 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
 
     @Override
     public Symbol visit(ObjectId objectId) {
+        if (!objectId.token.getText().equals("self")) {
+            if (objectId.getScope().lookupAttributeSymbol(objectId.token.getText()) == null) {
+                SymbolTable.error(objectId.ctx, objectId.token,
+                        "Undefined identifier " + objectId.token.getText());
+            }
+        }
+
         objectId.setSymbol(objectId.getScope().lookupAttributeSymbol(objectId.token.getText()));
         if (objectId.getSymbol() == null) {
             return null;
@@ -654,22 +661,6 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
     @Override
     public Symbol visit(Paren paren) {
         return paren.e.accept(this);
-    }
-
-    @Override
-    public Symbol visit(Simple simple) {
-        if (!simple.token.getText().equals("self")) {
-            if (simple.getScope().lookupAttributeSymbol(simple.token.getText()) == null) {
-                SymbolTable.error(simple.ctx, simple.token,
-                        "Undefined identifier " + simple.token.getText());
-            }
-        }
-
-        simple.setSymbol(simple.getScope().lookupAttributeSymbol(simple.token.getText()));
-        if (simple.getSymbol() == null) {
-            return null;
-        }
-        return ((AttributeSymbol) simple.getSymbol()).getType();
     }
 
     @Override

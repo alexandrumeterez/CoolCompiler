@@ -9,16 +9,12 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
     @Override
     public Void visit(TypeId id) {
         id.setScope(currentScope);
-//        id.setSymbol(SymbolTable.globals.lookupClassSymbol(id.token.getText()));
-
         return null;
     }
 
     @Override
     public Void visit(ObjectId objectId) {
         objectId.setScope(currentScope);
-//        objectId.setSymbol(objectId.getScope().lookupAttributeSymbol(objectId.token.getText()));
-
         return null;
     }
 
@@ -264,12 +260,6 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
     @Override
     public Void visit(Paren paren) {
         paren.e.accept(this);
-        return null;
-    }
-
-    @Override
-    public Void visit(Simple simple) {
-        simple.setScope(currentScope);
         return null;
     }
 

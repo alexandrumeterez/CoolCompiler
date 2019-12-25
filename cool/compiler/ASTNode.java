@@ -483,19 +483,6 @@ class Paren extends Expression {
     }
 }
 
-class Simple extends Expression {
-    ObjectId name;
-
-    Simple(ParserRuleContext ctx, ObjectId name, Token token) {
-        super(ctx, token);
-        this.name = name;
-    }
-
-    public <T> T accept(ASTVisitor<T> visitor) {
-        return visitor.visit(this);
-    }
-}
-
 class Int extends Expression {
     Int(ParserRuleContext ctx, Token token) {
         super(ctx, token);

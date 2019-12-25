@@ -14,7 +14,6 @@ public interface ASTVisitor<T> {
 	T visit(Block block);
 	T visit(Let let);
 	T visit(Case case1);
-
 	T visit(NewType newType);
 	T visit(IsVoidExpr isVoidExpr);
 	T visit(Mult mult);
@@ -26,7 +25,6 @@ public interface ASTVisitor<T> {
 	T visit(Equal equal);
 	T visit(NotExpr notExpr);
 	T visit(Paren paren);
-	T visit(Simple simple);
 	T visit(Int int1);
 	T visit(Str str);
 	T visit(Bool bool);

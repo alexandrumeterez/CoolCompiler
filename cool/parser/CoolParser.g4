@@ -44,7 +44,7 @@ expr
 	|	LET variables+=letlocal (COMMA variables+=letlocal)* IN let_block_expr=expr #let
 	|	CASE cond=expr OF (caseBranches+=casebranch)* ESAC #case
 	|	NEW type=TYPEID #newType
-	|	name=OBJECTID #simple
+	|	name=OBJECTID #objectId
 	|	SELFID #self
 	|	INT_CONSTANT #int
 	|	BOOL_CONSTANT #bool

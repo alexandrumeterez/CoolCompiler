@@ -8,6 +8,15 @@ public class IdSymbol extends Symbol implements Scope {
     protected Map<String, AttributeSymbol> attributeSymbols = new LinkedHashMap<>();
     protected Scope parent;
 
+    public ClassSymbol getType() {
+        return type;
+    }
+
+    public void setType(ClassSymbol type) {
+        this.type = type;
+    }
+
+    protected ClassSymbol type;
     public IdSymbol(String name) {
         super(name);
     }
