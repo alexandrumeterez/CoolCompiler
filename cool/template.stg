@@ -145,7 +145,7 @@ class_objTab:
 
 dispTab(name, e) ::= <<
 <name>_dispTab:
-    <e>
+    <sequence(e)>
 >>
 
 protObj(index, e, name, dim) ::= <<
@@ -153,7 +153,7 @@ protObj(index, e, name, dim) ::= <<
 	.word <index>
 	.word <dim>
 	.word <name>_dispTab
-	<e>
+	<sequence(e)>
 >>
 
 obj_init(e, name, parent) ::= <<
@@ -175,6 +175,59 @@ obj_init(e, name, parent) ::= <<
 >>
 
 id(offset, location) ::= <<
-lw      $a0 <offset>($<location>)
+lw  $a0 <offset>($<location>)
 >>
 
+define_method(class, name, var_dec, body, var_inc, param_inc) ::= <<
+<class>.<name>:
+    addiu   $sp $sp -12
+    sw      $fp 12($sp)
+    sw      $s0 8($sp)
+    sw      $ra 4($sp)
+    addiu   $fp $sp 4
+    <var_dec>
+    move    $s0 $a0
+    <body>
+    <var_inc>
+    lw      $fp 12($sp)
+    lw      $s0 8($sp)
+    lw      $ra 4($sp)
+    addiu   $sp $sp 12
+    <param_inc>
+    jr      $ra
+>>
+
+const_load(tag) ::= <<
+la      $a0 <tag>
+>>
+
+attrib_init(offset) ::= <<
+sw     $a0 <offset>($s0)
+>>
+
+stack_inc(val) ::= <<
+	addiu $sp $sp <val>
+>>
+
+stack_dec(val) ::= <<
+	addiu $sp $sp -<val>
+>>
+
+dynamic_disp(obj, param, m_offset, label, file, line) ::= <<
+<sequence(param)>
+<obj>
+bnez    $a0 <label>
+la      $a0 <file>
+li      $t1 <line>
+jal     _dispatch_abort
+<label>:
+lw      $t1 8($a0)
+lw      $t1 <m_offset>($t1)
+jalr    $t1
+>>
+
+load_param(param) ::= <<
+	<param>
+    sw      $a0 0($sp)
+    addiu   $sp $sp -4
+>>

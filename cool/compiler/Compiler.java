@@ -817,10 +817,11 @@ public class Compiler {
 
 //        System.out.println(classGraph);
 //        System.out.println(reverseGraph);
-        var codeGenVisitor = new CodeGenConstGenVisitor();
-        var t = ast.accept(codeGenVisitor);
-        final String out = t.render();
-        System.out.println(out);
+        var codeGenConstGenVisitor = new CodeGenConstGenVisitor();
+        ast.accept(codeGenConstGenVisitor);
+        var codeGenVisitor = new CodeGenVisitor();
+        var out = ast.accept(codeGenVisitor);
+        System.out.println(out.render());
     }
 
 }

@@ -8,6 +8,7 @@ import java.util.*;
 
 class ClassProtObj {
     LinkedList<AttributeSymbol> attributes = new LinkedList<>();
+    Map<String, AttributeSymbol> attributeNameToAttributeSymbol = new LinkedHashMap<>();
 }
 
 class ClassDispatchTable {
@@ -22,6 +23,13 @@ class ClassObject {
 
 
 public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
+    private ST getSequence(ST pieceOfCode) {
+        return templates.getInstanceOf("sequence").add("e", pieceOfCode);
+    }
+
+    private ST getSequence(String pieceOfCode) {
+        return templates.getInstanceOf("sequence").add("e", pieceOfCode);
+    }
 
     private ClassObject createClassObject(String name) {
         ClassObject classObject = new ClassObject();
@@ -36,16 +44,23 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
         Collections.reverse(inheritanceChain);
 
         // go from Object down the inheritance chain to current class and add all attributes and methods
+        int currentOffset = 12;
+
         for (var c : inheritanceChain) {
             ClassSymbol classSymbol = SymbolTable.globals.lookupClassSymbol(c);
             // add all variables
+            // set offset for symbols
             for (Map.Entry<String, AttributeSymbol> entry : classSymbol.getAttributeSymbols().entrySet()) {
                 AttributeSymbol attributeSymbol = entry.getValue();
                 // append symbols to the current classobject
                 if (attributeSymbol.getName().equals("self")) {
                     continue;
                 }
+                classObject.protObjList.attributeNameToAttributeSymbol.put(attributeSymbol.getName(), attributeSymbol);
+
+                attributeSymbol.setOffset(currentOffset);
                 classObject.protObjList.attributes.add(attributeSymbol);
+                currentOffset += 4;
             }
             // add all methods
             for (Map.Entry<String, MethodSymbol> entry : classSymbol.getMethodSymbols().entrySet()) {
@@ -83,7 +98,7 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
         int_constant.add("index", index);
         int_constant.add("val", value);
         int_constant.add("tag", tag);
-        intConstValueToIntConstName.put(value, "int_const" + index);
+        intValueToIntConstMap.put(value, "int_const" + index);
         return int_constant;
     }
 
@@ -109,8 +124,8 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
         for (String v : classNameToIndexMap.keySet()) {
             if (v.equals(""))
                 continue;
-            classObjTab.add("tag", ".word " + v + "_protObj\n");
-            classObjTab.add("tag", ".word " + v + "_init\n");
+            classObjTab.add("tag", ".word " + v + "_protObj");
+            classObjTab.add("tag", ".word " + v + "_init");
         }
         return classObjTab;
     }
@@ -130,7 +145,8 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
     static HashMap<Integer, String> classIndexToClassNameMap = new LinkedHashMap<>();
     static HashMap<String, String> classNameToStrConstMap = new LinkedHashMap<>();
     static HashMap<String, String> strConstToClassNameMap = new LinkedHashMap<>();
-    static HashMap<Integer, String> intConstValueToIntConstName = new LinkedHashMap<>();
+    static HashMap<String, String> strValueToStrConstMap = new LinkedHashMap<>();
+    static HashMap<Integer, String> intValueToIntConstMap = new LinkedHashMap<>();
 
     static ArrayList<ST> intConstantsList = new ArrayList<>();
     static ArrayList<ST> stringConstantsList = new ArrayList<>();
@@ -170,6 +186,7 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
         stringConstantsList.add(str_const0);
         classNameToStrConstMap.put("", "str_const0");
         strConstToClassNameMap.put("str_const0", "");
+        strValueToStrConstMap.put("", "str_const0");
         ST int_const0 = createAndAddIntConstant(0, 0, classNameToIndexMap.get("Int"));
         intConstantsList.add(int_const0);
 
@@ -188,16 +205,17 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
             wordDim += 4;
 
             // if the int const with the correct value doesnt exist, then create it
-            if (!intConstValueToIntConstName.containsKey(className.length())) {
+            if (!intValueToIntConstMap.containsKey(className.length())) {
                 ST int_const = createAndAddIntConstant(intConstIndex, className.length(), classNameToIndexMap.get("Int"));
                 intConstantsList.add(int_const);
                 intConstIndex++;
             }
             // create the str const
-            ST str_const = createStringConstant(strConstIndex, wordDim, intConstValueToIntConstName.get(className.length()), className, classNameToIndexMap.get("String"));
+            ST str_const = createStringConstant(strConstIndex, wordDim, intValueToIntConstMap.get(className.length()), className, classNameToIndexMap.get("String"));
             stringConstantsList.add(str_const);
             classNameToStrConstMap.put(className, "str_const" + strConstIndex);
             strConstToClassNameMap.put("str_const" + strConstIndex, className);
+            strValueToStrConstMap.put(className, "str_const" + strConstIndex);
             strConstIndex++;
         }
 //        System.out.println(Compiler.reverseGraph);
@@ -221,16 +239,16 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
             for (var attribute : classObject.protObjList.attributes) {
                 switch (attribute.getType().getName()) {
                     case "Int":
-                        protObjST.add("e", ".word int_const0\n");
+                        protObjST.add("e", ".word int_const0");
                         break;
                     case "String":
-                        protObjST.add("e", ".word str_const0\n");
+                        protObjST.add("e", ".word str_const0");
                         break;
                     case "Bool":
-                        protObjST.add("e", ".word bool_const0\n");
+                        protObjST.add("e", ".word bool_const0");
                         break;
                     default:
-                        protObjST.add("e", ".word 0\n");
+                        protObjST.add("e", ".word 0");
                         break;
                 }
             }
@@ -239,20 +257,20 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
             switch (className) {
                 case "Int":
                     wordDim = 4;
-                    protObjST.add("e", ".word 0\n");
+                    protObjST.add("e", ".word 0");
                     break;
                 case "String":
                     wordDim = 5;
-                    protObjST.add("e", ".asciiz \"\"\n");
-                    protObjST.add("e", ".align 2\n");
+                    protObjST.add("e", ".asciiz \"\"");
+                    protObjST.add("e", ".align 2");
                     break;
                 case "Bool":
                     wordDim = 4;
-                    protObjST.add("e", ".word 0\n");
+                    protObjST.add("e", ".word 0");
                     break;
             }
 
-            protObjST.add("dim", wordDim + "\n");
+            protObjST.add("dim", wordDim);
             protObjList.add(protObjST);
         }
 
@@ -267,7 +285,7 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
             ST dispTab = templates.getInstanceOf("dispTab");
             dispTab.add("name", className);
             for (var v : methodsNames) {
-                dispTab.add("e", ".word " + v + "\n");
+                dispTab.add("e", getSequence(".word " + v));
             }
 
             dispTabList.add(dispTab);
@@ -325,7 +343,9 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(Call call) {
-        call.accept(this);
+        for(var v : call.args) {
+            v.accept(this);
+        }
         return null;
     }
 
@@ -435,9 +455,8 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(Int int1) {
-        System.out.println(int1.token);
         var integer1 = Integer.parseInt(int1.token.getText());
-        if (!intConstValueToIntConstName.containsKey(integer1)) {
+        if (!intValueToIntConstMap.containsKey(integer1)) {
             ST int_const = createAndAddIntConstant(intConstIndex, integer1, classNameToIndexMap.get("Int"));
             intConstantsList.add(int_const);
             intConstIndex++;
@@ -447,27 +466,28 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(Str str) {
-        System.out.println(str.token);
-
         var text = str.token.getText().substring(1, str.token.getText().length() - 1);
-        // computer wordDim for the str const
-        int length = text.length() + 1;
-        int wordDim = length / 4;
-        if (length % 4 != 0) {
-            wordDim = length / 4 + 1;
-        }
-        wordDim += 4;
+        if (!strValueToStrConstMap.containsKey(text)) {
+            // computer wordDim for the str const
+            int length = text.length() + 1;
+            int wordDim = length / 4;
+            if (length % 4 != 0) {
+                wordDim = length / 4 + 1;
+            }
+            wordDim += 4;
 
-        // if the int const with the correct value doesnt exist, then create it
-        if (!intConstValueToIntConstName.containsKey(text.length())) {
-            ST int_const = createAndAddIntConstant(intConstIndex, text.length(), classNameToIndexMap.get("Int"));
-            intConstantsList.add(int_const);
-            intConstIndex++;
+            // if the int const with the correct value doesnt exist, then create it
+            if (!intValueToIntConstMap.containsKey(text.length())) {
+                ST int_const = createAndAddIntConstant(intConstIndex, text.length(), classNameToIndexMap.get("Int"));
+                intConstantsList.add(int_const);
+                intConstIndex++;
+            }
+            // create the str const
+            ST str_const = createStringConstant(strConstIndex, wordDim, intValueToIntConstMap.get(text.length()), text, classNameToIndexMap.get("String"));
+            stringConstantsList.add(str_const);
+            strValueToStrConstMap.put(text, "str_const" + strConstIndex);
+            strConstIndex++;
         }
-        // create the str const
-        ST str_const = createStringConstant(strConstIndex, wordDim, intConstValueToIntConstName.get(text.length()), text, classNameToIndexMap.get("String"));
-        stringConstantsList.add(str_const);
-        strConstIndex++;
         return null;
     }
 
@@ -486,23 +506,22 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
             mainSection.add("e", e.accept(this));
         }
 
-//        programST.add("int", classNameToIndexMap.get("Int"));
-//        programST.add("string", classNameToIndexMap.get("String"));
-//        programST.add("bool", classNameToIndexMap.get("Bool"));
+        programST.add("int", classNameToIndexMap.get("Int"));
+        programST.add("string", classNameToIndexMap.get("String"));
+        programST.add("bool", classNameToIndexMap.get("Bool"));
 //
-//        dataSection.add("e", stringConstantsList);
-//        dataSection.add("e", intConstantsList);
-//        dataSection.add("e", createBoolConstant(classNameToIndexMap.get("Bool")));
-//
-//        dataSection.add("e", createClassNameTab());
-//        dataSection.add("e", createClassObjTab());
-//
-//        dataSection.add("e", protObjList);
-//        dataSection.add("e", dispTabList);
-//
-//
-//        programST.add("data", dataSection);
-//        programST.add("text", textSection);
+        dataSection.add("e", stringConstantsList);
+        dataSection.add("e", intConstantsList);
+        dataSection.add("e", createBoolConstant(classNameToIndexMap.get("Bool")));
+
+        dataSection.add("e", createClassNameTab());
+        dataSection.add("e", createClassObjTab());
+
+        dataSection.add("e", protObjList);
+        dataSection.add("e", dispTabList);
+
+
+
         return programST;
     }
 
