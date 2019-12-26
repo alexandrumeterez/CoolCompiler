@@ -4,6 +4,7 @@ import cool.structures.*;
 import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STGroupFile;
 
+import java.io.File;
 import java.util.*;
 
 class ClassProtObj {
@@ -45,7 +46,7 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
 
         // go from Object down the inheritance chain to current class and add all attributes and methods
         int currentOffset = 12;
-
+        int currentMethodOffset = 0;
         for (var c : inheritanceChain) {
             ClassSymbol classSymbol = SymbolTable.globals.lookupClassSymbol(c);
             // add all variables
@@ -65,6 +66,8 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
             // add all methods
             for (Map.Entry<String, MethodSymbol> entry : classSymbol.getMethodSymbols().entrySet()) {
                 MethodSymbol methodSymbol = entry.getValue();
+                methodSymbol.setOffset(currentMethodOffset);
+                currentMethodOffset += 4;
                 // append symbols to the current classobject
                 classObject.dispatchTable.methods.add(methodSymbol);
                 classObject.dispatchTable.methodsNames.add(classSymbol.getName() + "." + methodSymbol.getName());
@@ -148,6 +151,8 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
     static HashMap<String, String> strValueToStrConstMap = new LinkedHashMap<>();
     static HashMap<Integer, String> intValueToIntConstMap = new LinkedHashMap<>();
 
+    static int strConstFileNameIndex;
+
     static ArrayList<ST> intConstantsList = new ArrayList<>();
     static ArrayList<ST> stringConstantsList = new ArrayList<>();
     static ArrayList<ST> protObjList = new ArrayList<>();
@@ -219,6 +224,7 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
             strConstIndex++;
         }
 //        System.out.println(Compiler.reverseGraph);
+
 
 
         createClassNameToClassObjectMap();
@@ -323,6 +329,32 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(ClassDef classDef) {
+        File f = new File(Compiler.fileNames.get(classDef.ctx));
+        // add strconst with file name
+        var text = f.getName();
+        if(!strValueToStrConstMap.containsKey(text)) {
+            int length = text.length() + 1;
+            int wordDim = length / 4;
+            if (length % 4 != 0) {
+                wordDim = length / 4 + 1;
+            }
+            wordDim += 4;
+
+            // if the int const with the correct value doesnt exist, then create it
+            if (!intValueToIntConstMap.containsKey(text.length())) {
+                ST int_const = createAndAddIntConstant(intConstIndex, text.length(), classNameToIndexMap.get("Int"));
+                intConstantsList.add(int_const);
+                intConstIndex++;
+            }
+            // create the str const
+            ST str_const = createStringConstant(strConstIndex, wordDim, intValueToIntConstMap.get(text.length()), text, classNameToIndexMap.get("String"));
+            stringConstantsList.add(str_const);
+            classNameToStrConstMap.put(text, "str_const" + strConstIndex);
+            strConstToClassNameMap.put("str_const" + strConstIndex, text);
+            strValueToStrConstMap.put(text, "str_const" + strConstIndex);
+            strConstFileNameIndex = strConstIndex;
+            strConstIndex++;
+        }
         for (var v : classDef.features) {
             v.accept(this);
         }
@@ -343,7 +375,7 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(Call call) {
-        for(var v : call.args) {
+        for (var v : call.args) {
             v.accept(this);
         }
         return null;
@@ -501,7 +533,6 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
         dataSection = templates.getInstanceOf("sequence");
         textSection = templates.getInstanceOf("sequence");
         mainSection = templates.getInstanceOf("sequence");
-
         for (var e : program.class_list) {
             mainSection.add("e", e.accept(this));
         }
@@ -519,7 +550,6 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
 
         dataSection.add("e", protObjList);
         dataSection.add("e", dispTabList);
-
 
 
         return programST;

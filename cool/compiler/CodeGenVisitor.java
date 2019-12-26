@@ -15,6 +15,7 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
     ST programST = CodeGenConstGenVisitor.programST;
     STGroupFile templates = CodeGenConstGenVisitor.templates;
     ArrayList<ST> functionsCode = new ArrayList<>();
+    static int dispatchIndex = 0;
 
     private ST getSequence(ST pieceOfCode) {
         return templates.getInstanceOf("sequence").add("e", pieceOfCode);
@@ -30,7 +31,16 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(ObjectId objectId) {
-        return null;
+        ST objectIdST;
+        if (objectId.token.getText().equals("self")) {
+            objectIdST = templates.getInstanceOf("self");
+        } else {
+            objectIdST = templates.getInstanceOf("id");
+            // TODO: check this
+            var symbol = (AttributeSymbol) objectId.getSymbol();
+            objectIdST.add("offset", symbol.getOffset());
+        }
+        return objectIdST;
     }
 
     @Override
@@ -70,7 +80,6 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(ClassDef classDef) {
-
         ST class_init = templates.getInstanceOf("obj_init");
         var classSymbol = (ClassSymbol) classDef.getSymbol();
         // set class name
@@ -97,12 +106,54 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(Dispatch dispatch) {
-        return null;
+        ST dispatchST;
+        if(dispatch.class_name != null)
+            dispatchST = templates.getInstanceOf("dispatch_call");
+        else
+            dispatchST = templates.getInstanceOf("method_call");
+        var methodSymbol = (MethodSymbol) dispatch.call.getSymbol();
+        for (var p : dispatch.call.args) {
+            ST param = templates.getInstanceOf("load_param");
+            param.add("param", p.accept(this));
+            dispatchST.add("param", param);
+        }
+
+        dispatchST.add("obj", dispatch.object.accept(this));
+        dispatchST.add("label", "dispatch" + dispatchIndex);
+        if(dispatch.class_name != null)
+            dispatchST.add("class", dispatch.class_name.token.getText());
+        dispatchIndex++;
+
+        dispatchST.add("m_offset", methodSymbol.getOffset());
+
+        dispatchST.add("line", dispatch.call.name.token.getLine());
+        dispatchST.add("file", "str_const" + CodeGenConstGenVisitor.strConstFileNameIndex);
+        dispatchIndex++;
+
+        return dispatchST;
     }
 
     @Override
     public ST visit(Call call) {
-        return null;
+        ST dispatchST = templates.getInstanceOf("method_call");
+        var methodSymbol = (MethodSymbol) call.getSymbol();
+        for (var p : call.args) {
+            ST param = templates.getInstanceOf("load_param");
+            param.add("param", p.accept(this));
+            dispatchST.add("param", param);
+        }
+
+        dispatchST.add("obj", templates.getInstanceOf("self"));
+        dispatchST.add("label", "dispatch" + dispatchIndex);
+        dispatchIndex++;
+
+        dispatchST.add("m_offset", methodSymbol.getOffset());
+
+        dispatchST.add("line", call.name.token.getLine());
+        dispatchST.add("file", "str_const" + CodeGenConstGenVisitor.strConstFileNameIndex);
+        dispatchIndex++;
+
+        return dispatchST;
     }
 
     @Override
