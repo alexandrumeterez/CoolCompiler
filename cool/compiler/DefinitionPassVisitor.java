@@ -138,7 +138,6 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
         dispatch.call.accept(this);
         dispatch.setScope(currentScope);
 
-
         return null;
     }
 
@@ -150,7 +149,33 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
 
         call.setScope(currentScope);
         call.setParentClassSymbolFromCurrentScope(currentScope);
-        call.setSymbol(call.getParentClassSymbol().lookupMethodSymbol(call.name.token.getText()));
+//        System.out.println(call.token);
+//        System.out.println(call.getParentClassSymbol());
+
+        // set for special classes
+        var functionName = call.name.token.getText();
+        switch (functionName) {
+            case "abort":
+            case "type_name":
+            case "copy":
+                call.setSymbol(BasicClasses.OBJECT.lookupMethodSymbol(functionName));
+                break;
+            case "length":
+            case "concat":
+            case "substr":
+                call.setSymbol(BasicClasses.STRING.lookupMethodSymbol(functionName));
+                break;
+            case "out_int":
+            case "out_string":
+            case "in_string":
+            case "in_int":
+                call.setSymbol(BasicClasses.IO.lookupMethodSymbol(functionName));
+                break;
+            default:
+                call.setSymbol(call.getParentClassSymbol().lookupMethodSymbol(call.name.token.getText()));
+                break;
+        }
+
         return null;
     }
 

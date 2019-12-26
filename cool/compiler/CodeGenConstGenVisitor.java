@@ -369,6 +369,7 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(Dispatch dispatch) {
+        dispatch.object.accept(this);
         dispatch.call.accept(this);
         return null;
     }
@@ -500,6 +501,7 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
     public ST visit(Str str) {
         var text = str.token.getText().substring(1, str.token.getText().length() - 1);
         if (!strValueToStrConstMap.containsKey(text)) {
+//            System.out.println(text);
             // computer wordDim for the str const
             int length = text.length() + 1;
             int wordDim = length / 4;

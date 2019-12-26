@@ -175,7 +175,7 @@ obj_init(e, name, parent) ::= <<
 >>
 
 id(offset) ::= <<
-lw  $a0 <offset>($fp)
+lw  $a0 <offset>($s0)
 >>
 
 define_method(class, name, var_dec, body, var_inc, param_inc) ::= <<
@@ -247,4 +247,9 @@ load_param(param) ::= <<
 
 self() ::= <<
 move    $a0 $s0
+>>
+
+assign(expr, location, offset) ::= <<
+<expr>
+sw      $a0 <offset>($<location>)
 >>

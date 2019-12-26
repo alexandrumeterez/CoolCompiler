@@ -592,7 +592,7 @@
         sw      $ra 4($sp)
         addiu   $fp $sp 4
         move    $s0 $a0
-        lw  $a0 20($fp)
+        lw  $a0 20($s0)
         bnez    $a0 dispatch0
         la      $a0 str_const13
         li      $t1 28

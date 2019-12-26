@@ -111,28 +111,7 @@
         .word 10
         .word String_dispTab
         .word int_const6
-        .asciiz "11-dispatch-String.cl"
-        .align 2
-    str_const14:
-        .word 10
-        .word 5
-        .word String_dispTab
-        .word int_const5
-        .asciiz "abc"
-        .align 2
-    str_const15:
-        .word 10
-        .word 6
-        .word String_dispTab
-        .word int_const8
-        .asciiz "abcde"
-        .align 2
-    str_const16:
-        .word 10
-        .word 5
-        .word String_dispTab
-        .word int_const2
-        .asciiz "de"
+        .asciiz "12-attr-no-init-ref.cl"
         .align 2
     int_const0:
         .word 9
@@ -168,17 +147,7 @@
         .word 9
         .word 4
         .word Int_dispTab
-        .word 21
-    int_const7:
-        .word 9
-        .word 4
-        .word Int_dispTab
-        .word 100
-    int_const8:
-        .word 9
-        .word 4
-        .word Int_dispTab
-        .word 5
+        .word 22
     bool_const0:
         .word 11
         .word 4
@@ -484,8 +453,6 @@
         addiu   $fp $sp 4
         move    $s0 $a0
         jal     IO_init
-        la      $a0 int_const7
-        sw     $a0 12($s0)
         move    $a0 $s0
         lw      $fp 12($sp)
         lw      $s0 8($sp)
@@ -500,8 +467,6 @@
         addiu   $fp $sp 4
         move    $s0 $a0
         jal     A_init
-        la      $a0 str_const14
-        sw     $a0 16($s0)
         move    $a0 $s0
         lw      $fp 12($sp)
         lw      $s0 8($sp)
@@ -516,8 +481,6 @@
         addiu   $fp $sp 4
         move    $s0 $a0
         jal     A_init
-        la      $a0 bool_const1
-        sw     $a0 16($s0)
         move    $a0 $s0
         lw      $fp 12($sp)
         lw      $s0 8($sp)
@@ -639,72 +602,27 @@
         sw      $ra 4($sp)
         addiu   $fp $sp 4
         move    $s0 $a0
-        	la      $a0 str_const15
-        	bnez    $a0 dispatch0
-        	la      $a0 str_const13
-        	li      $t1 31
-        	jal     _dispatch_abort
-        	dispatch0:
-        	lw      $t1 8($a0)          # dispatch table
-        	lw      $t1 12($t1) # method offset
-        	jalr    $t1
+        	lw  $a0 12($s0)
+            sw      $a0 0($sp)
+            addiu   $sp $sp -4
+        move    $a0 $s0
+        bnez    $a0 dispatch0
+        la      $a0 str_const13
+        li      $t1 31
+        jal     _dispatch_abort
+        dispatch0:
+        lw      $t1 8($a0)          # dispatch table
+        lw      $t1 16($t1) # method offset
+        jalr    $t1
+        	lw  $a0 16($s0)
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
         bnez    $a0 dispatch2
         la      $a0 str_const13
-        li      $t1 31
-        jal     _dispatch_abort
-        dispatch2:
-        lw      $t1 8($a0)          # dispatch table
-        lw      $t1 16($t1) # method offset
-        jalr    $t1
-        		la      $a0 str_const16
-        	    sw      $a0 0($sp)
-        	    addiu   $sp $sp -4
-        	la      $a0 str_const14
-        	bnez    $a0 dispatch4
-        	la      $a0 str_const13
-        	li      $t1 32
-        	jal     _dispatch_abort
-        	dispatch4:
-        	lw      $t1 8($a0)          # dispatch table
-        	lw      $t1 16($t1) # method offset
-        	jalr    $t1
-            sw      $a0 0($sp)
-            addiu   $sp $sp -4
-        move    $a0 $s0
-        bnez    $a0 dispatch6
-        la      $a0 str_const13
         li      $t1 32
         jal     _dispatch_abort
-        dispatch6:
-        lw      $t1 8($a0)          # dispatch table
-        lw      $t1 12($t1) # method offset
-        jalr    $t1
-        		la      $a0 int_const2
-        	    sw      $a0 0($sp)
-        	    addiu   $sp $sp -4
-        		la      $a0 int_const5
-        	    sw      $a0 0($sp)
-        	    addiu   $sp $sp -4
-        	la      $a0 str_const15
-        	bnez    $a0 dispatch8
-        	la      $a0 str_const13
-        	li      $t1 33
-        	jal     _dispatch_abort
-        	dispatch8:
-        	lw      $t1 8($a0)          # dispatch table
-        	lw      $t1 20($t1) # method offset
-        	jalr    $t1
-            sw      $a0 0($sp)
-            addiu   $sp $sp -4
-        move    $a0 $s0
-        bnez    $a0 dispatch10
-        la      $a0 str_const13
-        li      $t1 33
-        jal     _dispatch_abort
-        dispatch10:
+        dispatch2:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1

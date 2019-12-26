@@ -9,6 +9,7 @@ import org.stringtemplate.v4.STGroup;
 import org.stringtemplate.v4.STGroupFile;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 public class CodeGenVisitor implements ASTVisitor<ST> {
 
@@ -101,7 +102,11 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(AssignExpr assignExpr) {
-        return null;
+        ST assignST = templates.getInstanceOf("assign");
+        assignST.add("expr", assignExpr.e.accept(this));
+        assignST.add("offset", assignExpr.name.getSymbol().getOffset());
+        assignST.add("location", "s0");
+        return assignST;
     }
 
     @Override
@@ -112,9 +117,11 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         else
             dispatchST = templates.getInstanceOf("method_call");
         var methodSymbol = (MethodSymbol) dispatch.call.getSymbol();
-        for (var p : dispatch.call.args) {
+        var li = dispatch.call.args.listIterator(dispatch.call.args.size());
+
+        while(li.hasPrevious()) {
             ST param = templates.getInstanceOf("load_param");
-            param.add("param", p.accept(this));
+            param.add("param", li.previous().accept(this));
             dispatchST.add("param", param);
         }
 
@@ -123,7 +130,6 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         if(dispatch.class_name != null)
             dispatchST.add("class", dispatch.class_name.token.getText());
         dispatchIndex++;
-        System.out.println(dispatch.call.getSymbol());
         dispatchST.add("m_offset", methodSymbol.getOffset());
 
         dispatchST.add("line", dispatch.call.name.token.getLine());
@@ -137,9 +143,11 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
     public ST visit(Call call) {
         ST dispatchST = templates.getInstanceOf("method_call");
         var methodSymbol = (MethodSymbol) call.getSymbol();
-        for (var p : call.args) {
+        var li = call.args.listIterator(call.args.size());
+
+        while(li.hasPrevious()) {
             ST param = templates.getInstanceOf("load_param");
-            param.add("param", p.accept(this));
+            param.add("param", li.previous().accept(this));
             dispatchST.add("param", param);
         }
 
