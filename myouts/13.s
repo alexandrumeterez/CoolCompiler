@@ -644,6 +644,8 @@
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 16($t1) # method offset
         jalr    $t1
+        la      $a0 int_const8
+        sw      $a0 12($s0)
         	lw  $a0 12($s0)
             sw      $a0 0($sp)
             addiu   $sp $sp -4
@@ -668,6 +670,8 @@
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
+        la      $a0 str_const15
+        sw      $a0 16($s0)
         	lw  $a0 16($s0)
             sw      $a0 0($sp)
             addiu   $sp $sp -4

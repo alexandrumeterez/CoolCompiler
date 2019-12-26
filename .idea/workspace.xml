@@ -2,49 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4d2c2ad1-7397-4f12-a05c-877ffc53c253" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/coolc.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myouts/12.s" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myouts/13.s" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myouts/14.s" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myouts/15.s" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myouts/16.s" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myouts/17.s" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myouts/18.s" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myouts/19.s" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myouts/20.s" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myouts/21.s" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myouts/22.s" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myouts/23.s" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myouts/24.s" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myouts/25.s" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myouts/26.s" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myouts/27.s" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myouts/28.s" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myouts/29.s" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myouts/30.s" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myouts/31.s" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myouts/32.s" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myouts/test.s" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trap.handler.nogc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/Compiler.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/Compiler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/cool/compiler/DefinitionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/DefinitionPassVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/cool/structures/SymbolTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/structures/SymbolTable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/compiler/CodeGenConstGenVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/CodeGenConstGenVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/structures/Symbol.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/structures/Symbol.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cool/compiler/CodeGenVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/CodeGenVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cool/compiler/DefinitionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/DefinitionPassVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/structures/Symbol.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/structures/Symbol.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cool/template.stg" beforeDir="false" afterPath="$PROJECT_DIR$/cool/template.stg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/01.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/1.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/02.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/2.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/03.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/3.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/04.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/4.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/05.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/5.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/06.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/6.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/07.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/7.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/08.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/8.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/09.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/9.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/11.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/11.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mytester.sh" beforeDir="false" afterPath="$PROJECT_DIR$/mytester.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/13.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/13.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/14.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/14.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/18.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/18.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/test.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/test.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/tema3/14-formals-ref-assign.cl" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema3/14-formals-ref-assign.cl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,10 +98,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="704" y="196" width="602" height="382" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1577289129927" />
-    <state x="881" y="-56" width="376" height="568" key="#com.intellij.ide.util.MemberChooser" timestamp="1577279185882">
+    <state x="880" y="-78" width="376" height="568" key="#com.intellij.ide.util.MemberChooser" timestamp="1577372574713">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="881" y="-56" width="376" height="568" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1577279185882" />
+    <state x="880" y="-78" width="376" height="568" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1577372574713" />
     <state x="213" y="250" width="526" height="494" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1576776280409">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

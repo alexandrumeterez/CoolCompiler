@@ -111,7 +111,7 @@
         .word 11
         .word String_dispTab
         .word int_const6
-        .asciiz "13-attr-init-ref-assign.cl"
+        .asciiz "14-formals-ref-assign.cl"
         .align 2
     str_const14:
         .word 10
@@ -119,13 +119,6 @@
         .word String_dispTab
         .word int_const5
         .asciiz "abc"
-        .align 2
-    str_const15:
-        .word 10
-        .word 5
-        .word String_dispTab
-        .word int_const5
-        .asciiz "def"
         .align 2
     int_const0:
         .word 9
@@ -161,17 +154,12 @@
         .word 9
         .word 4
         .word Int_dispTab
-        .word 26
+        .word 24
     int_const7:
         .word 9
         .word 4
         .word Int_dispTab
         .word 100
-    int_const8:
-        .word 9
-        .word 4
-        .word Int_dispTab
-        .word 117
     bool_const0:
         .word 11
         .word 4
@@ -363,6 +351,7 @@
         .word A.f
         .word B.g
         .word Main.main
+        .word Main.charAt
     D_dispTab:
         .word Object.abort
         .word Object.type_name
@@ -632,55 +621,29 @@
         sw      $ra 4($sp)
         addiu   $fp $sp 4
         move    $s0 $a0
-        	lw  $a0 12($s0)
-            sw      $a0 0($sp)
-            addiu   $sp $sp -4
-        move    $a0 $s0
-        bnez    $a0 dispatch0
-        la      $a0 str_const13
-        li      $t1 31
-        jal     _dispatch_abort
-        dispatch0:
-        lw      $t1 8($a0)          # dispatch table
-        lw      $t1 16($t1) # method offset
-        jalr    $t1
-        la      $a0 int_const8
-        sw      $a0 12($s0)
-        	lw  $a0 12($s0)
+        		la      $a0 int_const2
+        	    sw      $a0 0($sp)
+        	    addiu   $sp $sp -4
+        		la      $a0 str_const14
+        	    sw      $a0 0($sp)
+        	    addiu   $sp $sp -4
+        	move    $a0 $s0
+        	bnez    $a0 dispatch0
+        	la      $a0 str_const13
+        	li      $t1 29
+        	jal     _dispatch_abort
+        	dispatch0:
+        	lw      $t1 8($a0)          # dispatch table
+        	lw      $t1 40($t1) # method offset
+        	jalr    $t1
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
         bnez    $a0 dispatch2
         la      $a0 str_const13
-        li      $t1 33
+        li      $t1 29
         jal     _dispatch_abort
         dispatch2:
-        lw      $t1 8($a0)          # dispatch table
-        lw      $t1 16($t1) # method offset
-        jalr    $t1
-        	lw  $a0 16($s0)
-            sw      $a0 0($sp)
-            addiu   $sp $sp -4
-        move    $a0 $s0
-        bnez    $a0 dispatch4
-        la      $a0 str_const13
-        li      $t1 35
-        jal     _dispatch_abort
-        dispatch4:
-        lw      $t1 8($a0)          # dispatch table
-        lw      $t1 12($t1) # method offset
-        jalr    $t1
-        la      $a0 str_const15
-        sw      $a0 16($s0)
-        	lw  $a0 16($s0)
-            sw      $a0 0($sp)
-            addiu   $sp $sp -4
-        move    $a0 $s0
-        bnez    $a0 dispatch6
-        la      $a0 str_const13
-        li      $t1 37
-        jal     _dispatch_abort
-        dispatch6:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
@@ -688,4 +651,34 @@
         lw      $s0 8($sp)
         lw      $ra 4($sp)
         addiu   $sp $sp 12
+        jr      $ra
+    Main.charAt:
+        addiu   $sp $sp -12
+        sw      $fp 12($sp)
+        sw      $s0 8($sp)
+        sw      $ra 4($sp)
+        addiu   $fp $sp 4
+        move    $s0 $a0
+        	la      $a0 int_const3
+            sw      $a0 0($sp)
+            addiu   $sp $sp -4
+        	lw  $a0 16($fp)
+            sw      $a0 0($sp)
+            addiu   $sp $sp -4
+        lw  $a0 12($fp)
+        bnez    $a0 dispatch4
+        la      $a0 str_const13
+        li      $t1 34
+        jal     _dispatch_abort
+        dispatch4:
+        lw      $t1 8($a0)          # dispatch table
+        lw      $t1 20($t1) # method offset
+        jalr    $t1
+        sw      $a0 12($fp)
+        lw  $a0 12($fp)
+        lw      $fp 12($sp)
+        lw      $s0 8($sp)
+        lw      $ra 4($sp)
+        addiu   $sp $sp 12
+        	addiu $sp $sp 8
         jr      $ra

@@ -29,7 +29,7 @@ class Main inherits E {
     main() : Object {
         out_string(charAt("abc", 2))
     };
-    
+
     charAt(str : String, index : Int) : String {
         {
             str <- str.substr(index, 1);

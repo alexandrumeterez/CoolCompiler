@@ -388,6 +388,11 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
         var parentClassSymbol = call.getParentClassSymbol();
         var callSymbol = (MethodSymbol) call.getSymbol();
         // check if method exists in parent class
+//        System.out.println("HERE" + call.getParentClassSymbol().lookupMethodSymbol(call.name.token.getText()));
+        if(callSymbol == null){
+            call.setSymbol(call.getParentClassSymbol().lookupMethodSymbol(call.name.token.getText()));
+        }
+        callSymbol = (MethodSymbol) call.getSymbol();
         if (callSymbol == null) {
             SymbolTable.error(call.ctx, call.name.token, "Undefined method " +
                     call.name.token.getText() + " in class " + parentClassSymbol.getName());

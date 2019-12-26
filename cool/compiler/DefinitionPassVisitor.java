@@ -33,6 +33,8 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
         var name = formal.name;
         var attributeSymbol = new AttributeSymbol(name.token.getText());
         attributeSymbol.setType(SymbolTable.globals.lookupClassSymbol(formal.type.token.getText()));
+        attributeSymbol.setOffset(offset);
+        attributeSymbol.setLocation("fp");
         var currentMethodScope = (MethodSymbol) currentScope;
         var currentMethodClassScope = (ClassSymbol) currentMethodScope.getParent();
         if (name.token.getText().equals("self")) {
@@ -49,6 +51,7 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
         return null;
     }
 
+    int offset = 12;
     @Override
     public Void visit(FuncDef funcDef) {
         var name = funcDef.name;
@@ -62,6 +65,7 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
         }
 
         // enter method scope
+//        System.out.println((ClassSymbol)currentScope);
 
         currentScope = methodSymbol;
         methodSymbol.setFunctionNode(funcDef);
@@ -71,6 +75,7 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
         // visit parameters and body
         for (var formal : funcDef.params) {
             formal.accept(this);
+            offset += 4;
         }
         funcDef.func_body.accept(this);
         currentScope = currentScope.getParent();

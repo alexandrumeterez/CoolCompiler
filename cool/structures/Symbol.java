@@ -3,6 +3,20 @@ package cool.structures;
 public class Symbol {
     protected String name;
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    protected String location = "s0";
+
     public int getOffset() {
         return offset;
     }

@@ -174,8 +174,8 @@ obj_init(e, name, parent) ::= <<
     jr      $ra
 >>
 
-id(offset) ::= <<
-lw  $a0 <offset>($s0)
+id(offset, location) ::= <<
+lw  $a0 <offset>($<location>)
 >>
 
 define_method(class, name, var_dec, body, var_inc, param_inc) ::= <<

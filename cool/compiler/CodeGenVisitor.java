@@ -40,6 +40,7 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
             // TODO: check this
             var symbol = (AttributeSymbol) objectId.getSymbol();
             objectIdST.add("offset", symbol.getOffset());
+            objectIdST.add("location", symbol.getLocation());
         }
         return objectIdST;
     }
@@ -59,9 +60,13 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         ST defineMethod = templates.getInstanceOf("define_method");
         MethodSymbol methodSymbol = (MethodSymbol) funcDef.getSymbol();
         ClassSymbol classSymbol = (ClassSymbol) methodSymbol.getParent();
-
         defineMethod.add("name", methodSymbol.getName());
         defineMethod.add("class", classSymbol.getName());
+
+//        System.out.println(funcDef.token);
+//        for(var v : funcDef.params)
+//            System.out.println(v.getSymbol().getOffset());
+//        System.out.println();
 
         if (methodSymbol.getAttributeSymbols().size() > 0) {
             defineMethod.add("param_inc", templates.getInstanceOf("stack_inc").add("val", 4 * methodSymbol.getAttributeSymbols().size()));
@@ -75,6 +80,7 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         defineMethod.add("body", methodBody);
 
         //TODO: the local variables in the function
+
 
         return defineMethod;
     }
@@ -103,9 +109,11 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
     @Override
     public ST visit(AssignExpr assignExpr) {
         ST assignST = templates.getInstanceOf("assign");
+//        System.out.println(assignExpr.name.getSymbol().getOffset());
         assignST.add("expr", assignExpr.e.accept(this));
         assignST.add("offset", assignExpr.name.getSymbol().getOffset());
-        assignST.add("location", "s0");
+        assignST.add("location", assignExpr.name.getSymbol().getLocation());
+
         return assignST;
     }
 
