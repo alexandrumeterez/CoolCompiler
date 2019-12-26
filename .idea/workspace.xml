@@ -2,11 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4d2c2ad1-7397-4f12-a05c-877ffc53c253" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/myouts/02.s" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myouts/03.s" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myouts/04.s" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myouts/05.s" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myouts/06.s" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myouts/07.s" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myouts/08.s" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myouts/09.s" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myouts/10.s" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myouts/11.s" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mytester.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/compiler/CodeGenConstGenVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/CodeGenConstGenVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cool/compiler/CodeGenVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/CodeGenVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/template.stg" beforeDir="false" afterPath="$PROJECT_DIR$/cool/template.stg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Tester3/tester.sh" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Tester3/tester.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/structures/SymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/structures/SymbolTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/01.asm" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/01.s" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

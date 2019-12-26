@@ -37,7 +37,6 @@ public class SymbolTable {
         // Set methods and formals of STRING
         var lengthMethodSymbol = new MethodSymbol(BasicClasses.STRING, "length");
         lengthMethodSymbol.setType(BasicClasses.INT);
-
         var concatMethodSymbol = new MethodSymbol(BasicClasses.STRING, "concat");
         concatMethodSymbol.setType(BasicClasses.STRING);
         var concatFormal1 = new AttributeSymbol("s");

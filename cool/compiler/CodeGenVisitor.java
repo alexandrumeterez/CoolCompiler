@@ -123,7 +123,7 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         if(dispatch.class_name != null)
             dispatchST.add("class", dispatch.class_name.token.getText());
         dispatchIndex++;
-
+        System.out.println(dispatch.call.getSymbol());
         dispatchST.add("m_offset", methodSymbol.getOffset());
 
         dispatchST.add("line", dispatch.call.name.token.getLine());
@@ -163,7 +163,11 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(Block block) {
-        return null;
+        ST blockST = templates.getInstanceOf("sequence");
+        for(var v : block.block_expressions) {
+            blockST.add("e", v.accept(this));
+        }
+        return blockST;
     }
 
     @Override
