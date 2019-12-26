@@ -199,12 +199,14 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
         return null;
     }
 
+    int letOffset = -4;
     @Override
     public Void visit(Let let) {
         var letScope = new MethodSymbol(currentScope, "let");
         currentScope = letScope;
         for (var v : let.variables) {
             v.accept(this);
+            letOffset -= 4;
         }
         let.let_block_expr.accept(this);
         currentScope = letScope.getParent();
@@ -356,6 +358,8 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
         var letSymbol = new MethodSymbol(currentScope, "let_" + name.token.getText());
         var letLocalSymbol = new AttributeSymbol(name.token.getText());
         letLocalSymbol.setType(SymbolTable.globals.lookupClassSymbol(letLocal.type.token.getText()));
+        letLocalSymbol.setOffset(letOffset);
+        letLocalSymbol.setLocation("fp");
         if (name.token.getText().equals("self")) {
             SymbolTable.error(letLocal.ctx, letLocal.token, "Let variable has illegal name " + name.token.getText());
         }

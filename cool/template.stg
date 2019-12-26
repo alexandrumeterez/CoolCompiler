@@ -253,3 +253,8 @@ assign(expr, location, offset) ::= <<
 <expr>
 sw      $a0 <offset>($<location>)
 >>
+
+let(var, body) ::= <<
+<sequence(var)>
+<body>
+>>

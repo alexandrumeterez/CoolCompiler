@@ -17,6 +17,7 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
     STGroupFile templates = CodeGenConstGenVisitor.templates;
     ArrayList<ST> functionsCode = new ArrayList<>();
     static int dispatchIndex = 0;
+    int numberLocalVariables = 0;
 
     private ST getSequence(ST pieceOfCode) {
         return templates.getInstanceOf("sequence").add("e", pieceOfCode);
@@ -27,7 +28,23 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(TypeId id) {
-        return null;
+        ST constDeclr = templates.getInstanceOf("const_load");
+        var type = id.token.getText();
+        switch (type) {
+            case "String":
+                constDeclr.add("tag", "str_const0");
+                break;
+            case "Int":
+                constDeclr.add("tag", "int_const0");
+                break;
+            case "Bool":
+                constDeclr.add("tag", "bool_const0");
+                break;
+            default:
+                constDeclr.add("tag", "0");
+                break;
+        }
+        return constDeclr;
     }
 
     @Override
@@ -57,6 +74,7 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(FuncDef funcDef) {
+        numberLocalVariables = 0;
         ST defineMethod = templates.getInstanceOf("define_method");
         MethodSymbol methodSymbol = (MethodSymbol) funcDef.getSymbol();
         ClassSymbol classSymbol = (ClassSymbol) methodSymbol.getParent();
@@ -80,6 +98,14 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         defineMethod.add("body", methodBody);
 
         //TODO: the local variables in the function
+        if(numberLocalVariables > 0) {
+            defineMethod.add("var_dec", templates.getInstanceOf("stack_dec").add("val", 4 * numberLocalVariables));
+            defineMethod.add("var_inc", templates.getInstanceOf("stack_inc").add("val", 4 * numberLocalVariables));
+        } else {
+            defineMethod.add("var_dec", "");
+            defineMethod.add("var_inc", "");
+        }
+
 
 
         return defineMethod;
@@ -120,14 +146,14 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
     @Override
     public ST visit(Dispatch dispatch) {
         ST dispatchST;
-        if(dispatch.class_name != null)
+        if (dispatch.class_name != null)
             dispatchST = templates.getInstanceOf("dispatch_call");
         else
             dispatchST = templates.getInstanceOf("method_call");
         var methodSymbol = (MethodSymbol) dispatch.call.getSymbol();
         var li = dispatch.call.args.listIterator(dispatch.call.args.size());
 
-        while(li.hasPrevious()) {
+        while (li.hasPrevious()) {
             ST param = templates.getInstanceOf("load_param");
             param.add("param", li.previous().accept(this));
             dispatchST.add("param", param);
@@ -135,7 +161,7 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
 
         dispatchST.add("obj", dispatch.object.accept(this));
         dispatchST.add("label", "dispatch" + dispatchIndex);
-        if(dispatch.class_name != null)
+        if (dispatch.class_name != null)
             dispatchST.add("class", dispatch.class_name.token.getText());
         dispatchIndex++;
         dispatchST.add("m_offset", methodSymbol.getOffset());
@@ -153,7 +179,7 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         var methodSymbol = (MethodSymbol) call.getSymbol();
         var li = call.args.listIterator(call.args.size());
 
-        while(li.hasPrevious()) {
+        while (li.hasPrevious()) {
             ST param = templates.getInstanceOf("load_param");
             param.add("param", li.previous().accept(this));
             dispatchST.add("param", param);
@@ -180,7 +206,7 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
     @Override
     public ST visit(Block block) {
         ST blockST = templates.getInstanceOf("sequence");
-        for(var v : block.block_expressions) {
+        for (var v : block.block_expressions) {
             blockST.add("e", v.accept(this));
         }
         return blockST;
@@ -188,7 +214,13 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(Let let) {
-        return null;
+        ST letST = templates.getInstanceOf("let");
+        for (var v : let.variables) {
+            numberLocalVariables++;
+            letST.add("var", v.accept(this));
+        }
+        letST.add("body", let.let_block_expr.accept(this));
+        return letST;
     }
 
     @Override
@@ -317,7 +349,15 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(LetLocal letLocal) {
-        return null;
+        ST letLocalST = templates.getInstanceOf("assign");
+        letLocalST.add("offset", letLocal.getSymbol().getOffset());
+        letLocalST.add("location", letLocal.getSymbol().getLocation());
+        if (letLocal.e != null) {
+            letLocalST.add("expr", letLocal.e.accept(this));
+        } else {
+            letLocalST.add("expr", letLocal.type.accept(this));
+        }
+        return letLocalST;
     }
 
     @Override

@@ -572,7 +572,8 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(LetLocal letLocal) {
-        letLocal.e.accept(this);
+        if(letLocal.e != null)
+            letLocal.e.accept(this);
         return null;
     }
 
