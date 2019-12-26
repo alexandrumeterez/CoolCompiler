@@ -315,6 +315,8 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
         if(atClass != null) {
             callSymbol = (MethodSymbol) atClassType.lookupMethodSymbol(dispatch.call.name.token.getText());
         }
+        dispatch.call.setSymbol(callSymbol);
+
         var call = dispatch.call;
 
 //        System.out.println(callSymbol.getType());

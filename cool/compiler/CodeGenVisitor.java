@@ -230,7 +230,13 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(NewType newType) {
-        return null;
+        ST newTypeST;
+        if(newType.type.token.getText().equals("SELF_TYPE")) {
+            newTypeST = templates.getInstanceOf("selftype");
+        } else {
+            newTypeST = templates.getInstanceOf("new").add("class", newType.type.token.getText());
+        }
+        return newTypeST;
     }
 
     @Override

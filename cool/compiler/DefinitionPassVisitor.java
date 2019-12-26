@@ -142,7 +142,6 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
         }
         dispatch.call.accept(this);
         dispatch.setScope(currentScope);
-
         return null;
     }
 
