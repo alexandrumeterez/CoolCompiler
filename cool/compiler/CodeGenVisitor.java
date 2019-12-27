@@ -292,7 +292,9 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(TildeExpr tildeExpr) {
-        return null;
+        ST tildeExprST = templates.getInstanceOf("tilda");
+        tildeExprST.add("expr", tildeExpr.e.accept(this));
+        return tildeExprST;
     }
 
     @Override
@@ -318,7 +320,7 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(Paren paren) {
-        return null;
+        return paren.e.accept(this);
     }
 
     @Override

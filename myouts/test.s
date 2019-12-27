@@ -111,7 +111,7 @@
         .word 9
         .word String_dispTab
         .word int_const6
-        .asciiz "24-arithm-plus.cl"
+        .asciiz "25-arithm-paren.cl"
         .align 2
     str_const14:
         .word 10
@@ -161,12 +161,17 @@
         .word 9
         .word 4
         .word Int_dispTab
-        .word 17
+        .word 18
     int_const7:
         .word 9
         .word 4
         .word Int_dispTab
         .word 100
+    int_const8:
+        .word 9
+        .word 4
+        .word Int_dispTab
+        .word 12
     bool_const0:
         .word 11
         .word 4
@@ -696,59 +701,53 @@
         sw      $s0 8($sp)
         sw      $ra 4($sp)
         addiu   $fp $sp 4
-        	addiu $sp $sp -8
         move    $s0 $a0
-        la      $a0 int_const3
-        sw      $a0 -4($fp)
-        la      $a0 int_const2
-        sw      $a0 -8($fp)
-        	lw  $a0 -4($fp)
+        	la      $a0 int_const5
+        	jal     Object.copy
+        	lw      $t1 12($a0)
+        	neg     $t1 $t1
+        	sw      $t1 12($a0)
         	sw      $a0 0($sp)
         	addiu   $sp $sp -4
-        	lw  $a0 -8($fp)
+        	la      $a0 int_const4
+        	sw      $a0 0($sp)
+        	addiu   $sp $sp -4
+        	la      $a0 int_const8
+        	sw      $a0 0($sp)
+        	addiu   $sp $sp -4
+        	la      $a0 int_const1
         	jal     Object.copy
         	lw      $t1 4($sp)
         	addiu   $sp $sp 4
         	lw      $t1 12($t1)
         	lw      $t2 12($a0)
-        	add     $t1 $t1 $t2
+        	div     $t1 $t1 $t2
+        	sw      $t1 12($a0)
+        	jal     Object.copy
+        	lw      $t1 4($sp)
+        	addiu   $sp $sp 4
+        	lw      $t1 12($t1)
+        	lw      $t2 12($a0)
+        	sub     $t1 $t1 $t2
+        	sw      $t1 12($a0)
+        	jal     Object.copy
+        	lw      $t1 4($sp)
+        	addiu   $sp $sp 4
+        	lw      $t1 12($t1)
+        	lw      $t2 12($a0)
+        	mul     $t1 $t1 $t2
         	sw      $t1 12($a0)
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
         bnez    $a0 dispatch4
         la      $a0 str_const13
-        li      $t1 41
+        li      $t1 38
         jal     _dispatch_abort
         dispatch4:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 16($t1) # method offset
         jalr    $t1
-        	lw  $a0 -4($fp)
-            sw      $a0 0($sp)
-            addiu   $sp $sp -4
-        move    $a0 $s0
-        bnez    $a0 dispatch5
-        la      $a0 str_const13
-        li      $t1 42
-        jal     _dispatch_abort
-        dispatch5:
-        lw      $t1 8($a0)          # dispatch table
-        lw      $t1 16($t1) # method offset
-        jalr    $t1
-        	lw  $a0 -8($fp)
-            sw      $a0 0($sp)
-            addiu   $sp $sp -4
-        move    $a0 $s0
-        bnez    $a0 dispatch6
-        la      $a0 str_const13
-        li      $t1 43
-        jal     _dispatch_abort
-        dispatch6:
-        lw      $t1 8($a0)          # dispatch table
-        lw      $t1 16($t1) # method offset
-        jalr    $t1
-        	addiu $sp $sp 8
         lw      $fp 12($sp)
         lw      $s0 8($sp)
         lw      $ra 4($sp)

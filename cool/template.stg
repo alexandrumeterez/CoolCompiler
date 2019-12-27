@@ -322,3 +322,11 @@ lw      $t2 12($a0)
 <op>     $t1 $t1 $t2
 sw      $t1 12($a0)
 >>
+
+tilda(expr) ::= <<
+<expr>
+jal     Object.copy
+lw      $t1 12($a0)
+neg     $t1 $t1
+sw      $t1 12($a0)
+>>
