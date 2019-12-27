@@ -5,17 +5,18 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/cool/compiler/DefinitionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/DefinitionPassVisitor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/cool/structures/SymbolTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/structures/SymbolTable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/compiler/CodeGenVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/CodeGenVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cool/compiler/DefinitionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/DefinitionPassVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/structures/SymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/structures/SymbolTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/template.stg" beforeDir="false" afterPath="$PROJECT_DIR$/cool/template.stg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/25.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/25.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/26.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/26.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/27.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/27.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/28.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/28.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/29.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/29.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/30.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/30.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/31.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/31.s" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myouts/test.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/test.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/tema2/10-type-new-isvoid.out" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/10-type-new-isvoid.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/tema2/12-type-if.out" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/12-type-if.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/tema2/13-type-case.out" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/13-type-case.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/tema2/14-type-block.out" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/14-type-block.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/tema2/17-type-method.out" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/17-type-method.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/tema2/19-self_type.out" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/19-self_type.out" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

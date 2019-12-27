@@ -42,6 +42,22 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
         }
         var elseT = iff.elseBranch.accept(this);
 
+        if(thenT.getName().equals("SELF_TYPE")) {
+            var currentScope = iff.getScope();
+            while(!(currentScope instanceof ClassSymbol)){
+                currentScope = currentScope.getParent();
+            }
+            thenT = (ClassSymbol)currentScope;
+        }
+        if(elseT.getName().equals("SELF_TYPE")) {
+            var currentScope = iff.getScope();
+            while(!(currentScope instanceof ClassSymbol)){
+                currentScope = currentScope.getParent();
+            }
+            elseT = (ClassSymbol)currentScope;
+        }
+
+
         if (thenT != elseT) {
             // find meething point on path to Object
             var parent = ((ClassSymbol) elseT).getParentClassSymbol();
@@ -149,6 +165,7 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
 
         if (funcDef.func_body != null) {
             var bodyType = funcDef.func_body.accept(this);
+
             if (bodyType == null) {
                 return methodReturnType;
             }
@@ -161,7 +178,6 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
             if (bodyType.getName().equals("SELF_TYPE")) {
                 bodyType = (ClassSymbol) funcDef.getScope().getParent();
             }
-
             var parent = ((ClassSymbol) bodyType).getParentClassSymbol();
             while (parent != null) {
                 if (parent.getName().equals(BasicClasses.OBJECT.getName())) {
@@ -346,7 +362,7 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
                 var parent = ((ClassSymbol) callArgumentType).getParentClassSymbol();
 
 
-                while (parent != null && !parent.getName().equals(BasicClasses.OBJECT.getName())) {
+                while (parent != null) {
                     if (methodFormalType == parent) {
                         callArgumentType = methodFormalType;
                         break;

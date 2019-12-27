@@ -26,6 +26,7 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
         if (iff.elseBranch != null) {
             iff.elseBranch.accept(this);
         }
+        iff.setScope(currentScope);
         return null;
     }
 
