@@ -278,61 +278,61 @@
     	.word int_const0
     	.word str_const0
     Object_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
+        .word Object.type_name
+        .word Object.copy
     IO_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
-        .word IO.in_int
-        .word IO.in_string
-        .word IO.out_int
+        .word Object.type_name
+        .word Object.copy
         .word IO.out_string
+        .word IO.out_int
+        .word IO.in_string
+        .word IO.in_int
     Int_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
+        .word Object.type_name
+        .word Object.copy
     String_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
-        .word String.substr
-        .word String.concat
+        .word Object.type_name
+        .word Object.copy
         .word String.length
+        .word String.concat
+        .word String.substr
     Bool_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
+        .word Object.type_name
+        .word Object.copy
     A_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
+        .word Object.type_name
+        .word Object.copy
     C_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
+        .word Object.type_name
+        .word Object.copy
     F_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
+        .word Object.type_name
+        .word Object.copy
     B_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
+        .word Object.type_name
+        .word Object.copy
     E_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
+        .word Object.type_name
+        .word Object.copy
     Main_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
+        .word Object.type_name
+        .word Object.copy
         .word Main.main
     D_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
+        .word Object.type_name
+        .word Object.copy
 
 
 

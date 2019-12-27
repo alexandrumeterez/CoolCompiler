@@ -4,8 +4,6 @@
     <list default="true" id="4d2c2ad1-7397-4f12-a05c-877ffc53c253" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cool/compiler/CodeGenConstGenVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/CodeGenConstGenVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/compiler/CodeGenVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/CodeGenVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myouts/1.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/1.s" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myouts/10.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/10.s" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myouts/11.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/11.s" afterDir="false" />

@@ -290,102 +290,102 @@
     	.word Bool_dispTab
     	.word 0
     Object_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
+        .word Object.type_name
+        .word Object.copy
     IO_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
-        .word IO.in_int
-        .word IO.in_string
-        .word IO.out_int
+        .word Object.type_name
+        .word Object.copy
         .word IO.out_string
+        .word IO.out_int
+        .word IO.in_string
+        .word IO.in_int
     A_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
-        .word IO.in_int
-        .word IO.in_string
-        .word IO.out_int
+        .word Object.type_name
+        .word Object.copy
         .word IO.out_string
+        .word IO.out_int
+        .word IO.in_string
+        .word IO.in_int
         .word A.f
     C_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
-        .word IO.in_int
-        .word IO.in_string
-        .word IO.out_int
+        .word Object.type_name
+        .word Object.copy
         .word IO.out_string
-        .word C.h
+        .word IO.out_int
+        .word IO.in_string
+        .word IO.in_int
         .word C.f
+        .word C.h
     F_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
-        .word IO.in_int
-        .word IO.in_string
-        .word IO.out_int
+        .word Object.type_name
+        .word Object.copy
         .word IO.out_string
-        .word C.h
+        .word IO.out_int
+        .word IO.in_string
+        .word IO.in_int
         .word C.f
+        .word C.h
     B_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
-        .word IO.in_int
-        .word IO.in_string
-        .word IO.out_int
+        .word Object.type_name
+        .word Object.copy
         .word IO.out_string
+        .word IO.out_int
+        .word IO.in_string
+        .word IO.in_int
         .word A.f
         .word B.g
     E_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
-        .word IO.in_int
-        .word IO.in_string
-        .word IO.out_int
+        .word Object.type_name
+        .word Object.copy
         .word IO.out_string
+        .word IO.out_int
+        .word IO.in_string
+        .word IO.in_int
         .word A.f
         .word B.g
     Main_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
-        .word IO.in_int
-        .word IO.in_string
-        .word IO.out_int
+        .word Object.type_name
+        .word Object.copy
         .word IO.out_string
+        .word IO.out_int
+        .word IO.in_string
+        .word IO.in_int
         .word A.f
         .word B.g
         .word Main.main
     D_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
-        .word IO.in_int
-        .word IO.in_string
-        .word IO.out_int
+        .word Object.type_name
+        .word Object.copy
         .word IO.out_string
+        .word IO.out_int
+        .word IO.in_string
+        .word IO.in_int
         .word A.f
         .word B.g
     Int_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
+        .word Object.type_name
+        .word Object.copy
     String_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
-        .word String.substr
-        .word String.concat
+        .word Object.type_name
+        .word Object.copy
         .word String.length
+        .word String.concat
+        .word String.substr
     Bool_dispTab:
-        .word Object.copy
-        .word Object.type_name
         .word Object.abort
+        .word Object.type_name
+        .word Object.copy
 
 
 
@@ -645,7 +645,7 @@
         jal     _dispatch_abort
         dispatch0:
         lw      $t1 8($a0)          # dispatch table
-        lw      $t1 20($t1) # method offset
+        lw      $t1 16($t1) # method offset
         jalr    $t1
         la      $a0 int_const8
         sw      $a0 -4($fp)
@@ -659,7 +659,7 @@
         jal     _dispatch_abort
         dispatch1:
         lw      $t1 8($a0)          # dispatch table
-        lw      $t1 20($t1) # method offset
+        lw      $t1 16($t1) # method offset
         jalr    $t1
         	lw  $a0 -8($fp)
             sw      $a0 0($sp)
@@ -671,7 +671,7 @@
         jal     _dispatch_abort
         dispatch2:
         lw      $t1 8($a0)          # dispatch table
-        lw      $t1 24($t1) # method offset
+        lw      $t1 12($t1) # method offset
         jalr    $t1
         la      $a0 str_const15
         sw      $a0 -8($fp)
@@ -685,7 +685,7 @@
         jal     _dispatch_abort
         dispatch3:
         lw      $t1 8($a0)          # dispatch table
-        lw      $t1 24($t1) # method offset
+        lw      $t1 12($t1) # method offset
         jalr    $t1
         	addiu $sp $sp 8
         lw      $fp 12($sp)

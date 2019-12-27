@@ -15,7 +15,6 @@ class ClassProtObj {
 class ClassDispatchTable {
     LinkedList<MethodSymbol> methods = new LinkedList<>();
     LinkedList<String> methodsNames = new LinkedList<>();
-    LinkedList<String> methodsNamesWithoutClasses = new LinkedList<>();
 }
 
 class ClassObject {
@@ -44,10 +43,13 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
             current = current.getParentClassSymbol();
         }
 
-//        Collections.reverse(inheritanceChain);
+        Collections.reverse(inheritanceChain);
 
         // go from Object down the inheritance chain to current class and add all attributes and methods
 
+        int currentOffset = 12;
+
+        HashMap<String, String> functionToClassMap = new LinkedHashMap<>();
 
         for (var c : inheritanceChain) {
             ClassSymbol classSymbol = SymbolTable.globals.lookupClassSymbol(c);
@@ -61,43 +63,27 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
                 }
                 classObject.protObjList.attributeNameToAttributeSymbol.put(attributeSymbol.getName(), attributeSymbol);
 
-//                attributeSymbol.setOffset(currentOffset);
+                attributeSymbol.setOffset(currentOffset);
                 classObject.protObjList.attributes.add(attributeSymbol);
-//                currentOffset += 4;
+                currentOffset += 4;
             }
 
-            // add all methods
+
+            // add all methods to the functiontoclass map
             for (Map.Entry<String, MethodSymbol> entry : classSymbol.getMethodSymbols().entrySet()) {
                 MethodSymbol methodSymbol = entry.getValue();
-
-                // dont add it for the parent class if this class overwrites it
-//                System.out.println(currentClassSymbolBuildingClassObject + " " + methodSymbol);
-
-                if (classObject.dispatchTable.methodsNamesWithoutClasses.contains(methodSymbol.getName())) {
-                    continue;
-                }
-//                methodSymbol.setOffset(currentMethodOffset);
-//                currentMethodOffset += 4;
-                // append symbols to the current classobject
-                classObject.dispatchTable.methods.add(methodSymbol);
-                classObject.dispatchTable.methodsNames.add(classSymbol.getName() + "." + methodSymbol.getName());
-                classObject.dispatchTable.methodsNamesWithoutClasses.add(methodSymbol.getName());
+                functionToClassMap.put(methodSymbol.getName(), classSymbol.getName());
             }
         }
-        Collections.reverse(classObject.dispatchTable.methods);
-        Collections.reverse(classObject.dispatchTable.methodsNamesWithoutClasses);
-        Collections.reverse(classObject.dispatchTable.methodsNames);
-        Collections.reverse(classObject.protObjList.attributes);
 
-        int currentOffset = 12;
         int currentMethodOffset = 0;
-        for (var m : classObject.dispatchTable.methods) {
-            m.setOffset(currentMethodOffset);
+        //add functions in methods for class object
+        for(Map.Entry<String, String> entry : functionToClassMap.entrySet()) {
+            classObject.dispatchTable.methodsNames.add(entry.getValue() + "." + entry.getKey());
+            MethodSymbol methodSymbol = SymbolTable.globals.lookupClassSymbol(entry.getValue()).lookupMethodSymbol(entry.getKey());
+            classObject.dispatchTable.methods.add(methodSymbol);
+            methodSymbol.setOffset(currentMethodOffset);
             currentMethodOffset += 4;
-        }
-        for (var m : classObject.protObjList.attributes) {
-            m.setOffset(currentOffset);
-            currentOffset += 4;
         }
 
         return classObject;
