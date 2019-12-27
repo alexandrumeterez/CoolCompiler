@@ -68,7 +68,10 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
 //        System.out.println((ClassSymbol)currentScope);
 
         currentScope = methodSymbol;
-        methodSymbol.setFunctionNode(funcDef);
+        for(var v : funcDef.params) {
+            methodSymbol.getParams().add(v.type.token.getText());
+        }
+        methodSymbol.setReturn_type(funcDef.return_type.token.getText());
         funcDef.setSymbol(methodSymbol);
         // set method scope
         funcDef.setScope(currentScope);

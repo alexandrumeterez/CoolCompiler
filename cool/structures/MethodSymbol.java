@@ -14,6 +14,25 @@ public class MethodSymbol extends Symbol implements Scope {
     protected Map<String, AttributeSymbol> attributeSymbols = new LinkedHashMap<>();
     protected Scope parent;
 
+    public LinkedList<String> getParams() {
+        return params;
+    }
+
+    public void setParams(LinkedList<String> params) {
+        this.params = params;
+    }
+
+    LinkedList<String> params = new LinkedList<>();
+
+    public String getReturn_type() {
+        return return_type;
+    }
+
+    public void setReturn_type(String return_type) {
+        this.return_type = return_type;
+    }
+
+    String return_type;
 
     public ClassSymbol getType() {
         return type;
@@ -24,16 +43,6 @@ public class MethodSymbol extends Symbol implements Scope {
     }
 
     protected ClassSymbol type;
-
-    public ASTNode getFunctionNode() {
-        return functionNode;
-    }
-
-    public void setFunctionNode(ASTNode functionNode) {
-        this.functionNode = functionNode;
-    }
-
-    protected ASTNode functionNode;
 
     public MethodSymbol(String name) {
         super(name);

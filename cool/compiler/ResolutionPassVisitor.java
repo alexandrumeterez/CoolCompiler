@@ -105,9 +105,8 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
             //get method with same name in the parent class(if exists)
             var parentMethodSymbol = parentClassSymbol.lookupMethodSymbol(name.token.getText());
             if (parentMethodSymbol != null) {
-                var parentMethodASTNode = (FuncDef) parentMethodSymbol.getFunctionNode();
                 // check number of formal params
-                if (funcDef.params.size() != parentMethodASTNode.params.size()) {
+                if (funcDef.params.size() != parentMethodSymbol.getParams().size()) {
                     SymbolTable.error(funcDef.ctx, funcDef.token, "Class " + classScope + " overrides method " +
                             name.token.getText() +
                             " with different number of formal parameters");
@@ -115,26 +114,26 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
 
                 // check parameter types
 
-                for (int i = 0; i < Math.min(funcDef.params.size(), parentMethodASTNode.params.size()); i++) {
+                for (int i = 0; i < Math.min(funcDef.params.size(), parentMethodSymbol.getParams().size()); i++) {
                     var formal = funcDef.params.get(i);
-                    var parentFormal = parentMethodASTNode.params.get(i);
-                    if (!formal.type.token.getText().equals(parentFormal.type.token.getText())) {
+                    var parentFormal = parentMethodSymbol.getParams().get(i);
+                    if (!formal.type.token.getText().equals(parentFormal)) {
                         SymbolTable.error(funcDef.ctx, formal.type.token, "Class " +
                                 classScope + " overrides method " + name.token.getText() +
                                 " but changes type of formal parameter " +
                                 formal.name.token.getText() + " from " +
-                                parentFormal.type.token.getText() + " to " +
+                                parentFormal + " to " +
                                 formal.type.token.getText());
                     }
                 }
 
                 // check return type
-                if (!type.token.getText().equals(parentMethodASTNode.return_type.token.getText())) {
+                if (!type.token.getText().equals(parentMethodSymbol.getReturn_type())) {
                     SymbolTable.error(funcDef.ctx, type.token, "Class " +
                             classScope + " overrides method " +
                             name.token.getText() +
                             " but changes return type from " +
-                            parentMethodASTNode.return_type.token.getText() + " to " +
+                            parentMethodSymbol.getReturn_type() + " to " +
                             type.token.getText());
                 }
             }
