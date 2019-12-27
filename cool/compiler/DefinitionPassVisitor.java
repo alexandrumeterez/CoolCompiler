@@ -54,6 +54,7 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
     int offset = 12;
     @Override
     public Void visit(FuncDef funcDef) {
+        offset = 12;
         var name = funcDef.name;
         var methodSymbol = new MethodSymbol(currentScope, name.token.getText());
 

@@ -108,10 +108,10 @@
         .align 2
     str_const13:
         .word 10
-        .word 7
+        .word 9
         .word String_dispTab
         .word int_const6
-        .asciiz "23-not.cl"
+        .asciiz "24-arithm-plus.cl"
         .align 2
     str_const14:
         .word 10
@@ -126,34 +126,6 @@
         .word String_dispTab
         .word int_const2
         .asciiz "\n"
-        .align 2
-    str_const16:
-        .word 10
-        .word 5
-        .word String_dispTab
-        .word int_const5
-        .asciiz "NO1"
-        .align 2
-    str_const17:
-        .word 10
-        .word 6
-        .word String_dispTab
-        .word int_const4
-        .asciiz "YES1"
-        .align 2
-    str_const18:
-        .word 10
-        .word 5
-        .word String_dispTab
-        .word int_const5
-        .asciiz "NO2"
-        .align 2
-    str_const19:
-        .word 10
-        .word 6
-        .word String_dispTab
-        .word int_const4
-        .asciiz "YES2"
         .align 2
     int_const0:
         .word 9
@@ -189,7 +161,7 @@
         .word 9
         .word 4
         .word Int_dispTab
-        .word 9
+        .word 17
     int_const7:
         .word 9
         .word 4
@@ -692,7 +664,7 @@
         		la      $a0 str_const15
         	    sw      $a0 0($sp)
         	    addiu   $sp $sp -4
-        			lw  $a0 16($fp)
+        			lw  $a0 12($fp)
         		    sw      $a0 0($sp)
         		    addiu   $sp $sp -4
         		move    $a0 $s0
@@ -724,55 +696,59 @@
         sw      $s0 8($sp)
         sw      $ra 4($sp)
         addiu   $fp $sp 4
+        	addiu $sp $sp -8
         move    $s0 $a0
-        	la      $a0 bool_const1
-        	lw      $t1 12($a0)
-        	la      $a0 bool_const1
-        	beqz    $t1 not0
-        	la      $a0 bool_const0
-        	not0:
-        	    lw      $t1 12($a0)
-        	    beqz    $t1 else0
-        	la      $a0 str_const16
-        	    b       end0
-        	else0:
-        	la      $a0 str_const17
-        	end0:
+        la      $a0 int_const3
+        sw      $a0 -4($fp)
+        la      $a0 int_const2
+        sw      $a0 -8($fp)
+        	lw  $a0 -4($fp)
+        	sw      $a0 0($sp)
+        	addiu   $sp $sp -4
+        	lw  $a0 -8($fp)
+        	jal     Object.copy
+        	lw      $t1 4($sp)
+        	addiu   $sp $sp 4
+        	lw      $t1 12($t1)
+        	lw      $t2 12($a0)
+        	add     $t1 $t1 $t2
+        	sw      $t1 12($a0)
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
         bnez    $a0 dispatch4
         la      $a0 str_const13
-        li      $t1 39
+        li      $t1 41
         jal     _dispatch_abort
         dispatch4:
         lw      $t1 8($a0)          # dispatch table
-        lw      $t1 12($t1) # method offset
+        lw      $t1 16($t1) # method offset
         jalr    $t1
-        	la      $a0 bool_const0
-        	lw      $t1 12($a0)
-        	la      $a0 bool_const1
-        	beqz    $t1 not1
-        	la      $a0 bool_const0
-        	not1:
-        	    lw      $t1 12($a0)
-        	    beqz    $t1 else1
-        	la      $a0 str_const18
-        	    b       end1
-        	else1:
-        	la      $a0 str_const19
-        	end1:
+        	lw  $a0 -4($fp)
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
         bnez    $a0 dispatch5
         la      $a0 str_const13
-        li      $t1 40
+        li      $t1 42
         jal     _dispatch_abort
         dispatch5:
         lw      $t1 8($a0)          # dispatch table
-        lw      $t1 12($t1) # method offset
+        lw      $t1 16($t1) # method offset
         jalr    $t1
+        	lw  $a0 -8($fp)
+            sw      $a0 0($sp)
+            addiu   $sp $sp -4
+        move    $a0 $s0
+        bnez    $a0 dispatch6
+        la      $a0 str_const13
+        li      $t1 43
+        jal     _dispatch_abort
+        dispatch6:
+        lw      $t1 8($a0)          # dispatch table
+        lw      $t1 16($t1) # method offset
+        jalr    $t1
+        	addiu $sp $sp 8
         lw      $fp 12($sp)
         lw      $s0 8($sp)
         lw      $ra 4($sp)

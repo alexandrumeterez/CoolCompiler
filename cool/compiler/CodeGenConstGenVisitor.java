@@ -62,7 +62,6 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
                     continue;
                 }
                 classObject.protObjList.attributeNameToAttributeSymbol.put(attributeSymbol.getName(), attributeSymbol);
-
                 attributeSymbol.setOffset(currentOffset);
                 classObject.protObjList.attributes.add(attributeSymbol);
                 currentOffset += 4;

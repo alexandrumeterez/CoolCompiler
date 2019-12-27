@@ -25,11 +25,11 @@ class F inherits C {};
 
 class Main inherits E {
     x : SELF_TYPE;
-    
+
     out_string(str : String) : SELF_TYPE {
         self@IO.out_string(str.concat("\n"))
     };
-    
+
     out_int(n : Int) : SELF_TYPE {
         self@IO.out_int(n)@IO.out_string("\n")
     };

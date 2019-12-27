@@ -92,10 +92,6 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         defineMethod.add("name", methodSymbol.getName());
         defineMethod.add("class", classSymbol.getName());
 
-//        System.out.println(funcDef.token);
-//        for(var v : funcDef.params)
-//            System.out.println(v.getSymbol().getOffset());
-//        System.out.println();
 
         if (methodSymbol.getAttributeSymbols().size() > 0) {
             defineMethod.add("param_inc", templates.getInstanceOf("stack_inc").add("val", 4 * methodSymbol.getAttributeSymbols().size()));
@@ -105,7 +101,6 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
 
         ST methodBody = templates.getInstanceOf("sequence");
         methodBody.add("e", funcDef.func_body.accept(this));
-
         defineMethod.add("body", methodBody);
 
         //TODO: the local variables in the function
@@ -261,22 +256,38 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(Mult mult) {
-        return null;
+        ST operationST = templates.getInstanceOf("operation");
+        operationST.add("left_op", mult.left.accept(this));
+        operationST.add("right_op", mult.right.accept(this));
+        operationST.add("op", "mul");
+        return operationST;
     }
 
     @Override
     public ST visit(Div div) {
-        return null;
+        ST operationST = templates.getInstanceOf("operation");
+        operationST.add("left_op", div.left.accept(this));
+        operationST.add("right_op", div.right.accept(this));
+        operationST.add("op", "div");
+        return operationST;
     }
 
     @Override
     public ST visit(Plus plus) {
-        return null;
+        ST operationST = templates.getInstanceOf("operation");
+        operationST.add("left_op", plus.left.accept(this));
+        operationST.add("right_op", plus.right.accept(this));
+        operationST.add("op", "add");
+        return operationST;
     }
 
     @Override
     public ST visit(Minus minus) {
-        return null;
+        ST operationST = templates.getInstanceOf("operation");
+        operationST.add("left_op", minus.left.accept(this));
+        operationST.add("right_op", minus.right.accept(this));
+        operationST.add("op", "sub");
+        return operationST;
     }
 
     @Override
@@ -384,6 +395,7 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         } else {
             letLocalST.add("expr", letLocal.type.accept(this));
         }
+//        System.out.println(letLocal.getSymbol().getOffset());
 //        System.out.println("letlocal " + letLocal.token);
 //        System.out.println(((AttributeSymbol)letLocal.getSymbol()).getType());
         return letLocalST;
