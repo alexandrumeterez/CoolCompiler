@@ -345,3 +345,18 @@ eq(left_op, right_op, label) ::= <<
     jal     equality_test
 <label>:
 >>
+
+comparision(op, left_op, right_op, label) ::= <<
+<left_op>
+    sw      $a0 0($sp)
+    addiu   $sp $sp -4
+<right_op>
+    lw      $t1 4($sp)
+    addiu   $sp $sp 4
+    lw      $t1 12($t1)
+    lw      $t2 12($a0)
+    la      $a0 bool_const1
+    <op>     $t1 $t2 <label>
+    la      $a0 bool_const0
+<label>:
+>>

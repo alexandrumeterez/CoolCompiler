@@ -297,9 +297,25 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         return tildeExprST;
     }
 
+    static int lessthanIndex = 0;
+    static int lessequalthanIndex = 0;
+
     @Override
     public ST visit(Relational relational) {
-        return null;
+        var op = relational.operation;
+        ST relationalST = templates.getInstanceOf("comparision");
+        relationalST.add("left_op", relational.left.accept(this));
+        relationalST.add("right_op", relational.right.accept(this));
+        if (op.equals("<")) {
+            relationalST.add("label", "less" + lessthanIndex);
+            lessthanIndex++;
+            relationalST.add("op", "blt");
+        } else if (op.equals("<=")) {
+            relationalST.add("label", "lesseq" + lessequalthanIndex);
+            lessequalthanIndex++;
+            relationalST.add("op", "ble");
+        }
+        return relationalST;
     }
 
     static int equalIndex = 0;

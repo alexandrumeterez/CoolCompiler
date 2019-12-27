@@ -111,7 +111,7 @@
         .word 8
         .word String_dispTab
         .word int_const6
-        .asciiz "26-equality.cl"
+        .asciiz "27-compare.cl"
         .align 2
     str_const14:
         .word 10
@@ -129,157 +129,17 @@
         .align 2
     str_const16:
         .word 10
-        .word 6
+        .word 5
         .word String_dispTab
-        .word int_const4
-        .asciiz "3 OK"
+        .word int_const2
+        .asciiz "OK"
         .align 2
     str_const17:
         .word 10
-        .word 7
-        .word String_dispTab
-        .word int_const8
-        .asciiz "3 failed"
-        .align 2
-    str_const18:
-        .word 10
         .word 6
         .word String_dispTab
-        .word int_const4
-        .asciiz "a OK"
-        .align 2
-    str_const19:
-        .word 10
-        .word 7
-        .word String_dispTab
-        .word int_const8
-        .asciiz "a failed"
-        .align 2
-    str_const20:
-        .word 10
-        .word 6
-        .word String_dispTab
-        .word int_const9
-        .asciiz "a1 OK"
-        .align 2
-    str_const21:
-        .word 10
-        .word 7
-        .word String_dispTab
-        .word int_const10
-        .asciiz "a1 failed"
-        .align 2
-    str_const22:
-        .word 10
-        .word 6
-        .word String_dispTab
-        .word int_const9
-        .asciiz "a2 OK"
-        .align 2
-    str_const23:
-        .word 10
-        .word 7
-        .word String_dispTab
-        .word int_const10
-        .asciiz "a2 failed"
-        .align 2
-    str_const24:
-        .word 10
-        .word 6
-        .word String_dispTab
-        .word int_const4
-        .asciiz "b OK"
-        .align 2
-    str_const25:
-        .word 10
-        .word 7
-        .word String_dispTab
-        .word int_const8
-        .asciiz "b failed"
-        .align 2
-    str_const26:
-        .word 10
-        .word 6
-        .word String_dispTab
-        .word int_const9
-        .asciiz "b1 OK"
-        .align 2
-    str_const27:
-        .word 10
-        .word 7
-        .word String_dispTab
-        .word int_const10
-        .asciiz "b1 failed"
-        .align 2
-    str_const28:
-        .word 10
-        .word 6
-        .word String_dispTab
-        .word int_const9
-        .asciiz "b2 OK"
-        .align 2
-    str_const29:
-        .word 10
-        .word 7
-        .word String_dispTab
-        .word int_const10
-        .asciiz "b2 failed"
-        .align 2
-    str_const30:
-        .word 10
-        .word 6
-        .word String_dispTab
-        .word int_const4
-        .asciiz "x OK"
-        .align 2
-    str_const31:
-        .word 10
-        .word 7
-        .word String_dispTab
-        .word int_const8
-        .asciiz "x failed"
-        .align 2
-    str_const32:
-        .word 10
-        .word 6
-        .word String_dispTab
-        .word int_const11
-        .asciiz "self OK"
-        .align 2
-    str_const33:
-        .word 10
-        .word 7
-        .word String_dispTab
-        .word int_const12
-        .asciiz "self failed"
-        .align 2
-    str_const34:
-        .word 10
-        .word 6
-        .word String_dispTab
-        .word int_const11
-        .asciiz "comp OK"
-        .align 2
-    str_const35:
-        .word 10
-        .word 7
-        .word String_dispTab
-        .word int_const12
-        .asciiz "comp failed"
-        .align 2
-    str_const36:
-        .word 10
-        .word 6
-        .word String_dispTab
-        .word int_const11
-        .asciiz "copy OK"
-        .align 2
-    str_const37:
-        .word 10
-        .word 7
-        .word String_dispTab
-        .word int_const12
-        .asciiz "copy failed"
+        .word int_const1
+        .asciiz "failed"
         .align 2
     int_const0:
         .word 9
@@ -315,7 +175,7 @@
         .word 9
         .word 4
         .word Int_dispTab
-        .word 14
+        .word 13
     int_const7:
         .word 9
         .word 4
@@ -325,27 +185,7 @@
         .word 9
         .word 4
         .word Int_dispTab
-        .word 8
-    int_const9:
-        .word 9
-        .word 4
-        .word Int_dispTab
         .word 5
-    int_const10:
-        .word 9
-        .word 4
-        .word Int_dispTab
-        .word 9
-    int_const11:
-        .word 9
-        .word 4
-        .word Int_dispTab
-        .word 7
-    int_const12:
-        .word 9
-        .word 4
-        .word Int_dispTab
-        .word 11
     bool_const0:
         .word 11
         .word 4
@@ -875,28 +715,19 @@
         sw      $s0 8($sp)
         sw      $ra 4($sp)
         addiu   $fp $sp 4
-        	addiu $sp $sp -16
         move    $s0 $a0
-        la      $a0 int_const7
-        sw      $a0 -4($fp)
-        la      $a0 int_const0
-        sw      $a0 -8($fp)
-        la      $a0 str_const14
-        sw      $a0 -12($fp)
-        la      $a0 str_const0
-        sw      $a0 -16($fp)
         	la      $a0 int_const5
         	    sw      $a0 0($sp)
         	    addiu   $sp $sp -4
-        	la      $a0 int_const5
+        	la      $a0 int_const8
         	    lw      $t1 4($sp)
         	    addiu   $sp $sp 4
-        	    move    $t2 $a0
+        	    lw      $t1 12($t1)
+        	    lw      $t2 12($a0)
         	    la      $a0 bool_const1
-        	    beq     $t1 $t2 eq0
-        	    la      $a1 bool_const0
-        	    jal     equality_test
-        	eq0:
+        	    blt     $t1 $t2 less0
+        	    la      $a0 bool_const0
+        	less0:
         	    lw      $t1 12($a0)
         	    beqz    $t1 else0
         	la      $a0 str_const16
@@ -909,321 +740,162 @@
         move    $a0 $s0
         bnez    $a0 dispatch4
         la      $a0 str_const13
-        li      $t1 43
+        li      $t1 39
         jal     _dispatch_abort
         dispatch4:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
-        	lw  $a0 12($s0)
+        	la      $a0 int_const5
         	    sw      $a0 0($sp)
         	    addiu   $sp $sp -4
-        	lw  $a0 12($s0)
+        	la      $a0 int_const8
         	    lw      $t1 4($sp)
         	    addiu   $sp $sp 4
-        	    move    $t2 $a0
+        	    lw      $t1 12($t1)
+        	    lw      $t2 12($a0)
         	    la      $a0 bool_const1
-        	    beq     $t1 $t2 eq1
-        	    la      $a1 bool_const0
-        	    jal     equality_test
-        	eq1:
+        	    ble     $t1 $t2 lesseq0
+        	    la      $a0 bool_const0
+        	lesseq0:
         	    lw      $t1 12($a0)
         	    beqz    $t1 else1
-        	la      $a0 str_const18
+        	la      $a0 str_const16
         	    b       end1
         	else1:
-        	la      $a0 str_const19
+        	la      $a0 str_const17
         	end1:
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
         bnez    $a0 dispatch5
         la      $a0 str_const13
-        li      $t1 44
+        li      $t1 40
         jal     _dispatch_abort
         dispatch5:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
-        	lw  $a0 12($s0)
+        	la      $a0 int_const8
         	    sw      $a0 0($sp)
         	    addiu   $sp $sp -4
-        	lw  $a0 -4($fp)
+        	la      $a0 int_const5
         	    lw      $t1 4($sp)
         	    addiu   $sp $sp 4
-        	    move    $t2 $a0
+        	    lw      $t1 12($t1)
+        	    lw      $t2 12($a0)
         	    la      $a0 bool_const1
-        	    beq     $t1 $t2 eq2
-        	    la      $a1 bool_const0
-        	    jal     equality_test
-        	eq2:
+        	    blt     $t1 $t2 less1
+        	    la      $a0 bool_const0
+        	less1:
         	    lw      $t1 12($a0)
         	    beqz    $t1 else2
-        	la      $a0 str_const20
+        	la      $a0 str_const16
         	    b       end2
         	else2:
-        	la      $a0 str_const21
+        	la      $a0 str_const17
         	end2:
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
         bnez    $a0 dispatch6
         la      $a0 str_const13
-        li      $t1 45
+        li      $t1 41
         jal     _dispatch_abort
         dispatch6:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
-        	lw  $a0 12($s0)
+        	la      $a0 int_const8
         	    sw      $a0 0($sp)
         	    addiu   $sp $sp -4
-        	lw  $a0 -8($fp)
+        	la      $a0 int_const5
         	    lw      $t1 4($sp)
         	    addiu   $sp $sp 4
-        	    move    $t2 $a0
+        	    lw      $t1 12($t1)
+        	    lw      $t2 12($a0)
         	    la      $a0 bool_const1
-        	    beq     $t1 $t2 eq3
-        	    la      $a1 bool_const0
-        	    jal     equality_test
-        	eq3:
+        	    ble     $t1 $t2 lesseq1
+        	    la      $a0 bool_const0
+        	lesseq1:
         	    lw      $t1 12($a0)
         	    beqz    $t1 else3
-        	la      $a0 str_const22
+        	la      $a0 str_const16
         	    b       end3
         	else3:
-        	la      $a0 str_const23
+        	la      $a0 str_const17
         	end3:
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
         bnez    $a0 dispatch7
         la      $a0 str_const13
-        li      $t1 46
+        li      $t1 42
         jal     _dispatch_abort
         dispatch7:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
-        	lw  $a0 16($s0)
+        	la      $a0 int_const5
         	    sw      $a0 0($sp)
         	    addiu   $sp $sp -4
-        	lw  $a0 16($s0)
+        	la      $a0 int_const5
         	    lw      $t1 4($sp)
         	    addiu   $sp $sp 4
-        	    move    $t2 $a0
+        	    lw      $t1 12($t1)
+        	    lw      $t2 12($a0)
         	    la      $a0 bool_const1
-        	    beq     $t1 $t2 eq4
-        	    la      $a1 bool_const0
-        	    jal     equality_test
-        	eq4:
+        	    blt     $t1 $t2 less2
+        	    la      $a0 bool_const0
+        	less2:
         	    lw      $t1 12($a0)
         	    beqz    $t1 else4
-        	la      $a0 str_const24
+        	la      $a0 str_const16
         	    b       end4
         	else4:
-        	la      $a0 str_const25
+        	la      $a0 str_const17
         	end4:
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
         bnez    $a0 dispatch8
         la      $a0 str_const13
-        li      $t1 47
+        li      $t1 43
         jal     _dispatch_abort
         dispatch8:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
-        	lw  $a0 16($s0)
+        	la      $a0 int_const5
         	    sw      $a0 0($sp)
         	    addiu   $sp $sp -4
-        	lw  $a0 -12($fp)
+        	la      $a0 int_const5
         	    lw      $t1 4($sp)
         	    addiu   $sp $sp 4
-        	    move    $t2 $a0
+        	    lw      $t1 12($t1)
+        	    lw      $t2 12($a0)
         	    la      $a0 bool_const1
-        	    beq     $t1 $t2 eq5
-        	    la      $a1 bool_const0
-        	    jal     equality_test
-        	eq5:
+        	    ble     $t1 $t2 lesseq2
+        	    la      $a0 bool_const0
+        	lesseq2:
         	    lw      $t1 12($a0)
         	    beqz    $t1 else5
-        	la      $a0 str_const26
+        	la      $a0 str_const16
         	    b       end5
         	else5:
-        	la      $a0 str_const27
+        	la      $a0 str_const17
         	end5:
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
         bnez    $a0 dispatch9
         la      $a0 str_const13
-        li      $t1 48
+        li      $t1 44
         jal     _dispatch_abort
         dispatch9:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
-        	lw  $a0 16($s0)
-        	    sw      $a0 0($sp)
-        	    addiu   $sp $sp -4
-        	lw  $a0 -16($fp)
-        	    lw      $t1 4($sp)
-        	    addiu   $sp $sp 4
-        	    move    $t2 $a0
-        	    la      $a0 bool_const1
-        	    beq     $t1 $t2 eq6
-        	    la      $a1 bool_const0
-        	    jal     equality_test
-        	eq6:
-        	    lw      $t1 12($a0)
-        	    beqz    $t1 else6
-        	la      $a0 str_const28
-        	    b       end6
-        	else6:
-        	la      $a0 str_const29
-        	end6:
-            sw      $a0 0($sp)
-            addiu   $sp $sp -4
-        move    $a0 $s0
-        bnez    $a0 dispatch10
-        la      $a0 str_const13
-        li      $t1 49
-        jal     _dispatch_abort
-        dispatch10:
-        lw      $t1 8($a0)          # dispatch table
-        lw      $t1 12($t1) # method offset
-        jalr    $t1
-        	lw  $a0 20($s0)
-        	    sw      $a0 0($sp)
-        	    addiu   $sp $sp -4
-        	lw  $a0 20($s0)
-        	    lw      $t1 4($sp)
-        	    addiu   $sp $sp 4
-        	    move    $t2 $a0
-        	    la      $a0 bool_const1
-        	    beq     $t1 $t2 eq7
-        	    la      $a1 bool_const0
-        	    jal     equality_test
-        	eq7:
-        	    lw      $t1 12($a0)
-        	    beqz    $t1 else7
-        	la      $a0 str_const30
-        	    b       end7
-        	else7:
-        	la      $a0 str_const31
-        	end7:
-            sw      $a0 0($sp)
-            addiu   $sp $sp -4
-        move    $a0 $s0
-        bnez    $a0 dispatch11
-        la      $a0 str_const13
-        li      $t1 50
-        jal     _dispatch_abort
-        dispatch11:
-        lw      $t1 8($a0)          # dispatch table
-        lw      $t1 12($t1) # method offset
-        jalr    $t1
-        	move    $a0 $s0
-        	    sw      $a0 0($sp)
-        	    addiu   $sp $sp -4
-        	move    $a0 $s0
-        	    lw      $t1 4($sp)
-        	    addiu   $sp $sp 4
-        	    move    $t2 $a0
-        	    la      $a0 bool_const1
-        	    beq     $t1 $t2 eq8
-        	    la      $a1 bool_const0
-        	    jal     equality_test
-        	eq8:
-        	    lw      $t1 12($a0)
-        	    beqz    $t1 else8
-        	la      $a0 str_const32
-        	    b       end8
-        	else8:
-        	la      $a0 str_const33
-        	end8:
-            sw      $a0 0($sp)
-            addiu   $sp $sp -4
-        move    $a0 $s0
-        bnez    $a0 dispatch12
-        la      $a0 str_const13
-        li      $t1 51
-        jal     _dispatch_abort
-        dispatch12:
-        lw      $t1 8($a0)          # dispatch table
-        lw      $t1 12($t1) # method offset
-        jalr    $t1
-        	lw  $a0 20($s0)
-        	    sw      $a0 0($sp)
-        	    addiu   $sp $sp -4
-        	move    $a0 $s0
-        	    lw      $t1 4($sp)
-        	    addiu   $sp $sp 4
-        	    move    $t2 $a0
-        	    la      $a0 bool_const1
-        	    beq     $t1 $t2 eq9
-        	    la      $a1 bool_const0
-        	    jal     equality_test
-        	eq9:
-        	    lw      $t1 12($a0)
-        	    beqz    $t1 else9
-        	la      $a0 str_const34
-        	    b       end9
-        	else9:
-        	la      $a0 str_const35
-        	end9:
-            sw      $a0 0($sp)
-            addiu   $sp $sp -4
-        move    $a0 $s0
-        bnez    $a0 dispatch13
-        la      $a0 str_const13
-        li      $t1 52
-        jal     _dispatch_abort
-        dispatch13:
-        lw      $t1 8($a0)          # dispatch table
-        lw      $t1 12($t1) # method offset
-        jalr    $t1
-        	move    $a0 $s0
-        	    sw      $a0 0($sp)
-        	    addiu   $sp $sp -4
-        	move    $a0 $s0
-        	bnez    $a0 dispatch14
-        	la      $a0 str_const13
-        	li      $t1 53
-        	jal     _dispatch_abort
-        	dispatch14:
-        	lw      $t1 8($a0)          # dispatch table
-        	lw      $t1 8($t1) # method offset
-        	jalr    $t1
-        	    lw      $t1 4($sp)
-        	    addiu   $sp $sp 4
-        	    move    $t2 $a0
-        	    la      $a0 bool_const1
-        	    beq     $t1 $t2 eq10
-        	    la      $a1 bool_const0
-        	    jal     equality_test
-        	eq10:
-        	    lw      $t1 12($a0)
-        	    beqz    $t1 else10
-        	la      $a0 str_const36
-        	    b       end10
-        	else10:
-        	la      $a0 str_const37
-        	end10:
-            sw      $a0 0($sp)
-            addiu   $sp $sp -4
-        move    $a0 $s0
-        bnez    $a0 dispatch15
-        la      $a0 str_const13
-        li      $t1 53
-        jal     _dispatch_abort
-        dispatch15:
-        lw      $t1 8($a0)          # dispatch table
-        lw      $t1 12($t1) # method offset
-        jalr    $t1
-        	addiu $sp $sp 16
         lw      $fp 12($sp)
         lw      $s0 8($sp)
         lw      $ra 4($sp)
