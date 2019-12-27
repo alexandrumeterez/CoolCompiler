@@ -62,9 +62,20 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         return objectIdST;
     }
 
+    static int end_index = 0;
+    static int else_index = 0;
+
     @Override
     public ST visit(If iff) {
-        return null;
+        ST ifST = templates.getInstanceOf("if");
+        ifST.add("cond", iff.cond.accept(this));
+        ifST.add("else_label", "else" + else_index);
+        else_index++;
+        ifST.add("end_label", "end" + end_index);
+        end_index++;
+        ifST.add("thenBranch", iff.thenBranch.accept(this));
+        ifST.add("elseBranch", iff.elseBranch.accept(this));
+        return ifST;
     }
 
     @Override
@@ -98,14 +109,13 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         defineMethod.add("body", methodBody);
 
         //TODO: the local variables in the function
-        if(numberLocalVariables > 0) {
+        if (numberLocalVariables > 0) {
             defineMethod.add("var_dec", templates.getInstanceOf("stack_dec").add("val", 4 * numberLocalVariables));
             defineMethod.add("var_inc", templates.getInstanceOf("stack_inc").add("val", 4 * numberLocalVariables));
         } else {
             defineMethod.add("var_dec", "");
             defineMethod.add("var_inc", "");
         }
-
 
 
         return defineMethod;
@@ -230,7 +240,7 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
     @Override
     public ST visit(NewType newType) {
         ST newTypeST;
-        if(newType.type.token.getText().equals("SELF_TYPE")) {
+        if (newType.type.token.getText().equals("SELF_TYPE")) {
             newTypeST = templates.getInstanceOf("selftype");
         } else {
             newTypeST = templates.getInstanceOf("new").add("class", newType.type.token.getText());

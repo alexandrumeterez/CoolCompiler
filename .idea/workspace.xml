@@ -3,14 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4d2c2ad1-7397-4f12-a05c-877ffc53c253" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/DefinitionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/DefinitionPassVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/cool/structures/MethodSymbol.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/structures/MethodSymbol.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/compiler/DefinitionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/DefinitionPassVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/structures/MethodSymbol.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/structures/MethodSymbol.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/structures/SymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/structures/SymbolTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/test.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/test.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/compiler/CodeGenVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/CodeGenVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/template.stg" beforeDir="false" afterPath="$PROJECT_DIR$/cool/template.stg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

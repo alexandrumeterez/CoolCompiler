@@ -279,3 +279,14 @@ la      $a0 <class>_protObj
 jal     Object.copy
 jal     <class>_init
 >>
+
+if(cond, thenBranch, elseBranch, else_label, end_label) ::= <<
+<cond>
+    lw      $t1 12($a0)
+    beqz    $t1 <else_label>
+<thenBranch>
+    b       <end_label>
+<else_label>:
+<elseBranch>
+<end_label>:
+>>

@@ -725,6 +725,14 @@
         sw      $ra 4($sp)
         addiu   $fp $sp 4
         move    $s0 $a0
+        	la      $a0 bool_const1
+        	    lw      $t1 12($a0)
+        	    beqz    $t1 else0
+        	la      $a0 str_const16
+        	    b       end0
+        	else0:
+        	la      $a0 str_const17
+        	end0:
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
@@ -736,7 +744,14 @@
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
-
+        	la      $a0 bool_const0
+        	    lw      $t1 12($a0)
+        	    beqz    $t1 else1
+        	la      $a0 str_const18
+        	    b       end1
+        	else1:
+        	la      $a0 str_const19
+        	end1:
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
