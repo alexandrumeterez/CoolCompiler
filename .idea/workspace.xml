@@ -3,8 +3,19 @@
   <component name="ChangeListManager">
     <list default="true" id="4d2c2ad1-7397-4f12-a05c-877ffc53c253" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/DefinitionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/DefinitionPassVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/structures/SymbolTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/structures/SymbolTable.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cool/compiler/CodeGenVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/CodeGenVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/compiler/DefinitionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/DefinitionPassVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/structures/SymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/structures/SymbolTable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cool/template.stg" beforeDir="false" afterPath="$PROJECT_DIR$/cool/template.stg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/25.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/25.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/26.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/26.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/27.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/27.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/28.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/28.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/test.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/test.s" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,10 +122,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="440" y="56" width="1026" height="838" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1576701074760" />
-    <state x="1100" y="251" width="672" height="677" key="run.anything.popup" timestamp="1577372929204">
+    <state x="1100" y="251" width="672" height="677" key="run.anything.popup" timestamp="1577462564564">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="1100" y="251" width="672" height="677" key="run.anything.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1577372929204" />
+    <state x="1100" y="251" width="672" height="677" key="run.anything.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1577462564564" />
     <state x="623" y="245" width="672" height="678" key="search.everywhere.popup" timestamp="1577309542344">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

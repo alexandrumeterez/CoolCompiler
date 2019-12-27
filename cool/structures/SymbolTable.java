@@ -98,7 +98,7 @@ public class SymbolTable {
         BasicClasses.BOOL.setParentClassSymbol(BasicClasses.OBJECT);
         BasicClasses.STRING.setParentClassSymbol(BasicClasses.OBJECT);
         BasicClasses.IO.setParentClassSymbol(BasicClasses.OBJECT);
-
+        BasicClasses.SELF_TYPE.setParentClassSymbol(BasicClasses.OBJECT);
         globals.add(BasicClasses.OBJECT);
         globals.add(BasicClasses.INT);
         globals.add(BasicClasses.BOOL);

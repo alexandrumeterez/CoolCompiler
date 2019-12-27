@@ -360,3 +360,14 @@ comparision(op, left_op, right_op, label) ::= <<
     la      $a0 bool_const0
 <label>:
 >>
+
+while(cond, body, cond_label, end_label) ::= <<
+<cond_label>:
+<cond>
+    lw      $t1 12($a0)
+    beqz    $t1 <end_label>
+<body>
+    b       <cond_label>
+<end_label>:
+    move    $a0 $zero
+>>

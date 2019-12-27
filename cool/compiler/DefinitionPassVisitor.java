@@ -15,6 +15,7 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
     @Override
     public Void visit(ObjectId objectId) {
         objectId.setScope(currentScope);
+        objectId.setSymbol(objectId.getScope().lookupAttributeSymbol(objectId.token.getText()));
         return null;
     }
 

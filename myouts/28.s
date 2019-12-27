@@ -721,7 +721,48 @@
         sw      $a0 -4($fp)
         la      $a0 int_const0
         sw      $a0 -8($fp)
-
+        while_cond0:
+        lw  $a0 -4($fp)
+            sw      $a0 0($sp)
+            addiu   $sp $sp -4
+        la      $a0 int_const8
+            lw      $t1 4($sp)
+            addiu   $sp $sp 4
+            lw      $t1 12($t1)
+            lw      $t2 12($a0)
+            la      $a0 bool_const1
+            ble     $t1 $t2 lesseq0
+            la      $a0 bool_const0
+        lesseq0:
+            lw      $t1 12($a0)
+            beqz    $t1 while_end0
+        lw  $a0 -8($fp)
+        sw      $a0 0($sp)
+        addiu   $sp $sp -4
+        lw  $a0 -4($fp)
+        jal     Object.copy
+        lw      $t1 4($sp)
+        addiu   $sp $sp 4
+        lw      $t1 12($t1)
+        lw      $t2 12($a0)
+        add     $t1 $t1 $t2
+        sw      $t1 12($a0)
+        sw      $a0 -8($fp)
+        lw  $a0 -4($fp)
+        sw      $a0 0($sp)
+        addiu   $sp $sp -4
+        la      $a0 int_const3
+        jal     Object.copy
+        lw      $t1 4($sp)
+        addiu   $sp $sp 4
+        lw      $t1 12($t1)
+        lw      $t2 12($a0)
+        add     $t1 $t1 $t2
+        sw      $t1 12($a0)
+        sw      $a0 -4($fp)
+            b       while_cond0
+        while_end0:
+            move    $a0 $zero
         sw      $a0 -12($fp)
         	lw  $a0 -8($fp)
             sw      $a0 0($sp)

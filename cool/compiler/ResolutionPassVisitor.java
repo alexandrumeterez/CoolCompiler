@@ -21,7 +21,6 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
                         "Undefined identifier " + objectId.token.getText());
             }
         }
-
         objectId.setSymbol(objectId.getScope().lookupAttributeSymbol(objectId.token.getText()));
         if (objectId.getSymbol() == null) {
             return null;
@@ -345,6 +344,8 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
             if (callArgumentType != null) {
 
                 var parent = ((ClassSymbol) callArgumentType).getParentClassSymbol();
+
+
                 while (parent != null && !parent.getName().equals(BasicClasses.OBJECT.getName())) {
                     if (methodFormalType == parent) {
                         callArgumentType = methodFormalType;
@@ -419,13 +420,15 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
             if (callArgumentType != null) {
 
                 var parent = ((ClassSymbol) callArgumentType).getParentClassSymbol();
-                while (parent != null && !parent.getName().equals(BasicClasses.OBJECT.getName())) {
-                    if (methodFormalType == parent) {
-                        callArgumentType = methodFormalType;
-                        break;
-                    }
+                if(!callArgumentType.getName().equals(methodFormalType.getName())) {
+                    while (parent != null) {
+                        if (methodFormalType == parent) {
+                            callArgumentType = methodFormalType;
+                            break;
+                        }
 
-                    parent = parent.getParentClassSymbol();
+                        parent = parent.getParentClassSymbol();
+                    }
                 }
                 if (methodFormalType != callArgumentType) {
                     SymbolTable.error(call.ctx, callArgument.token, "In call to method " +

@@ -702,8 +702,34 @@
         sw      $ra 4($sp)
         addiu   $fp $sp 4
         move    $s0 $a0
+        	la      $a0 int_const5
+        	jal     Object.copy
+        	lw      $t1 12($a0)
+        	neg     $t1 $t1
+        	sw      $t1 12($a0)
         	sw      $a0 0($sp)
         	addiu   $sp $sp -4
+        	la      $a0 int_const4
+        	sw      $a0 0($sp)
+        	addiu   $sp $sp -4
+        	la      $a0 int_const8
+        	sw      $a0 0($sp)
+        	addiu   $sp $sp -4
+        	la      $a0 int_const1
+        	jal     Object.copy
+        	lw      $t1 4($sp)
+        	addiu   $sp $sp 4
+        	lw      $t1 12($t1)
+        	lw      $t2 12($a0)
+        	div     $t1 $t1 $t2
+        	sw      $t1 12($a0)
+        	jal     Object.copy
+        	lw      $t1 4($sp)
+        	addiu   $sp $sp 4
+        	lw      $t1 12($t1)
+        	lw      $t2 12($a0)
+        	sub     $t1 $t1 $t2
+        	sw      $t1 12($a0)
         	jal     Object.copy
         	lw      $t1 4($sp)
         	addiu   $sp $sp 4

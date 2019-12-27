@@ -108,10 +108,10 @@
         .align 2
     str_const13:
         .word 10
-        .word 8
+        .word 7
         .word String_dispTab
         .word int_const6
-        .asciiz "27-compare.cl"
+        .asciiz "28-while.cl"
         .align 2
     str_const14:
         .word 10
@@ -175,7 +175,7 @@
         .word 9
         .word 4
         .word Int_dispTab
-        .word 13
+        .word 11
     int_const7:
         .word 9
         .word 4
@@ -185,7 +185,7 @@
         .word 9
         .word 4
         .word Int_dispTab
-        .word 5
+        .word 10
     bool_const0:
         .word 11
         .word 4
@@ -715,19 +715,85 @@
         sw      $s0 8($sp)
         sw      $ra 4($sp)
         addiu   $fp $sp 4
+        	addiu $sp $sp -12
         move    $s0 $a0
-        	la      $a0 int_const5
-        	    sw      $a0 0($sp)
-        	    addiu   $sp $sp -4
-        	la      $a0 int_const8
-        	    lw      $t1 4($sp)
-        	    addiu   $sp $sp 4
-        	    lw      $t1 12($t1)
-        	    lw      $t2 12($a0)
-        	    la      $a0 bool_const1
-        	    blt     $t1 $t2 less0
-        	    la      $a0 bool_const0
-        	less0:
+        la      $a0 int_const0
+        sw      $a0 -4($fp)
+        la      $a0 int_const0
+        sw      $a0 -8($fp)
+        while_cond0:
+        lw  $a0 -4($fp)
+            sw      $a0 0($sp)
+            addiu   $sp $sp -4
+        la      $a0 int_const8
+            lw      $t1 4($sp)
+            addiu   $sp $sp 4
+            lw      $t1 12($t1)
+            lw      $t2 12($a0)
+            la      $a0 bool_const1
+            ble     $t1 $t2 lesseq0
+            la      $a0 bool_const0
+        lesseq0:
+            lw      $t1 12($a0)
+            beqz    $t1 while_end0
+        lw  $a0 -8($fp)
+        sw      $a0 0($sp)
+        addiu   $sp $sp -4
+        lw  $a0 -4($fp)
+        jal     Object.copy
+        lw      $t1 4($sp)
+        addiu   $sp $sp 4
+        lw      $t1 12($t1)
+        lw      $t2 12($a0)
+        add     $t1 $t1 $t2
+        sw      $t1 12($a0)
+        sw      $a0 -8($fp)
+        lw  $a0 -4($fp)
+        sw      $a0 0($sp)
+        addiu   $sp $sp -4
+        la      $a0 int_const3
+        jal     Object.copy
+        lw      $t1 4($sp)
+        addiu   $sp $sp 4
+        lw      $t1 12($t1)
+        lw      $t2 12($a0)
+        add     $t1 $t1 $t2
+        sw      $t1 12($a0)
+        sw      $a0 -4($fp)
+            b       while_cond0
+        while_end0:
+            move    $a0 $zero
+        sw      $a0 -12($fp)
+        	lw  $a0 -8($fp)
+            sw      $a0 0($sp)
+            addiu   $sp $sp -4
+        move    $a0 $s0
+        bnez    $a0 dispatch4
+        la      $a0 str_const13
+        li      $t1 48
+        jal     _dispatch_abort
+        dispatch4:
+        lw      $t1 8($a0)          # dispatch table
+        lw      $t1 16($t1) # method offset
+        jalr    $t1
+        	lw  $a0 -4($fp)
+            sw      $a0 0($sp)
+            addiu   $sp $sp -4
+        move    $a0 $s0
+        bnez    $a0 dispatch5
+        la      $a0 str_const13
+        li      $t1 49
+        jal     _dispatch_abort
+        dispatch5:
+        lw      $t1 8($a0)          # dispatch table
+        lw      $t1 16($t1) # method offset
+        jalr    $t1
+        	lw  $a0 -12($fp)
+        	move    $t1 $a0
+        	la      $a0 bool_const1
+        	beqz    $t1 isvoid0
+        	la      $a0 bool_const0
+        	isvoid0:
         	    lw      $t1 12($a0)
         	    beqz    $t1 else0
         	la      $a0 str_const16
@@ -738,164 +804,15 @@
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
-        bnez    $a0 dispatch4
-        la      $a0 str_const13
-        li      $t1 39
-        jal     _dispatch_abort
-        dispatch4:
-        lw      $t1 8($a0)          # dispatch table
-        lw      $t1 12($t1) # method offset
-        jalr    $t1
-        	la      $a0 int_const5
-        	    sw      $a0 0($sp)
-        	    addiu   $sp $sp -4
-        	la      $a0 int_const8
-        	    lw      $t1 4($sp)
-        	    addiu   $sp $sp 4
-        	    lw      $t1 12($t1)
-        	    lw      $t2 12($a0)
-        	    la      $a0 bool_const1
-        	    ble     $t1 $t2 lesseq0
-        	    la      $a0 bool_const0
-        	lesseq0:
-        	    lw      $t1 12($a0)
-        	    beqz    $t1 else1
-        	la      $a0 str_const16
-        	    b       end1
-        	else1:
-        	la      $a0 str_const17
-        	end1:
-            sw      $a0 0($sp)
-            addiu   $sp $sp -4
-        move    $a0 $s0
-        bnez    $a0 dispatch5
-        la      $a0 str_const13
-        li      $t1 40
-        jal     _dispatch_abort
-        dispatch5:
-        lw      $t1 8($a0)          # dispatch table
-        lw      $t1 12($t1) # method offset
-        jalr    $t1
-        	la      $a0 int_const8
-        	    sw      $a0 0($sp)
-        	    addiu   $sp $sp -4
-        	la      $a0 int_const5
-        	    lw      $t1 4($sp)
-        	    addiu   $sp $sp 4
-        	    lw      $t1 12($t1)
-        	    lw      $t2 12($a0)
-        	    la      $a0 bool_const1
-        	    blt     $t1 $t2 less1
-        	    la      $a0 bool_const0
-        	less1:
-        	    lw      $t1 12($a0)
-        	    beqz    $t1 else2
-        	la      $a0 str_const16
-        	    b       end2
-        	else2:
-        	la      $a0 str_const17
-        	end2:
-            sw      $a0 0($sp)
-            addiu   $sp $sp -4
-        move    $a0 $s0
         bnez    $a0 dispatch6
         la      $a0 str_const13
-        li      $t1 41
+        li      $t1 50
         jal     _dispatch_abort
         dispatch6:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
-        	la      $a0 int_const8
-        	    sw      $a0 0($sp)
-        	    addiu   $sp $sp -4
-        	la      $a0 int_const5
-        	    lw      $t1 4($sp)
-        	    addiu   $sp $sp 4
-        	    lw      $t1 12($t1)
-        	    lw      $t2 12($a0)
-        	    la      $a0 bool_const1
-        	    ble     $t1 $t2 lesseq1
-        	    la      $a0 bool_const0
-        	lesseq1:
-        	    lw      $t1 12($a0)
-        	    beqz    $t1 else3
-        	la      $a0 str_const16
-        	    b       end3
-        	else3:
-        	la      $a0 str_const17
-        	end3:
-            sw      $a0 0($sp)
-            addiu   $sp $sp -4
-        move    $a0 $s0
-        bnez    $a0 dispatch7
-        la      $a0 str_const13
-        li      $t1 42
-        jal     _dispatch_abort
-        dispatch7:
-        lw      $t1 8($a0)          # dispatch table
-        lw      $t1 12($t1) # method offset
-        jalr    $t1
-        	la      $a0 int_const5
-        	    sw      $a0 0($sp)
-        	    addiu   $sp $sp -4
-        	la      $a0 int_const5
-        	    lw      $t1 4($sp)
-        	    addiu   $sp $sp 4
-        	    lw      $t1 12($t1)
-        	    lw      $t2 12($a0)
-        	    la      $a0 bool_const1
-        	    blt     $t1 $t2 less2
-        	    la      $a0 bool_const0
-        	less2:
-        	    lw      $t1 12($a0)
-        	    beqz    $t1 else4
-        	la      $a0 str_const16
-        	    b       end4
-        	else4:
-        	la      $a0 str_const17
-        	end4:
-            sw      $a0 0($sp)
-            addiu   $sp $sp -4
-        move    $a0 $s0
-        bnez    $a0 dispatch8
-        la      $a0 str_const13
-        li      $t1 43
-        jal     _dispatch_abort
-        dispatch8:
-        lw      $t1 8($a0)          # dispatch table
-        lw      $t1 12($t1) # method offset
-        jalr    $t1
-        	la      $a0 int_const5
-        	    sw      $a0 0($sp)
-        	    addiu   $sp $sp -4
-        	la      $a0 int_const5
-        	    lw      $t1 4($sp)
-        	    addiu   $sp $sp 4
-        	    lw      $t1 12($t1)
-        	    lw      $t2 12($a0)
-        	    la      $a0 bool_const1
-        	    ble     $t1 $t2 lesseq2
-        	    la      $a0 bool_const0
-        	lesseq2:
-        	    lw      $t1 12($a0)
-        	    beqz    $t1 else5
-        	la      $a0 str_const16
-        	    b       end5
-        	else5:
-        	la      $a0 str_const17
-        	end5:
-            sw      $a0 0($sp)
-            addiu   $sp $sp -4
-        move    $a0 $s0
-        bnez    $a0 dispatch9
-        la      $a0 str_const13
-        li      $t1 44
-        jal     _dispatch_abort
-        dispatch9:
-        lw      $t1 8($a0)          # dispatch table
-        lw      $t1 12($t1) # method offset
-        jalr    $t1
+        	addiu $sp $sp 12
         lw      $fp 12($sp)
         lw      $s0 8($sp)
         lw      $ra 4($sp)

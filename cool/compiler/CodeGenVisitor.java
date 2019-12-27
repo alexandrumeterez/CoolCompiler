@@ -202,9 +202,19 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         return dispatchST;
     }
 
+    static int whileCondIndex = 0;
+    static int whileEndIndex = 0;
+
     @Override
     public ST visit(While while1) {
-        return null;
+        ST whileST = templates.getInstanceOf("while");
+        whileST.add("cond", while1.cond.accept(this));
+        whileST.add("cond_label", "while_cond" + whileCondIndex);
+        whileCondIndex++;
+        whileST.add("body", while1.whileBody.accept(this));
+        whileST.add("end_label", "while_end" + whileEndIndex);
+        whileEndIndex++;
+        return whileST;
     }
 
     @Override

@@ -716,6 +716,18 @@
         sw      $ra 4($sp)
         addiu   $fp $sp 4
         move    $s0 $a0
+        	la      $a0 int_const5
+        	    sw      $a0 0($sp)
+        	    addiu   $sp $sp -4
+        	la      $a0 int_const8
+        	    lw      $t1 4($sp)
+        	    addiu   $sp $sp 4
+        	    lw      $t1 12($t1)
+        	    lw      $t2 12($a0)
+        	    la      $a0 bool_const1
+        	    blt     $t1 $t2 less0
+        	    la      $a0 bool_const0
+        	less0:
         	    lw      $t1 12($a0)
         	    beqz    $t1 else0
         	la      $a0 str_const16
@@ -734,7 +746,18 @@
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
-
+        	la      $a0 int_const5
+        	    sw      $a0 0($sp)
+        	    addiu   $sp $sp -4
+        	la      $a0 int_const8
+        	    lw      $t1 4($sp)
+        	    addiu   $sp $sp 4
+        	    lw      $t1 12($t1)
+        	    lw      $t2 12($a0)
+        	    la      $a0 bool_const1
+        	    ble     $t1 $t2 lesseq0
+        	    la      $a0 bool_const0
+        	lesseq0:
         	    lw      $t1 12($a0)
         	    beqz    $t1 else1
         	la      $a0 str_const16
@@ -753,7 +776,18 @@
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
-
+        	la      $a0 int_const8
+        	    sw      $a0 0($sp)
+        	    addiu   $sp $sp -4
+        	la      $a0 int_const5
+        	    lw      $t1 4($sp)
+        	    addiu   $sp $sp 4
+        	    lw      $t1 12($t1)
+        	    lw      $t2 12($a0)
+        	    la      $a0 bool_const1
+        	    blt     $t1 $t2 less1
+        	    la      $a0 bool_const0
+        	less1:
         	    lw      $t1 12($a0)
         	    beqz    $t1 else2
         	la      $a0 str_const16
@@ -772,7 +806,18 @@
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
-
+        	la      $a0 int_const8
+        	    sw      $a0 0($sp)
+        	    addiu   $sp $sp -4
+        	la      $a0 int_const5
+        	    lw      $t1 4($sp)
+        	    addiu   $sp $sp 4
+        	    lw      $t1 12($t1)
+        	    lw      $t2 12($a0)
+        	    la      $a0 bool_const1
+        	    ble     $t1 $t2 lesseq1
+        	    la      $a0 bool_const0
+        	lesseq1:
         	    lw      $t1 12($a0)
         	    beqz    $t1 else3
         	la      $a0 str_const16
@@ -791,7 +836,18 @@
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
-
+        	la      $a0 int_const5
+        	    sw      $a0 0($sp)
+        	    addiu   $sp $sp -4
+        	la      $a0 int_const5
+        	    lw      $t1 4($sp)
+        	    addiu   $sp $sp 4
+        	    lw      $t1 12($t1)
+        	    lw      $t2 12($a0)
+        	    la      $a0 bool_const1
+        	    blt     $t1 $t2 less2
+        	    la      $a0 bool_const0
+        	less2:
         	    lw      $t1 12($a0)
         	    beqz    $t1 else4
         	la      $a0 str_const16
@@ -810,7 +866,18 @@
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
-
+        	la      $a0 int_const5
+        	    sw      $a0 0($sp)
+        	    addiu   $sp $sp -4
+        	la      $a0 int_const5
+        	    lw      $t1 4($sp)
+        	    addiu   $sp $sp 4
+        	    lw      $t1 12($t1)
+        	    lw      $t2 12($a0)
+        	    la      $a0 bool_const1
+        	    ble     $t1 $t2 lesseq2
+        	    la      $a0 bool_const0
+        	lesseq2:
         	    lw      $t1 12($a0)
         	    beqz    $t1 else5
         	la      $a0 str_const16
