@@ -302,9 +302,16 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         return null;
     }
 
+    static int equalIndex = 0;
+
     @Override
     public ST visit(Equal equal) {
-        return null;
+        ST equalST = templates.getInstanceOf("eq");
+        equalST.add("left_op", equal.left.accept(this));
+        equalST.add("right_op", equal.right.accept(this));
+        equalST.add("label", "eq" + equalIndex);
+        equalIndex++;
+        return equalST;
     }
 
     static int not_index = 0;

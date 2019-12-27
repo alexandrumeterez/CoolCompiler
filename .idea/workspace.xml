@@ -5,15 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cool/compiler/CodeGenVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/CodeGenVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cool/template.stg" beforeDir="false" afterPath="$PROJECT_DIR$/cool/template.stg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/21.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/21.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/22.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/22.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/23.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/23.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/24.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/24.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/25.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/25.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/26.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/26.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/27.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/27.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/28.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/28.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/test.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/test.s" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

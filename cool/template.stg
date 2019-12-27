@@ -330,3 +330,18 @@ lw      $t1 12($a0)
 neg     $t1 $t1
 sw      $t1 12($a0)
 >>
+
+eq(left_op, right_op, label) ::= <<
+<left_op>
+    sw      $a0 0($sp)
+    addiu   $sp $sp -4
+<right_op>
+    lw      $t1 4($sp)
+    addiu   $sp $sp 4
+    move    $t2 $a0
+    la      $a0 bool_const1
+    beq     $t1 $t2 <label>
+    la      $a1 bool_const0
+    jal     equality_test
+<label>:
+>>
