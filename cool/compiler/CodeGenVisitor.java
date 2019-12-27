@@ -163,7 +163,7 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         dispatchST.add("label", "dispatch" + dispatchIndex);
         if (dispatch.class_name != null)
             dispatchST.add("class", dispatch.class_name.token.getText());
-        dispatchIndex++;
+
         dispatchST.add("m_offset", methodSymbol.getOffset());
 
         dispatchST.add("line", dispatch.call.name.token.getLine());
@@ -187,7 +187,6 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
 
         dispatchST.add("obj", templates.getInstanceOf("self"));
         dispatchST.add("label", "dispatch" + dispatchIndex);
-        dispatchIndex++;
 
         dispatchST.add("m_offset", methodSymbol.getOffset());
 
@@ -363,6 +362,8 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         } else {
             letLocalST.add("expr", letLocal.type.accept(this));
         }
+//        System.out.println("letlocal " + letLocal.token);
+//        System.out.println(((AttributeSymbol)letLocal.getSymbol()).getType());
         return letLocalST;
     }
 

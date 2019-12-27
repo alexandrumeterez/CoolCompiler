@@ -3,13 +3,29 @@
   <component name="ChangeListManager">
     <list default="true" id="4d2c2ad1-7397-4f12-a05c-877ffc53c253" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/Compiler.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/Compiler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/DefinitionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/DefinitionPassVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/compiler/CodeGenConstGenVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/CodeGenConstGenVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cool/compiler/CodeGenVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/CodeGenVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/compiler/DefinitionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/DefinitionPassVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/template.stg" beforeDir="false" afterPath="$PROJECT_DIR$/cool/template.stg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/1.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/1.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/10.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/10.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/11.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/11.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/12.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/12.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/13.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/13.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/14.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/14.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/15.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/15.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/16.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/16.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/17.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/17.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/18.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/18.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/19.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/19.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/2.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/2.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/20.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/20.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/3.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/3.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/4.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/4.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/5.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/5.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/6.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/6.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/7.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/7.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/8.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/8.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/9.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/9.s" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myouts/test.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/test.s" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

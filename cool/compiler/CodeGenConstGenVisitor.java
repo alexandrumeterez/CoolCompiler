@@ -15,6 +15,7 @@ class ClassProtObj {
 class ClassDispatchTable {
     LinkedList<MethodSymbol> methods = new LinkedList<>();
     LinkedList<String> methodsNames = new LinkedList<>();
+    LinkedList<String> methodsNamesWithoutClasses = new LinkedList<>();
 }
 
 class ClassObject {
@@ -42,11 +43,12 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
             inheritanceChain.add(current.getName());
             current = current.getParentClassSymbol();
         }
-        Collections.reverse(inheritanceChain);
+
+//        Collections.reverse(inheritanceChain);
 
         // go from Object down the inheritance chain to current class and add all attributes and methods
-        int currentOffset = 12;
-        int currentMethodOffset = 0;
+
+
         for (var c : inheritanceChain) {
             ClassSymbol classSymbol = SymbolTable.globals.lookupClassSymbol(c);
             // add all variables
@@ -59,19 +61,43 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
                 }
                 classObject.protObjList.attributeNameToAttributeSymbol.put(attributeSymbol.getName(), attributeSymbol);
 
-                attributeSymbol.setOffset(currentOffset);
+//                attributeSymbol.setOffset(currentOffset);
                 classObject.protObjList.attributes.add(attributeSymbol);
-                currentOffset += 4;
+//                currentOffset += 4;
             }
+
             // add all methods
             for (Map.Entry<String, MethodSymbol> entry : classSymbol.getMethodSymbols().entrySet()) {
                 MethodSymbol methodSymbol = entry.getValue();
-                methodSymbol.setOffset(currentMethodOffset);
-                currentMethodOffset += 4;
+
+                // dont add it for the parent class if this class overwrites it
+//                System.out.println(currentClassSymbolBuildingClassObject + " " + methodSymbol);
+
+                if (classObject.dispatchTable.methodsNamesWithoutClasses.contains(methodSymbol.getName())) {
+                    continue;
+                }
+//                methodSymbol.setOffset(currentMethodOffset);
+//                currentMethodOffset += 4;
                 // append symbols to the current classobject
                 classObject.dispatchTable.methods.add(methodSymbol);
                 classObject.dispatchTable.methodsNames.add(classSymbol.getName() + "." + methodSymbol.getName());
+                classObject.dispatchTable.methodsNamesWithoutClasses.add(methodSymbol.getName());
             }
+        }
+        Collections.reverse(classObject.dispatchTable.methods);
+        Collections.reverse(classObject.dispatchTable.methodsNamesWithoutClasses);
+        Collections.reverse(classObject.dispatchTable.methodsNames);
+        Collections.reverse(classObject.protObjList.attributes);
+
+        int currentOffset = 12;
+        int currentMethodOffset = 0;
+        for (var m : classObject.dispatchTable.methods) {
+            m.setOffset(currentMethodOffset);
+            currentMethodOffset += 4;
+        }
+        for (var m : classObject.protObjList.attributes) {
+            m.setOffset(currentOffset);
+            currentOffset += 4;
         }
 
         return classObject;
@@ -226,7 +252,6 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
 //        System.out.println(Compiler.reverseGraph);
 
 
-
         createClassNameToClassObjectMap();
 
         // build the protobj list
@@ -332,7 +357,7 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
         File f = new File(Compiler.fileNames.get(classDef.ctx));
         // add strconst with file name
         var text = f.getName();
-        if(!strValueToStrConstMap.containsKey(text)) {
+        if (!strValueToStrConstMap.containsKey(text)) {
             int length = text.length() + 1;
             int wordDim = length / 4;
             if (length % 4 != 0) {
@@ -572,7 +597,7 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(LetLocal letLocal) {
-        if(letLocal.e != null)
+        if (letLocal.e != null)
             letLocal.e.accept(this);
         return null;
     }

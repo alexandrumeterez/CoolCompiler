@@ -157,11 +157,11 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
 
 
             // check for SELF_TYPE in the function definition
-            if(bodyType.getName().equals("SELF_TYPE") && methodReturnType.getName().equals("SELF_TYPE")) {
+            if (bodyType.getName().equals("SELF_TYPE") && methodReturnType.getName().equals("SELF_TYPE")) {
                 return methodReturnType;
             }
             if (bodyType.getName().equals("SELF_TYPE")) {
-                bodyType = (ClassSymbol)funcDef.getScope().getParent();
+                bodyType = (ClassSymbol) funcDef.getScope().getParent();
             }
 
             var parent = ((ClassSymbol) bodyType).getParentClassSymbol();
@@ -216,7 +216,7 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
         if (right == null) {
             return left;
         }
-        if(left.getName().equals(right.getName())) {
+        if (left.getName().equals(right.getName())) {
             return right;
         }
 
@@ -312,7 +312,7 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
         }
         // check if method exists in caller type class
         var callSymbol = (MethodSymbol) callerType.lookupMethodSymbol(dispatch.call.name.token.getText());
-        if(atClass != null) {
+        if (atClass != null) {
             callSymbol = (MethodSymbol) atClassType.lookupMethodSymbol(dispatch.call.name.token.getText());
         }
         dispatch.call.setSymbol(callSymbol);
@@ -391,7 +391,7 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
         var callSymbol = (MethodSymbol) call.getSymbol();
         // check if method exists in parent class
 //        System.out.println("HERE" + call.getParentClassSymbol().lookupMethodSymbol(call.name.token.getText()));
-        if(callSymbol == null){
+        if (callSymbol == null) {
             call.setSymbol(call.getParentClassSymbol().lookupMethodSymbol(call.name.token.getText()));
         }
         callSymbol = (MethodSymbol) call.getSymbol();

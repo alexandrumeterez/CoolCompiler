@@ -278,74 +278,72 @@
     	.word int_const0
     	.word str_const0
     Object_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
+        .word Object.type_name
+        .word Object.abort
     IO_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
-        .word IO.out_string
-        .word IO.out_int
-        .word IO.in_string
+        .word Object.type_name
+        .word Object.abort
         .word IO.in_int
+        .word IO.in_string
+        .word IO.out_int
+        .word IO.out_string
     Int_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
+        .word Object.type_name
+        .word Object.abort
     String_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
-        .word String.length
-        .word String.concat
+        .word Object.type_name
+        .word Object.abort
         .word String.substr
+        .word String.concat
+        .word String.length
     Bool_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
+        .word Object.type_name
+        .word Object.abort
     A_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
+        .word Object.type_name
+        .word Object.abort
         .word A.f
     C_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
-        .word A.f
-        .word C.f
+        .word Object.type_name
+        .word Object.abort
         .word C.h
+        .word C.f
     F_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
-        .word A.f
-        .word C.f
+        .word Object.type_name
+        .word Object.abort
         .word C.h
+        .word C.f
     B_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
+        .word Object.type_name
+        .word Object.abort
         .word A.f
         .word B.g
     E_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
+        .word Object.type_name
+        .word Object.abort
         .word A.f
         .word B.g
     Main_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
+        .word Object.type_name
+        .word Object.abort
         .word A.f
         .word B.g
         .word Main.main
     D_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
+        .word Object.type_name
+        .word Object.abort
         .word A.f
         .word B.g
 
@@ -599,7 +597,7 @@
         jal     _dispatch_abort
         dispatch0:
         lw      $t1 8($a0)          # dispatch table
-        lw      $t1 0($t1) # method offset
+        lw      $t1 8($t1) # method offset
         jalr    $t1
         lw      $fp 12($sp)
         lw      $s0 8($sp)

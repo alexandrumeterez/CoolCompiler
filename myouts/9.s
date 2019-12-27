@@ -278,104 +278,102 @@
     	.word Bool_dispTab
     	.word 0
     Object_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
+        .word Object.type_name
+        .word Object.abort
     IO_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
-        .word IO.out_string
-        .word IO.out_int
-        .word IO.in_string
+        .word Object.type_name
+        .word Object.abort
         .word IO.in_int
+        .word IO.in_string
+        .word IO.out_int
+        .word IO.out_string
     A_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
-        .word IO.out_string
-        .word IO.out_int
-        .word IO.in_string
+        .word Object.type_name
+        .word Object.abort
         .word IO.in_int
+        .word IO.in_string
+        .word IO.out_int
+        .word IO.out_string
         .word A.f
     C_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
-        .word IO.out_string
-        .word IO.out_int
-        .word IO.in_string
+        .word Object.type_name
+        .word Object.abort
         .word IO.in_int
-        .word A.f
-        .word C.f
+        .word IO.in_string
+        .word IO.out_int
+        .word IO.out_string
         .word C.h
+        .word C.f
     F_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
-        .word IO.out_string
-        .word IO.out_int
-        .word IO.in_string
+        .word Object.type_name
+        .word Object.abort
         .word IO.in_int
-        .word A.f
-        .word C.f
+        .word IO.in_string
+        .word IO.out_int
+        .word IO.out_string
         .word C.h
+        .word C.f
     B_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
-        .word IO.out_string
-        .word IO.out_int
-        .word IO.in_string
+        .word Object.type_name
+        .word Object.abort
         .word IO.in_int
+        .word IO.in_string
+        .word IO.out_int
+        .word IO.out_string
         .word A.f
         .word B.g
     E_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
-        .word IO.out_string
-        .word IO.out_int
-        .word IO.in_string
+        .word Object.type_name
+        .word Object.abort
         .word IO.in_int
+        .word IO.in_string
+        .word IO.out_int
+        .word IO.out_string
         .word A.f
         .word B.g
     Main_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
-        .word IO.out_string
-        .word IO.out_int
-        .word IO.in_string
+        .word Object.type_name
+        .word Object.abort
         .word IO.in_int
+        .word IO.in_string
+        .word IO.out_int
+        .word IO.out_string
         .word A.f
         .word B.g
         .word Main.main
     D_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
-        .word IO.out_string
-        .word IO.out_int
-        .word IO.in_string
+        .word Object.type_name
+        .word Object.abort
         .word IO.in_int
+        .word IO.in_string
+        .word IO.out_int
+        .word IO.out_string
         .word A.f
         .word B.g
     Int_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
+        .word Object.type_name
+        .word Object.abort
     String_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
-        .word String.length
-        .word String.concat
+        .word Object.type_name
+        .word Object.abort
         .word String.substr
+        .word String.concat
+        .word String.length
     Bool_dispTab:
-        .word Object.abort
-        .word Object.type_name
         .word Object.copy
+        .word Object.type_name
+        .word Object.abort
 
 
 
@@ -633,15 +631,15 @@
         jal     _dispatch_abort
         dispatch0:
         lw      $t1 8($a0)          # dispatch table
-        lw      $t1 12($t1) # method offset
+        lw      $t1 24($t1) # method offset
         jalr    $t1
-        bnez    $a0 dispatch2
+        bnez    $a0 dispatch1
         la      $a0 str_const13
         li      $t1 30
         jal     _dispatch_abort
-        dispatch2:
+        dispatch1:
         lw      $t1 8($a0)          # dispatch table
-        lw      $t1 16($t1) # method offset
+        lw      $t1 20($t1) # method offset
         jalr    $t1
         lw      $fp 12($sp)
         lw      $s0 8($sp)
