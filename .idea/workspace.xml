@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cool/compiler/CodeGenVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/CodeGenVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cool/template.stg" beforeDir="false" afterPath="$PROJECT_DIR$/cool/template.stg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myouts/test.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/test.s" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

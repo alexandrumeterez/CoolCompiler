@@ -111,7 +111,7 @@
         .word 7
         .word String_dispTab
         .word int_const6
-        .asciiz "21-if.cl"
+        .asciiz "23-not.cl"
         .align 2
     str_const14:
         .word 10
@@ -129,31 +129,31 @@
         .align 2
     str_const16:
         .word 10
-        .word 6
-        .word String_dispTab
-        .word int_const4
-        .asciiz "YES1"
-        .align 2
-    str_const17:
-        .word 10
         .word 5
         .word String_dispTab
         .word int_const5
         .asciiz "NO1"
         .align 2
-    str_const18:
+    str_const17:
         .word 10
         .word 6
         .word String_dispTab
         .word int_const4
-        .asciiz "YES2"
+        .asciiz "YES1"
         .align 2
-    str_const19:
+    str_const18:
         .word 10
         .word 5
         .word String_dispTab
         .word int_const5
         .asciiz "NO2"
+        .align 2
+    str_const19:
+        .word 10
+        .word 6
+        .word String_dispTab
+        .word int_const4
+        .asciiz "YES2"
         .align 2
     int_const0:
         .word 9
@@ -189,7 +189,7 @@
         .word 9
         .word 4
         .word Int_dispTab
-        .word 8
+        .word 9
     int_const7:
         .word 9
         .word 4
@@ -726,6 +726,11 @@
         addiu   $fp $sp 4
         move    $s0 $a0
         	la      $a0 bool_const1
+        	lw      $t1 12($a0)
+        	la      $a0 bool_const1
+        	beqz    $t1 not0
+        	la      $a0 bool_const0
+        	not0:
         	    lw      $t1 12($a0)
         	    beqz    $t1 else0
         	la      $a0 str_const16
@@ -745,6 +750,11 @@
         lw      $t1 12($t1) # method offset
         jalr    $t1
         	la      $a0 bool_const0
+        	lw      $t1 12($a0)
+        	la      $a0 bool_const1
+        	beqz    $t1 not1
+        	la      $a0 bool_const0
+        	not1:
         	    lw      $t1 12($a0)
         	    beqz    $t1 else1
         	la      $a0 str_const18

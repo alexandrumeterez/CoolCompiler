@@ -248,9 +248,15 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         return newTypeST;
     }
 
+    static int isVoidExprIndex = 0;
+
     @Override
     public ST visit(IsVoidExpr isVoidExpr) {
-        return null;
+        ST isVoidExprST = templates.getInstanceOf("isvoid");
+        isVoidExprST.add("expr", isVoidExpr.e.accept(this));
+        isVoidExprST.add("label", "isvoid" + isVoidExprIndex);
+        isVoidExprIndex++;
+        return isVoidExprST;
     }
 
     @Override
@@ -288,9 +294,15 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         return null;
     }
 
+    static int not_index = 0;
+
     @Override
     public ST visit(NotExpr notExpr) {
-        return null;
+        ST notST = templates.getInstanceOf("not");
+        notST.add("expr", notExpr.e.accept(this));
+        notST.add("label", "not" + not_index);
+        not_index++;
+        return notST;
     }
 
     @Override

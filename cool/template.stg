@@ -290,3 +290,21 @@ if(cond, thenBranch, elseBranch, else_label, end_label) ::= <<
 <elseBranch>
 <end_label>:
 >>
+
+isvoid(expr, label) ::= <<
+<expr>
+move    $t1 $a0
+la      $a0 bool_const1
+beqz    $t1 <label>
+la      $a0 bool_const0
+<label>:
+>>
+
+not(expr, label) ::= <<
+<expr>
+lw      $t1 12($a0)
+la      $a0 bool_const1
+beqz    $t1 <label>
+la      $a0 bool_const0
+<label>:
+>>
