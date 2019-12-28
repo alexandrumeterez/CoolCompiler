@@ -2,21 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4d2c2ad1-7397-4f12-a05c-877ffc53c253" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/tests/tema3/testumeublanao.cl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testumeublanao.ref" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/DefinitionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/DefinitionPassVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/ResolutionPassVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/compiler/DefinitionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/DefinitionPassVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/ResolutionPassVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/29.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/29.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/30.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/30.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/31.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/31.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myouts/test.s" beforeDir="false" afterPath="$PROJECT_DIR$/myouts/test.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tema2/10-type-new-isvoid.out" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/10-type-new-isvoid.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tema2/12-type-if.out" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/12-type-if.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tema2/13-type-case.out" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/13-type-case.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tema2/14-type-block.out" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/14-type-block.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tema2/17-type-method.out" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/17-type-method.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tema2/19-self_type.out" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tema2/19-self_type.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/cool/compiler/Compiler.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cool/compiler/Compiler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/compiler/CodeGenConstGenVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/CodeGenConstGenVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cool/compiler/Compiler.java" beforeDir="false" afterPath="$PROJECT_DIR$/cool/compiler/Compiler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,6 +114,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="440" y="56" width="1026" height="838" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1576701074760" />
+    <state x="130" y="267" width="700" height="530" key="recent.locations.popup" timestamp="1577471659524">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="130" y="267" width="700" height="530" key="recent.locations.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1577471659524" />
     <state x="1100" y="251" width="672" height="677" key="run.anything.popup" timestamp="1577462564564">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

@@ -77,7 +77,7 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
 
         int currentMethodOffset = 0;
         //add functions in methods for class object
-        for(Map.Entry<String, String> entry : functionToClassMap.entrySet()) {
+        for (Map.Entry<String, String> entry : functionToClassMap.entrySet()) {
             classObject.dispatchTable.methodsNames.add(entry.getValue() + "." + entry.getKey());
             MethodSymbol methodSymbol = SymbolTable.globals.lookupClassSymbol(entry.getValue()).lookupMethodSymbol(entry.getKey());
             classObject.dispatchTable.methods.add(methodSymbol);
@@ -161,6 +161,9 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
     static HashMap<String, String> strConstToClassNameMap = new LinkedHashMap<>();
     static HashMap<String, String> strValueToStrConstMap = new LinkedHashMap<>();
     static HashMap<Integer, String> intValueToIntConstMap = new LinkedHashMap<>();
+    static HashMap<Integer, Integer> classIndexToMaxValueOnSubtree = new LinkedHashMap<>();
+    static HashMap<String, Integer> classNameToMaxValueOnSubtree = new LinkedHashMap<>();
+
 
     static int strConstFileNameIndex;
 
@@ -194,6 +197,36 @@ public class CodeGenConstGenVisitor implements ASTVisitor<ST> {
             }
         }
 
+        // compute the maximum value on the subtree for each class
+        for (Map.Entry<String, Integer> entry : classNameToIndexMap.entrySet()) {
+            var currentClassName = entry.getKey();
+            HashSet<String> visitedSet = new HashSet<>();
+            Stack<String> dfsStack = new Stack<>();
+            dfsStack.push(currentClassName);
+            //set default value
+            int currentClassIndex = entry.getValue();
+            classIndexToMaxValueOnSubtree.put(currentClassIndex, currentClassIndex);
+            classNameToMaxValueOnSubtree.put(currentClassName, currentClassIndex);
+            while (!dfsStack.empty()) {
+                var nodeInSubtree = dfsStack.pop();
+                if (!visitedSet.contains(nodeInSubtree)) {
+                    var nodeInSubtreeIndex = classNameToIndexMap.get(nodeInSubtree);
+                    var tempIndex = classIndexToMaxValueOnSubtree.get(currentClassIndex);
+                    var updatedValue = Math.max(nodeInSubtreeIndex, tempIndex);
+                    classIndexToMaxValueOnSubtree.put(currentClassIndex, updatedValue);
+                    classNameToMaxValueOnSubtree.put(currentClassName, updatedValue);
+                    visitedSet.add(nodeInSubtree);
+                }
+                if (Compiler.reverseGraph.containsKey(nodeInSubtree)) {
+                    var children = Compiler.reverseGraph.get(nodeInSubtree);
+                    for (var c : children) {
+                        if (!visitedSet.contains(c)) {
+                            dfsStack.push(c);
+                        }
+                    }
+                }
+            }
+        }
         // Now each class has its own class tag
         // Now I build the int const mapping and str const mapping
 
