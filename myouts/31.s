@@ -626,6 +626,121 @@
         sw      $ra 4($sp)
         addiu   $fp $sp 4
         move    $s0 $a0
+            lw  $a0 12($fp)
+            bnez    $a0 case0
+            la      $a0 str_const13
+            li      $t1 30
+            jal     _case_abort2
+        case0:
+            sw      $a0 -4($fp)
+            lw      $t1 0($a0)
+        casebranch0:
+            blt     $t1 10 casebranch1
+            bgt     $t1 10 casebranch1
+            		lw  $a0 -4($fp)
+            	    sw      $a0 0($sp)
+            	    addiu   $sp $sp -4
+            	la      $a0 str_const15
+            	bnez    $a0 dispatch1
+            	la      $a0 str_const13
+            	li      $t1 32
+            	jal     _dispatch_abort
+            	dispatch1:
+            	lw      $t1 8($a0)          # dispatch table
+            	lw      $t1 16($t1) # method offset
+            	jalr    $t1
+                sw      $a0 0($sp)
+                addiu   $sp $sp -4
+            move    $a0 $s0
+            bnez    $a0 dispatch2
+            la      $a0 str_const13
+            li      $t1 32
+            jal     _dispatch_abort
+            dispatch2:
+            lw      $t1 8($a0)          # dispatch table
+            lw      $t1 12($t1) # method offset
+            jalr    $t1
+            b       endcase0
+        casebranch1:
+            blt     $t1 9 casebranch2
+            bgt     $t1 9 casebranch2
+            	la      $a0 int_const3
+            	sw      $a0 0($sp)
+            	addiu   $sp $sp -4
+            	lw  $a0 -4($fp)
+            	jal     Object.copy
+            	lw      $t1 4($sp)
+            	addiu   $sp $sp 4
+            	lw      $t1 12($t1)
+            	lw      $t2 12($a0)
+            	add     $t1 $t1 $t2
+            	sw      $t1 12($a0)
+                sw      $a0 0($sp)
+                addiu   $sp $sp -4
+            move    $a0 $s0
+            bnez    $a0 dispatch0
+            la      $a0 str_const13
+            li      $t1 31
+            jal     _dispatch_abort
+            dispatch0:
+            lw      $t1 8($a0)          # dispatch table
+            lw      $t1 16($t1) # method offset
+            jalr    $t1
+            b       endcase0
+        casebranch2:
+            blt     $t1 7 casebranch3
+            bgt     $t1 7 casebranch3
+            	lw  $a0 -4($fp)
+            	bnez    $a0 dispatch5
+            	la      $a0 str_const13
+            	li      $t1 34
+            	jal     _dispatch_abort
+            	dispatch5:
+            	lw      $t1 8($a0)          # dispatch table
+            	lw      $t1 32($t1) # method offset
+            	jalr    $t1
+                sw      $a0 0($sp)
+                addiu   $sp $sp -4
+            move    $a0 $s0
+            bnez    $a0 dispatch6
+            la      $a0 str_const13
+            li      $t1 34
+            jal     _dispatch_abort
+            dispatch6:
+            lw      $t1 8($a0)          # dispatch table
+            lw      $t1 16($t1) # method offset
+            jalr    $t1
+            b       endcase0
+        casebranch3:
+            blt     $t1 2 casebranch4
+            bgt     $t1 8 casebranch4
+            	lw  $a0 -4($fp)
+            	bnez    $a0 dispatch3
+            	la      $a0 str_const13
+            	li      $t1 33
+            	jal     _dispatch_abort
+            	dispatch3:
+            	lw      $t1 8($a0)          # dispatch table
+            	lw      $t1 28($t1) # method offset
+            	jalr    $t1
+                sw      $a0 0($sp)
+                addiu   $sp $sp -4
+            move    $a0 $s0
+            bnez    $a0 dispatch4
+            la      $a0 str_const13
+            li      $t1 33
+            jal     _dispatch_abort
+            dispatch4:
+            lw      $t1 8($a0)          # dispatch table
+            lw      $t1 16($t1) # method offset
+            jalr    $t1
+            b       endcase0
+
+
+        casebranch4:
+            lw      $a0 -4($fp)
+            jal     _case_abort
+        endcase0:
         lw      $fp 12($sp)
         lw      $s0 8($sp)
         lw      $ra 4($sp)
@@ -643,11 +758,11 @@
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
-        bnez    $a0 dispatch0
+        bnez    $a0 dispatch7
         la      $a0 str_const13
         li      $t1 39
         jal     _dispatch_abort
-        dispatch0:
+        dispatch7:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 36($t1) # method offset
         jalr    $t1

@@ -210,6 +210,7 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
     int letOffset = -4;
     @Override
     public Void visit(Let let) {
+        letOffset = -4;
         var letScope = new MethodSymbol(currentScope, "let");
         currentScope = letScope;
         for (var v : let.variables) {
@@ -367,6 +368,7 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
         var letLocalSymbol = new AttributeSymbol(name.token.getText());
         letLocalSymbol.setType(SymbolTable.globals.lookupClassSymbol(letLocal.type.token.getText()));
         letLocalSymbol.setOffset(letOffset);
+//        System.out.println(letLocalSymbol + " " + letOffset);
         letLocalSymbol.setLocation("fp");
         if (name.token.getText().equals("self")) {
             SymbolTable.error(letLocal.ctx, letLocal.token, "Let variable has illegal name " + name.token.getText());

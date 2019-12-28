@@ -372,8 +372,8 @@ while(cond, body, cond_label, end_label) ::= <<
     move    $a0 $zero
 >>
 
-case(case_label, object, branch, lastbranch_label, endcase_label, file, line) ::= <<
-    lw      $a0 12($fp)
+case(case_label, cond, branch, lastbranch_label, endcase_label, file, line) ::= <<
+    <cond>
     bnez    $a0 <case_label>
     la      $a0 <file>
     li      $t1 <line>

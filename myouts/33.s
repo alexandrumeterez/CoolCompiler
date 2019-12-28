@@ -111,21 +111,7 @@
         .word 9
         .word String_dispTab
         .word int_const6
-        .asciiz "30-case-on-void.cl"
-        .align 2
-    str_const14:
-        .word 10
-        .word 5
-        .word String_dispTab
-        .word int_const5
-        .asciiz "abc"
-        .align 2
-    str_const15:
-        .word 10
-        .word 6
-        .word String_dispTab
-        .word int_const1
-        .asciiz "Found "
+        .asciiz "testumeublanao.cl"
         .align 2
     int_const0:
         .word 9
@@ -161,8 +147,13 @@
         .word 9
         .word 4
         .word Int_dispTab
-        .word 18
+        .word 17
     int_const7:
+        .word 9
+        .word 4
+        .word Int_dispTab
+        .word 1231
+    int_const8:
         .word 9
         .word 4
         .word Int_dispTab
@@ -228,46 +219,39 @@
 
     A_protObj:
     	.word 2
-    	.word 4
+    	.word 3
     	.word A_dispTab
-    	.word int_const0
+
     C_protObj:
     	.word 3
-    	.word 5
+    	.word 3
     	.word C_dispTab
-    	.word int_const0
-    	.word bool_const0
+
     F_protObj:
     	.word 4
-    	.word 5
+    	.word 3
     	.word F_dispTab
-    	.word int_const0
-    	.word bool_const0
+
     B_protObj:
     	.word 5
-    	.word 5
+    	.word 3
     	.word B_dispTab
-    	.word int_const0
-    	.word str_const0
+
     E_protObj:
     	.word 6
-    	.word 5
+    	.word 3
     	.word E_dispTab
-    	.word int_const0
-    	.word str_const0
+
     Main_protObj:
     	.word 7
-    	.word 6
+    	.word 4
     	.word Main_dispTab
-    	.word int_const0
-    	.word str_const0
     	.word 0
     D_protObj:
     	.word 8
-    	.word 5
+    	.word 3
     	.word D_dispTab
-    	.word int_const0
-    	.word str_const0
+
     Int_protObj:
     	.word 9
     	.word 4
@@ -304,7 +288,6 @@
         .word IO.out_int
         .word IO.in_string
         .word IO.in_int
-        .word A.f
     C_dispTab:
         .word Object.abort
         .word Object.type_name
@@ -313,8 +296,6 @@
         .word IO.out_int
         .word IO.in_string
         .word IO.in_int
-        .word C.f
-        .word C.h
     F_dispTab:
         .word Object.abort
         .word Object.type_name
@@ -323,8 +304,6 @@
         .word IO.out_int
         .word IO.in_string
         .word IO.in_int
-        .word C.f
-        .word C.h
     B_dispTab:
         .word Object.abort
         .word Object.type_name
@@ -333,8 +312,6 @@
         .word IO.out_int
         .word IO.in_string
         .word IO.in_int
-        .word A.f
-        .word B.g
     E_dispTab:
         .word Object.abort
         .word Object.type_name
@@ -343,8 +320,6 @@
         .word IO.out_int
         .word IO.in_string
         .word IO.in_int
-        .word A.f
-        .word B.g
     Main_dispTab:
         .word Object.abort
         .word Object.type_name
@@ -353,8 +328,6 @@
         .word IO.out_int
         .word IO.in_string
         .word IO.in_int
-        .word A.f
-        .word B.g
         .word Main.i
         .word Main.main
     D_dispTab:
@@ -365,8 +338,6 @@
         .word IO.out_int
         .word IO.in_string
         .word IO.in_int
-        .word A.f
-        .word B.g
     Int_dispTab:
         .word Object.abort
         .word Object.type_name
@@ -471,8 +442,6 @@
         addiu   $fp $sp 4
         move    $s0 $a0
         jal     IO_init
-        la      $a0 int_const7
-        sw     $a0 12($s0)
         move    $a0 $s0
         lw      $fp 12($sp)
         lw      $s0 8($sp)
@@ -487,8 +456,6 @@
         addiu   $fp $sp 4
         move    $s0 $a0
         jal     A_init
-        la      $a0 str_const14
-        sw     $a0 16($s0)
         move    $a0 $s0
         lw      $fp 12($sp)
         lw      $s0 8($sp)
@@ -503,8 +470,6 @@
         addiu   $fp $sp 4
         move    $s0 $a0
         jal     A_init
-        la      $a0 bool_const1
-        sw     $a0 16($s0)
         move    $a0 $s0
         lw      $fp 12($sp)
         lw      $s0 8($sp)
@@ -567,58 +532,6 @@
         lw      $ra 4($sp)
         addiu   $sp $sp 12
         jr      $ra
-    A.f:
-        addiu   $sp $sp -12
-        sw      $fp 12($sp)
-        sw      $s0 8($sp)
-        sw      $ra 4($sp)
-        addiu   $fp $sp 4
-        move    $s0 $a0
-        la      $a0 int_const3
-        lw      $fp 12($sp)
-        lw      $s0 8($sp)
-        lw      $ra 4($sp)
-        addiu   $sp $sp 12
-        jr      $ra
-    B.g:
-        addiu   $sp $sp -12
-        sw      $fp 12($sp)
-        sw      $s0 8($sp)
-        sw      $ra 4($sp)
-        addiu   $fp $sp 4
-        move    $s0 $a0
-        la      $a0 int_const2
-        lw      $fp 12($sp)
-        lw      $s0 8($sp)
-        lw      $ra 4($sp)
-        addiu   $sp $sp 12
-        jr      $ra
-    C.f:
-        addiu   $sp $sp -12
-        sw      $fp 12($sp)
-        sw      $s0 8($sp)
-        sw      $ra 4($sp)
-        addiu   $fp $sp 4
-        move    $s0 $a0
-        la      $a0 int_const5
-        lw      $fp 12($sp)
-        lw      $s0 8($sp)
-        lw      $ra 4($sp)
-        addiu   $sp $sp 12
-        jr      $ra
-    C.h:
-        addiu   $sp $sp -12
-        sw      $fp 12($sp)
-        sw      $s0 8($sp)
-        sw      $ra 4($sp)
-        addiu   $fp $sp 4
-        move    $s0 $a0
-        la      $a0 int_const4
-        lw      $fp 12($sp)
-        lw      $s0 8($sp)
-        lw      $ra 4($sp)
-        addiu   $sp $sp 12
-        jr      $ra
     Main.i:
         addiu   $sp $sp -12
         sw      $fp 12($sp)
@@ -629,115 +542,19 @@
             lw  $a0 12($fp)
             bnez    $a0 case0
             la      $a0 str_const13
-            li      $t1 30
+            li      $t1 19
             jal     _case_abort2
         case0:
             sw      $a0 -4($fp)
             lw      $t1 0($a0)
         casebranch0:
-            blt     $t1 10 casebranch1
-            bgt     $t1 10 casebranch1
-            		lw  $a0 -4($fp)
-            	    sw      $a0 0($sp)
-            	    addiu   $sp $sp -4
-            	la      $a0 str_const15
-            	bnez    $a0 dispatch1
-            	la      $a0 str_const13
-            	li      $t1 32
-            	jal     _dispatch_abort
-            	dispatch1:
-            	lw      $t1 8($a0)          # dispatch table
-            	lw      $t1 16($t1) # method offset
-            	jalr    $t1
-                sw      $a0 0($sp)
-                addiu   $sp $sp -4
-            move    $a0 $s0
-            bnez    $a0 dispatch2
-            la      $a0 str_const13
-            li      $t1 32
-            jal     _dispatch_abort
-            dispatch2:
-            lw      $t1 8($a0)          # dispatch table
-            lw      $t1 12($t1) # method offset
-            jalr    $t1
+            blt     $t1 9 casebranch1
+            bgt     $t1 9 casebranch1
+            la      $a0 int_const7
             b       endcase0
+
+
         casebranch1:
-            blt     $t1 9 casebranch2
-            bgt     $t1 9 casebranch2
-            	la      $a0 int_const3
-            	sw      $a0 0($sp)
-            	addiu   $sp $sp -4
-            	lw  $a0 -4($fp)
-            	jal     Object.copy
-            	lw      $t1 4($sp)
-            	addiu   $sp $sp 4
-            	lw      $t1 12($t1)
-            	lw      $t2 12($a0)
-            	add     $t1 $t1 $t2
-            	sw      $t1 12($a0)
-                sw      $a0 0($sp)
-                addiu   $sp $sp -4
-            move    $a0 $s0
-            bnez    $a0 dispatch0
-            la      $a0 str_const13
-            li      $t1 31
-            jal     _dispatch_abort
-            dispatch0:
-            lw      $t1 8($a0)          # dispatch table
-            lw      $t1 16($t1) # method offset
-            jalr    $t1
-            b       endcase0
-        casebranch2:
-            blt     $t1 7 casebranch3
-            bgt     $t1 7 casebranch3
-            	lw  $a0 -4($fp)
-            	bnez    $a0 dispatch5
-            	la      $a0 str_const13
-            	li      $t1 34
-            	jal     _dispatch_abort
-            	dispatch5:
-            	lw      $t1 8($a0)          # dispatch table
-            	lw      $t1 32($t1) # method offset
-            	jalr    $t1
-                sw      $a0 0($sp)
-                addiu   $sp $sp -4
-            move    $a0 $s0
-            bnez    $a0 dispatch6
-            la      $a0 str_const13
-            li      $t1 34
-            jal     _dispatch_abort
-            dispatch6:
-            lw      $t1 8($a0)          # dispatch table
-            lw      $t1 16($t1) # method offset
-            jalr    $t1
-            b       endcase0
-        casebranch3:
-            blt     $t1 2 casebranch4
-            bgt     $t1 8 casebranch4
-            	lw  $a0 -4($fp)
-            	bnez    $a0 dispatch3
-            	la      $a0 str_const13
-            	li      $t1 33
-            	jal     _dispatch_abort
-            	dispatch3:
-            	lw      $t1 8($a0)          # dispatch table
-            	lw      $t1 28($t1) # method offset
-            	jalr    $t1
-                sw      $a0 0($sp)
-                addiu   $sp $sp -4
-            move    $a0 $s0
-            bnez    $a0 dispatch4
-            la      $a0 str_const13
-            li      $t1 33
-            jal     _dispatch_abort
-            dispatch4:
-            lw      $t1 8($a0)          # dispatch table
-            lw      $t1 16($t1) # method offset
-            jalr    $t1
-            b       endcase0
-
-
-        casebranch4:
             lw      $a0 -4($fp)
             jal     _case_abort
         endcase0:
@@ -754,17 +571,17 @@
         sw      $ra 4($sp)
         addiu   $fp $sp 4
         move    $s0 $a0
-        	lw  $a0 20($s0)
+        	la      $a0 int_const8
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
-        bnez    $a0 dispatch7
+        bnez    $a0 dispatch0
         la      $a0 str_const13
-        li      $t1 39
+        li      $t1 26
         jal     _dispatch_abort
-        dispatch7:
+        dispatch0:
         lw      $t1 8($a0)          # dispatch table
-        lw      $t1 36($t1) # method offset
+        lw      $t1 28($t1) # method offset
         jalr    $t1
         lw      $fp 12($sp)
         lw      $s0 8($sp)

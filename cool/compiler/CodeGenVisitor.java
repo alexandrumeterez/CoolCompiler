@@ -101,10 +101,12 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         } else {
             defineMethod.add("param_inc", "");
         }
-
+//        System.out.println(funcDef.token);
+//        System.out.println("localvariables " + numberLocalVariables);
         ST methodBody = templates.getInstanceOf("sequence");
         methodBody.add("e", funcDef.func_body.accept(this));
         defineMethod.add("body", methodBody);
+//        System.out.println("localvariablesafter " + numberLocalVariables);
 
         //TODO: the local variables in the function
         if (numberLocalVariables > 0) {
@@ -232,11 +234,13 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(Let let) {
+//        System.out.println(let.token);
         ST letST = templates.getInstanceOf("let");
         for (var v : let.variables) {
             numberLocalVariables++;
             letST.add("var", v.accept(this));
         }
+//        System.out.println(letST.render());
         letST.add("body", let.let_block_expr.accept(this));
         return letST;
     }
@@ -248,10 +252,11 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
     @Override
     public ST visit(Case case1) {
         caseBranchMap.clear();
-        numberLocalVariables++;
+//        numberLocalVariables++;
         ST caseST = templates.getInstanceOf("case");
         caseST.add("case_label", "case" + caseIndex);
-//        caseST.add("cond", case1.cond.accept(this));
+        caseST.add("cond", case1.cond.accept(this));
+//        System.out.println(case1.cond.accept(this).render());
         caseST.add("endcase_label", "endcase" + caseIndex);
         for (var branch : case1.caseBranches) {
             branch.accept(this);

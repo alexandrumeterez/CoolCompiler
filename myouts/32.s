@@ -562,27 +562,78 @@
         addiu   $fp $sp 4
         	addiu $sp $sp -4
         move    $s0 $a0
+            lw  $a0 12($s0)
+            bnez    $a0 case0
+            la      $a0 str_const9
+            li      $t1 24
+            jal     _case_abort2
+        case0:
+            sw      $a0 -4($fp)
+            lw      $t1 0($a0)
+        casebranch0:
+            blt     $t1 5 casebranch1
+            bgt     $t1 5 casebranch1
+            lw  $a0 -4($fp)
+            b       endcase0
+        casebranch1:
+            blt     $t1 4 casebranch2
+            bgt     $t1 4 casebranch2
+            	lw  $a0 -4($fp)
+                sw      $a0 0($sp)
+                addiu   $sp $sp -4
+            la      $a0 A2I_protObj
+            jal     Object.copy
+            jal     A2I_init
+            bnez    $a0 dispatch0
+            la      $a0 str_const9
+            li      $t1 26
+            jal     _dispatch_abort
+            dispatch0:
+            lw      $t1 8($a0)          # dispatch table
+            lw      $t1 28($t1) # method offset
+            jalr    $t1
+            b       endcase0
+        casebranch2:
+            blt     $t1 0 casebranch3
+            bgt     $t1 7 casebranch3
+            move    $a0 $s0
+            bnez    $a0 dispatch1
+            la      $a0 str_const9
+            li      $t1 27
+            jal     _dispatch_abort
+            dispatch1:
+            lw      $t1 8($a0)          # dispatch table
+            lw      $t1 0($t1) # method offset
+            jalr    $t1
+            la      $a0 str_const0
+            b       endcase0
+
+
+        casebranch3:
+            lw      $a0 -4($fp)
+            jal     _case_abort
+        endcase0:
         sw      $a0 -4($fp)
         		la      $a0 str_const10
         	    sw      $a0 0($sp)
         	    addiu   $sp $sp -4
         	lw  $a0 -4($fp)
-        	bnez    $a0 dispatch0
+        	bnez    $a0 dispatch2
         	la      $a0 str_const9
         	li      $t1 31
         	jal     _dispatch_abort
-        	dispatch0:
+        	dispatch2:
         	lw      $t1 8($a0)          # dispatch table
         	lw      $t1 16($t1) # method offset
         	jalr    $t1
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
-        bnez    $a0 dispatch1
+        bnez    $a0 dispatch3
         la      $a0 str_const9
         li      $t1 31
         jal     _dispatch_abort
-        dispatch1:
+        dispatch3:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
@@ -598,22 +649,22 @@
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
-        bnez    $a0 dispatch2
+        bnez    $a0 dispatch4
         la      $a0 str_const9
         li      $t1 32
         jal     _dispatch_abort
-        dispatch2:
+        dispatch4:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
             b       end0
         else0:
         lw  $a0 16($s0)
-        bnez    $a0 dispatch3
+        bnez    $a0 dispatch5
         la      $a0 str_const9
         li      $t1 32
         jal     _dispatch_abort
-        dispatch3:
+        dispatch5:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 32($t1) # method offset
         jalr    $t1
@@ -633,10 +684,10 @@
         	addiu $sp $sp -24
         move    $s0 $a0
         la      $a0 int_const0
-        sw      $a0 -8($fp)
+        sw      $a0 -4($fp)
         la      $a0 str_const12
-        sw      $a0 -12($fp)
-        lw  $a0 -8($fp)
+        sw      $a0 -8($fp)
+        lw  $a0 -4($fp)
         sw      $a0 0($sp)
         addiu   $sp $sp -4
         la      $a0 int_const2
@@ -647,65 +698,65 @@
         lw      $t2 12($a0)
         add     $t1 $t1 $t2
         sw      $t1 12($a0)
-        sw      $a0 -16($fp)
+        sw      $a0 -12($fp)
         la      $a0 0
-        sw      $a0 -20($fp)
-        			lw  $a0 -20($fp)
+        sw      $a0 -16($fp)
+        			lw  $a0 -16($fp)
         		    sw      $a0 0($sp)
         		    addiu   $sp $sp -4
-        			lw  $a0 -16($fp)
+        			lw  $a0 -12($fp)
         		    sw      $a0 0($sp)
         		    addiu   $sp $sp -4
         		la      $a0 List_protObj
         		jal     Object.copy
         		jal     List_init
-        		bnez    $a0 dispatch4
+        		bnez    $a0 dispatch6
         		la      $a0 str_const9
         		li      $t1 47
         		jal     _dispatch_abort
-        		dispatch4:
+        		dispatch6:
         		lw      $t1 8($a0)          # dispatch table
         		lw      $t1 28($t1) # method offset
         		jalr    $t1
         	    sw      $a0 0($sp)
         	    addiu   $sp $sp -4
-        		lw  $a0 -12($fp)
+        		lw  $a0 -8($fp)
         	    sw      $a0 0($sp)
         	    addiu   $sp $sp -4
         	la      $a0 List_protObj
         	jal     Object.copy
         	jal     List_init
-        	bnez    $a0 dispatch5
+        	bnez    $a0 dispatch7
         	la      $a0 str_const9
         	li      $t1 46
         	jal     _dispatch_abort
-        	dispatch5:
+        	dispatch7:
         	lw      $t1 8($a0)          # dispatch table
         	lw      $t1 28($t1) # method offset
         	jalr    $t1
             sw      $a0 0($sp)
             addiu   $sp $sp -4
-        	lw  $a0 -8($fp)
+        	lw  $a0 -4($fp)
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         la      $a0 List_protObj
         jal     Object.copy
         jal     List_init
-        bnez    $a0 dispatch6
+        bnez    $a0 dispatch8
         la      $a0 str_const9
         li      $t1 45
         jal     _dispatch_abort
-        dispatch6:
+        dispatch8:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 28($t1) # method offset
         jalr    $t1
-        sw      $a0 -24($fp)
-        lw  $a0 -24($fp)
-        bnez    $a0 dispatch7
+        sw      $a0 -20($fp)
+        lw  $a0 -20($fp)
+        bnez    $a0 dispatch9
         la      $a0 str_const9
         li      $t1 49
         jal     _dispatch_abort
-        dispatch7:
+        dispatch9:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 32($t1) # method offset
         jalr    $t1
@@ -714,35 +765,35 @@
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
-        bnez    $a0 dispatch8
+        bnez    $a0 dispatch10
         la      $a0 str_const9
         li      $t1 52
         jal     _dispatch_abort
-        dispatch8:
+        dispatch10:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
-        bnez    $a0 dispatch9
+        bnez    $a0 dispatch11
         la      $a0 str_const9
         li      $t1 52
         jal     _dispatch_abort
-        dispatch9:
+        dispatch11:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 24($t1) # method offset
         jalr    $t1
-        sw      $a0 -28($fp)
+        sw      $a0 -4($fp)
         	la      $a0 str_const11
             sw      $a0 0($sp)
             addiu   $sp $sp -4
-        		lw  $a0 -28($fp)
+        		lw  $a0 -4($fp)
         	    sw      $a0 0($sp)
         	    addiu   $sp $sp -4
         	move    $a0 $s0
-        	bnez    $a0 dispatch10
+        	bnez    $a0 dispatch12
         	la      $a0 str_const9
         	li      $t1 55
         	jal     _dispatch_abort
-        	dispatch10:
+        	dispatch12:
         	lw      $t1 8($a0)          # dispatch table
         	lw      $t1 32($t1) # method offset
         	jalr    $t1
@@ -752,42 +803,42 @@
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
-        bnez    $a0 dispatch11
+        bnez    $a0 dispatch13
         la      $a0 str_const9
         li      $t1 55
         jal     _dispatch_abort
-        dispatch11:
+        dispatch13:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
-        bnez    $a0 dispatch12
+        bnez    $a0 dispatch14
         la      $a0 str_const9
         li      $t1 55
         jal     _dispatch_abort
-        dispatch12:
+        dispatch14:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 16($t1) # method offset
         jalr    $t1
-        bnez    $a0 dispatch13
+        bnez    $a0 dispatch15
         la      $a0 str_const9
         li      $t1 56
         jal     _dispatch_abort
-        dispatch13:
+        dispatch15:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
         	la      $a0 str_const11
             sw      $a0 0($sp)
             addiu   $sp $sp -4
-        		lw  $a0 -28($fp)
+        		lw  $a0 -4($fp)
         	    sw      $a0 0($sp)
         	    addiu   $sp $sp -4
         	move    $a0 $s0
-        	bnez    $a0 dispatch14
+        	bnez    $a0 dispatch16
         	la      $a0 str_const9
         	li      $t1 57
         	jal     _dispatch_abort
-        	dispatch14:
+        	dispatch16:
         	lw      $t1 8($a0)          # dispatch table
         	lw      $t1 36($t1) # method offset
         	jalr    $t1
@@ -797,27 +848,27 @@
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
-        bnez    $a0 dispatch15
+        bnez    $a0 dispatch17
         la      $a0 str_const9
         li      $t1 57
         jal     _dispatch_abort
-        dispatch15:
+        dispatch17:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
-        bnez    $a0 dispatch16
+        bnez    $a0 dispatch18
         la      $a0 str_const9
         li      $t1 57
         jal     _dispatch_abort
-        dispatch16:
+        dispatch18:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 16($t1) # method offset
         jalr    $t1
-        bnez    $a0 dispatch17
+        bnez    $a0 dispatch19
         la      $a0 str_const9
         li      $t1 58
         jal     _dispatch_abort
-        dispatch17:
+        dispatch19:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
@@ -868,11 +919,11 @@
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
-        bnez    $a0 dispatch18
+        bnez    $a0 dispatch20
         la      $a0 str_const9
         li      $t1 65
         jal     _dispatch_abort
-        dispatch18:
+        dispatch20:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 32($t1) # method offset
         jalr    $t1
@@ -899,7 +950,7 @@
         	addiu $sp $sp -4
         move    $s0 $a0
         la      $a0 int_const6
-        sw      $a0 -32($fp)
+        sw      $a0 -4($fp)
         while_cond0:
         lw  $a0 12($fp)
             sw      $a0 0($sp)
@@ -920,7 +971,7 @@
         not0:
             lw      $t1 12($a0)
             beqz    $t1 while_end0
-        lw  $a0 -32($fp)
+        lw  $a0 -4($fp)
         sw      $a0 0($sp)
         addiu   $sp $sp -4
         lw  $a0 12($fp)
@@ -931,7 +982,7 @@
         lw      $t2 12($a0)
         mul     $t1 $t1 $t2
         sw      $t1 12($a0)
-        sw      $a0 -32($fp)
+        sw      $a0 -4($fp)
         lw  $a0 12($fp)
         sw      $a0 0($sp)
         addiu   $sp $sp -4
@@ -947,7 +998,7 @@
             b       while_cond0
         while_end0:
             move    $a0 $zero
-        lw  $a0 -32($fp)
+        lw  $a0 -4($fp)
         	addiu $sp $sp 4
         lw      $fp 12($sp)
         lw      $s0 8($sp)
@@ -1133,11 +1184,11 @@
             b       end11
         else11:
         move    $a0 $s0
-        bnez    $a0 dispatch19
+        bnez    $a0 dispatch21
         la      $a0 str_const9
         li      $t1 111
         jal     _dispatch_abort
-        dispatch19:
+        dispatch21:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 0($t1) # method offset
         jalr    $t1
@@ -1336,11 +1387,11 @@
             b       end21
         else21:
         move    $a0 $s0
-        bnez    $a0 dispatch20
+        bnez    $a0 dispatch22
         la      $a0 str_const9
         li      $t1 129
         jal     _dispatch_abort
-        dispatch20:
+        dispatch22:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 0($t1) # method offset
         jalr    $t1
@@ -1369,11 +1420,11 @@
         addiu   $fp $sp 4
         move    $s0 $a0
         lw  $a0 12($fp)
-        bnez    $a0 dispatch21
+        bnez    $a0 dispatch23
         la      $a0 str_const9
         li      $t1 142
         jal     _dispatch_abort
-        dispatch21:
+        dispatch23:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
@@ -1400,11 +1451,11 @@
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         lw  $a0 12($fp)
-        bnez    $a0 dispatch22
+        bnez    $a0 dispatch24
         la      $a0 str_const9
         li      $t1 143
         jal     _dispatch_abort
-        dispatch22:
+        dispatch24:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 20($t1) # method offset
         jalr    $t1
@@ -1422,11 +1473,11 @@
             lw      $t1 12($a0)
             beqz    $t1 else23
         		lw  $a0 12($fp)
-        		bnez    $a0 dispatch23
+        		bnez    $a0 dispatch25
         		la      $a0 str_const9
         		li      $t1 143
         		jal     _dispatch_abort
-        		dispatch23:
+        		dispatch25:
         		lw      $t1 8($a0)          # dispatch table
         		lw      $t1 12($t1) # method offset
         		jalr    $t1
@@ -1446,22 +1497,22 @@
         	    sw      $a0 0($sp)
         	    addiu   $sp $sp -4
         	lw  $a0 12($fp)
-        	bnez    $a0 dispatch24
+        	bnez    $a0 dispatch26
         	la      $a0 str_const9
         	li      $t1 143
         	jal     _dispatch_abort
-        	dispatch24:
+        	dispatch26:
         	lw      $t1 8($a0)          # dispatch table
         	lw      $t1 20($t1) # method offset
         	jalr    $t1
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
-        bnez    $a0 dispatch25
+        bnez    $a0 dispatch27
         la      $a0 str_const9
         li      $t1 143
         jal     _dispatch_abort
-        dispatch25:
+        dispatch27:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 24($t1) # method offset
         jalr    $t1
@@ -1478,11 +1529,11 @@
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         lw  $a0 12($fp)
-        bnez    $a0 dispatch26
+        bnez    $a0 dispatch28
         la      $a0 str_const9
         li      $t1 144
         jal     _dispatch_abort
-        dispatch26:
+        dispatch28:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 20($t1) # method offset
         jalr    $t1
@@ -1500,11 +1551,11 @@
             lw      $t1 12($a0)
             beqz    $t1 else24
         		lw  $a0 12($fp)
-        		bnez    $a0 dispatch27
+        		bnez    $a0 dispatch29
         		la      $a0 str_const9
         		li      $t1 144
         		jal     _dispatch_abort
-        		dispatch27:
+        		dispatch29:
         		lw      $t1 8($a0)          # dispatch table
         		lw      $t1 12($t1) # method offset
         		jalr    $t1
@@ -1524,22 +1575,22 @@
         	    sw      $a0 0($sp)
         	    addiu   $sp $sp -4
         	lw  $a0 12($fp)
-        	bnez    $a0 dispatch28
+        	bnez    $a0 dispatch30
         	la      $a0 str_const9
         	li      $t1 144
         	jal     _dispatch_abort
-        	dispatch28:
+        	dispatch30:
         	lw      $t1 8($a0)          # dispatch table
         	lw      $t1 20($t1) # method offset
         	jalr    $t1
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
-        bnez    $a0 dispatch29
+        bnez    $a0 dispatch31
         la      $a0 str_const9
         li      $t1 144
         jal     _dispatch_abort
-        dispatch29:
+        dispatch31:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 24($t1) # method offset
         jalr    $t1
@@ -1549,11 +1600,11 @@
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
-        bnez    $a0 dispatch30
+        bnez    $a0 dispatch32
         la      $a0 str_const9
         li      $t1 145
         jal     _dispatch_abort
-        dispatch30:
+        dispatch32:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 24($t1) # method offset
         jalr    $t1
@@ -1575,24 +1626,24 @@
         	addiu $sp $sp -12
         move    $s0 $a0
         la      $a0 int_const0
-        sw      $a0 -36($fp)
+        sw      $a0 -4($fp)
         lw  $a0 12($fp)
-        bnez    $a0 dispatch31
+        bnez    $a0 dispatch33
         la      $a0 str_const9
         li      $t1 156
         jal     _dispatch_abort
-        dispatch31:
+        dispatch33:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
-        sw      $a0 -40($fp)
+        sw      $a0 -4($fp)
         la      $a0 int_const0
-        sw      $a0 -44($fp)
+        sw      $a0 -4($fp)
         while_cond1:
-        lw  $a0 -44($fp)
+        lw  $a0 -4($fp)
             sw      $a0 0($sp)
             addiu   $sp $sp -4
-        lw  $a0 -40($fp)
+        lw  $a0 -4($fp)
             lw      $t1 4($sp)
             addiu   $sp $sp 4
             lw      $t1 12($t1)
@@ -1603,7 +1654,7 @@
         less0:
             lw      $t1 12($a0)
             beqz    $t1 while_end1
-        lw  $a0 -36($fp)
+        lw  $a0 -4($fp)
         sw      $a0 0($sp)
         addiu   $sp $sp -4
         la      $a0 int_const12
@@ -1619,26 +1670,26 @@
         		la      $a0 int_const6
         	    sw      $a0 0($sp)
         	    addiu   $sp $sp -4
-        		lw  $a0 -44($fp)
+        		lw  $a0 -4($fp)
         	    sw      $a0 0($sp)
         	    addiu   $sp $sp -4
         	lw  $a0 12($fp)
-        	bnez    $a0 dispatch32
+        	bnez    $a0 dispatch34
         	la      $a0 str_const9
         	li      $t1 160
         	jal     _dispatch_abort
-        	dispatch32:
+        	dispatch34:
         	lw      $t1 8($a0)          # dispatch table
         	lw      $t1 20($t1) # method offset
         	jalr    $t1
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
-        bnez    $a0 dispatch33
+        bnez    $a0 dispatch35
         la      $a0 str_const9
         li      $t1 160
         jal     _dispatch_abort
-        dispatch33:
+        dispatch35:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 12($t1) # method offset
         jalr    $t1
@@ -1649,8 +1700,8 @@
         lw      $t2 12($a0)
         add     $t1 $t1 $t2
         sw      $t1 12($a0)
-        sw      $a0 -36($fp)
-        lw  $a0 -44($fp)
+        sw      $a0 -4($fp)
+        lw  $a0 -4($fp)
         sw      $a0 0($sp)
         addiu   $sp $sp -4
         la      $a0 int_const6
@@ -1661,11 +1712,11 @@
         lw      $t2 12($a0)
         add     $t1 $t1 $t2
         sw      $t1 12($a0)
-        sw      $a0 -44($fp)
+        sw      $a0 -4($fp)
             b       while_cond1
         while_end1:
             move    $a0 $zero
-        lw  $a0 -36($fp)
+        lw  $a0 -4($fp)
         	addiu $sp $sp 12
         lw      $fp 12($sp)
         lw      $s0 8($sp)
@@ -1715,11 +1766,11 @@
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
-        bnez    $a0 dispatch34
+        bnez    $a0 dispatch36
         la      $a0 str_const9
         li      $t1 177
         jal     _dispatch_abort
-        dispatch34:
+        dispatch36:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 32($t1) # method offset
         jalr    $t1
@@ -1743,22 +1794,22 @@
         	    sw      $a0 0($sp)
         	    addiu   $sp $sp -4
         	move    $a0 $s0
-        	bnez    $a0 dispatch35
+        	bnez    $a0 dispatch37
         	la      $a0 str_const9
         	li      $t1 178
         	jal     _dispatch_abort
-        	dispatch35:
+        	dispatch37:
         	lw      $t1 8($a0)          # dispatch table
         	lw      $t1 32($t1) # method offset
         	jalr    $t1
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         la      $a0 str_const26
-        bnez    $a0 dispatch36
+        bnez    $a0 dispatch38
         la      $a0 str_const9
         li      $t1 178
         jal     _dispatch_abort
-        dispatch36:
+        dispatch38:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 16($t1) # method offset
         jalr    $t1
@@ -1806,11 +1857,11 @@
         lw      $t2 12($a0)
         div     $t1 $t1 $t2
         sw      $t1 12($a0)
-        sw      $a0 -48($fp)
+        sw      $a0 -4($fp)
         		lw  $a0 12($fp)
         		sw      $a0 0($sp)
         		addiu   $sp $sp -4
-        		lw  $a0 -48($fp)
+        		lw  $a0 -4($fp)
         		sw      $a0 0($sp)
         		addiu   $sp $sp -4
         		la      $a0 int_const12
@@ -1831,33 +1882,33 @@
         	    sw      $a0 0($sp)
         	    addiu   $sp $sp -4
         	move    $a0 $s0
-        	bnez    $a0 dispatch37
+        	bnez    $a0 dispatch39
         	la      $a0 str_const9
         	li      $t1 188
         	jal     _dispatch_abort
-        	dispatch37:
+        	dispatch39:
         	lw      $t1 8($a0)          # dispatch table
         	lw      $t1 16($t1) # method offset
         	jalr    $t1
             sw      $a0 0($sp)
             addiu   $sp $sp -4
-        	lw  $a0 -48($fp)
+        	lw  $a0 -4($fp)
             sw      $a0 0($sp)
             addiu   $sp $sp -4
         move    $a0 $s0
-        bnez    $a0 dispatch38
+        bnez    $a0 dispatch40
         la      $a0 str_const9
         li      $t1 188
         jal     _dispatch_abort
-        dispatch38:
+        dispatch40:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 32($t1) # method offset
         jalr    $t1
-        bnez    $a0 dispatch39
+        bnez    $a0 dispatch41
         la      $a0 str_const9
         li      $t1 188
         jal     _dispatch_abort
-        dispatch39:
+        dispatch41:
         lw      $t1 8($a0)          # dispatch table
         lw      $t1 16($t1) # method offset
         jalr    $t1
