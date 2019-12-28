@@ -821,7 +821,7 @@ public class Compiler {
         ast.accept(codeGenConstGenVisitor);
         var codeGenVisitor = new CodeGenVisitor();
         var out = ast.accept(codeGenVisitor);
-//        System.out.println(out.render());
+        System.out.println(out.render());
     }
 
 }

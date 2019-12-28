@@ -18,9 +18,6 @@ class Main inherits E {
     i(x : Object) : Object {
         case x of
             i : Int => 1231;
-            s : String => 8989;
-            a : A => 9898;
-            m : Main => 9090;
         esac
     };
 

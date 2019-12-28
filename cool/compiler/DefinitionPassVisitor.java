@@ -16,6 +16,8 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
     public Void visit(ObjectId objectId) {
         objectId.setScope(currentScope);
         objectId.setSymbol(objectId.getScope().lookupAttributeSymbol(objectId.token.getText()));
+//        System.out.println("defobjectid " + objectId.token + currentScope +" "+objectId.getSymbol());
+
         return null;
     }
 
@@ -155,6 +157,7 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
     public Void visit(Call call) {
         for (var a : call.args) {
             a.accept(this);
+//            System.out.println(a.token + " " + a.getSymbol());
         }
 
         call.setScope(currentScope);
@@ -385,6 +388,8 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
         var caseBranchScope = new MethodSymbol(currentScope, "caseBranch");
         var caseBranchAttributeSymbol = new AttributeSymbol(name.token.getText());
         caseBranchAttributeSymbol.setType(SymbolTable.globals.lookupClassSymbol(caseBranch.type.token.getText()));
+        caseBranchAttributeSymbol.setLocation("fp");
+        caseBranchAttributeSymbol.setOffset(-4);
         currentScope = caseBranchScope;
         currentScope.add(caseBranchAttributeSymbol);
         if (name.token.getText().equals("self")) {

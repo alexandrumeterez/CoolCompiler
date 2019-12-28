@@ -457,8 +457,6 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
 
             }
         }
-
-
         return callSymbol.getType();
     }
 

@@ -26,7 +26,7 @@ str_const1:
     .word   10
     .word   6
     .word   String_dispTab
-    .word   int_const6
+    .word   int_const10
     .asciiz "Object"
     .align  2
 str_const2:
@@ -47,7 +47,7 @@ str_const4:
     .word   10
     .word   6
     .word   String_dispTab
-    .word   int_const6
+    .word   int_const10
     .asciiz "String"
     .align  2
 str_const5:
@@ -75,59 +75,52 @@ str_const8:
     .word   10
     .word   7
     .word   String_dispTab
-    .word   int_const7
+    .word   int_const6
     .asciiz "29-case.cl"
     .align  2
 str_const9:
-    .word   10
-    .word   6
-    .word   String_dispTab
-    .word   int_const6
-    .asciiz "Found "
-    .align  2
-str_const10:
     .word   10
     .word   5
     .word   String_dispTab
     .word   int_const2
     .asciiz "A"
     .align  2
-str_const11:
+str_const10:
     .word   10
     .word   5
     .word   String_dispTab
     .word   int_const2
     .asciiz "B"
     .align  2
-str_const12:
+str_const11:
     .word   10
     .word   5
     .word   String_dispTab
     .word   int_const2
     .asciiz "D"
     .align  2
-str_const13:
+str_const12:
     .word   10
     .word   5
     .word   String_dispTab
     .word   int_const2
     .asciiz "E"
     .align  2
-str_const14:
+str_const13:
     .word   10
     .word   6
     .word   String_dispTab
     .word   int_const5
     .asciiz "Main"
     .align  2
-str_const15:
+str_const14:
     .word   10
     .word   5
     .word   String_dispTab
     .word   int_const2
     .asciiz "C"
     .align  2
-str_const16:
+str_const15:
     .word   10
     .word   5
     .word   String_dispTab
@@ -168,12 +161,32 @@ int_const6:
     .word   9
     .word   4
     .word   Int_dispTab
-    .word   6
+    .word   10
 int_const7:
     .word   9
     .word   4
     .word   Int_dispTab
-    .word   10
+    .word   7
+int_const8:
+    .word   9
+    .word   4
+    .word   Int_dispTab
+    .word   9
+int_const9:
+    .word   9
+    .word   4
+    .word   Int_dispTab
+    .word   8
+int_const10:
+    .word   9
+    .word   4
+    .word   Int_dispTab
+    .word   6
+int_const11:
+    .word   9
+    .word   4
+    .word   Int_dispTab
+    .word   5
 bool_const0:
     .word   11
     .word   4
@@ -187,13 +200,13 @@ bool_const1:
 class_nameTab:
     .word   str_const1
     .word   str_const2
+    .word   str_const9
     .word   str_const10
     .word   str_const11
     .word   str_const12
     .word   str_const13
     .word   str_const14
     .word   str_const15
-    .word   str_const16
     .word   str_const3
     .word   str_const4
     .word   str_const5
@@ -711,107 +724,51 @@ Main.i:
 case4:
     sw      $a0 -4($fp)
     lw      $t1 0($a0)      # class tag
-    blt     $t1 10 casebranch8
-    bgt     $t1 10 casebranch8
-    lw      $a0 -4($fp)
-    sw      $a0 0($sp)
-    addiu   $sp $sp -4
-    la      $a0 str_const9
-    bnez    $a0 dispatch6
-    la      $a0 str_const8
-    li      $t1 40
-    jal     _dispatch_abort
-dispatch6:
-    lw      $t1 8($a0)   # dispatch table
-    lw      $t1 16($t1)   # method offset
-    jalr    $t1
-    sw      $a0 0($sp)
-    addiu   $sp $sp -4
-    move    $a0 $s0
-    bnez    $a0 dispatch7
-    la      $a0 str_const8
-    li      $t1 40
-    jal     _dispatch_abort
-dispatch7:
-    lw      $t1 8($a0)   # dispatch table
-    lw      $t1 12($t1)   # method offset
-    jalr    $t1
+    blt     $t1 10 casebranch6
+    bgt     $t1 10 casebranch6
+    la      $a0 int_const4
+    b       endcase5
+casebranch6:
+    blt     $t1 9 casebranch7
+    bgt     $t1 9 casebranch7
+    la      $a0 int_const3
+    b       endcase5
+casebranch7:
+    blt     $t1 8 casebranch8
+    bgt     $t1 8 casebranch8
+    la      $a0 int_const6
     b       endcase5
 casebranch8:
-    blt     $t1 9 casebranch10
-    bgt     $t1 9 casebranch10
-    la      $a0 int_const2
-    sw      $a0 0($sp)
-    addiu   $sp $sp -4
-    lw      $a0 -4($fp)
-    jal     Object.copy
-    lw      $t1 4($sp)
-    addiu   $sp $sp 4
-    lw      $t1 12($t1)     # int slot
-    lw      $t2 12($a0)     # int slot
-    add     $t1 $t1 $t2
-    sw      $t1 12($a0)     # int slot
-    sw      $a0 0($sp)
-    addiu   $sp $sp -4
-    move    $a0 $s0
-    bnez    $a0 dispatch9
-    la      $a0 str_const8
-    li      $t1 39
-    jal     _dispatch_abort
-dispatch9:
-    lw      $t1 8($a0)   # dispatch table
-    lw      $t1 16($t1)   # method offset
-    jalr    $t1
+    blt     $t1 7 casebranch9
+    bgt     $t1 8 casebranch9
+    la      $a0 int_const7
+    b       endcase5
+casebranch9:
+    blt     $t1 6 casebranch10
+    bgt     $t1 6 casebranch10
+    la      $a0 int_const5
     b       endcase5
 casebranch10:
-    blt     $t1 6 casebranch13
+    blt     $t1 5 casebranch11
+    bgt     $t1 6 casebranch11
+    la      $a0 int_const8
+    b       endcase5
+casebranch11:
+    blt     $t1 4 casebranch12
+    bgt     $t1 4 casebranch12
+    la      $a0 int_const9
+    b       endcase5
+casebranch12:
+    blt     $t1 3 casebranch13
     bgt     $t1 6 casebranch13
-    lw      $a0 -4($fp)
-    bnez    $a0 dispatch11
-    la      $a0 str_const8
-    li      $t1 42
-    jal     _dispatch_abort
-dispatch11:
-    lw      $t1 8($a0)   # dispatch table
-    lw      $t1 32($t1)   # method offset
-    jalr    $t1
-    sw      $a0 0($sp)
-    addiu   $sp $sp -4
-    move    $a0 $s0
-    bnez    $a0 dispatch12
-    la      $a0 str_const8
-    li      $t1 42
-    jal     _dispatch_abort
-dispatch12:
-    lw      $t1 8($a0)   # dispatch table
-    lw      $t1 16($t1)   # method offset
-    jalr    $t1
+    la      $a0 int_const10
     b       endcase5
 casebranch13:
-    blt     $t1 2 casebranch16
-    bgt     $t1 8 casebranch16
-    lw      $a0 -4($fp)
-    bnez    $a0 dispatch14
-    la      $a0 str_const8
-    li      $t1 41
-    jal     _dispatch_abort
-dispatch14:
-    lw      $t1 8($a0)   # dispatch table
-    lw      $t1 28($t1)   # method offset
-    jalr    $t1
-    sw      $a0 0($sp)
-    addiu   $sp $sp -4
-    move    $a0 $s0
-    bnez    $a0 dispatch15
-    la      $a0 str_const8
-    li      $t1 41
-    jal     _dispatch_abort
-dispatch15:
-    lw      $t1 8($a0)   # dispatch table
-    lw      $t1 16($t1)   # method offset
-    jalr    $t1
+    blt     $t1 2 casebranch14
+    bgt     $t1 8 casebranch14
+    la      $a0 int_const11
     b       endcase5
-casebranch16:
+casebranch14:
     lw      $a0 -4($fp)
     jal     _case_abort
 endcase5:
@@ -833,11 +790,11 @@ Main.main:
     sw      $a0 0($sp)
     addiu   $sp $sp -4
     move    $a0 $s0
-    bnez    $a0 dispatch17
+    bnez    $a0 dispatch15
     la      $a0 str_const8
-    li      $t1 48
+    li      $t1 53
     jal     _dispatch_abort
-dispatch17:
+dispatch15:
     lw      $t1 8($a0)   # dispatch table
     lw      $t1 36($t1)   # method offset
     jalr    $t1

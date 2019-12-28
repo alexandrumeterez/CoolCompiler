@@ -371,3 +371,29 @@ while(cond, body, cond_label, end_label) ::= <<
 <end_label>:
     move    $a0 $zero
 >>
+
+case(case_label, object, branch, lastbranch_label, endcase_label, file, line) ::= <<
+    lw      $a0 12($fp)
+    bnez    $a0 <case_label>
+    la      $a0 <file>
+    li      $t1 <line>
+    jal     _case_abort2
+<case_label>:
+    sw      $a0 -4($fp)
+    lw      $t1 0($a0)
+<branch>
+
+<lastbranch_label>:
+    lw      $a0 -4($fp)
+    jal     _case_abort
+<endcase_label>:
+>>
+
+case_branch(casebranch_label, endcase_label, casebranch_body, min_index, max_index, nextbranch_label) ::= <<
+<casebranch_label>:
+    blt     $t1 <min_index> <nextbranch_label>
+    bgt     $t1 <max_index> <nextbranch_label>
+    <casebranch_body>
+    b       <endcase_label>
+
+>>
