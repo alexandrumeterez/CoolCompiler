@@ -56,7 +56,6 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
             // TODO: check this
 
             var symbol = (AttributeSymbol) objectId.getSymbol();
-//            System.out.println("OBJECTID " + objectId.token + " " + symbol.getLocation() + " " + symbol.getOffset());
 
             objectIdST.add("offset", symbol.getOffset());
             objectIdST.add("location", symbol.getLocation());
@@ -101,12 +100,9 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         } else {
             defineMethod.add("param_inc", "");
         }
-//        System.out.println(funcDef.token);
-//        System.out.println("localvariables " + numberLocalVariables);
         ST methodBody = templates.getInstanceOf("sequence");
         methodBody.add("e", funcDef.func_body.accept(this));
         defineMethod.add("body", methodBody);
-//        System.out.println("localvariablesafter " + numberLocalVariables);
 
         //TODO: the local variables in the function
         if (numberLocalVariables > 0) {
@@ -145,7 +141,6 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
     @Override
     public ST visit(AssignExpr assignExpr) {
         ST assignST = templates.getInstanceOf("assign");
-//        System.out.println(assignExpr.name.getSymbol().getOffset());
         assignST.add("expr", assignExpr.e.accept(this));
         assignST.add("offset", assignExpr.name.getSymbol().getOffset());
         assignST.add("location", assignExpr.name.getSymbol().getLocation());
@@ -185,7 +180,6 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(Call call) {
-//        System.out.println("IN CALL");
         ST dispatchST = templates.getInstanceOf("method_call");
         var methodSymbol = (MethodSymbol) call.getSymbol();
         var li = call.args.listIterator(call.args.size());
@@ -204,7 +198,6 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         dispatchST.add("line", call.name.token.getLine());
         dispatchST.add("file", "str_const" + CodeGenConstGenVisitor.strConstFileNameIndex);
         dispatchIndex++;
-//        System.out.println("EXIT CALL");
         return dispatchST;
     }
 
@@ -234,13 +227,11 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
 
     @Override
     public ST visit(Let let) {
-//        System.out.println(let.token);
         ST letST = templates.getInstanceOf("let");
         for (var v : let.variables) {
             numberLocalVariables++;
             letST.add("var", v.accept(this));
         }
-//        System.out.println(letST.render());
         letST.add("body", let.let_block_expr.accept(this));
         return letST;
     }
@@ -252,11 +243,9 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
     @Override
     public ST visit(Case case1) {
         caseBranchMap.clear();
-//        numberLocalVariables++;
         ST caseST = templates.getInstanceOf("case");
         caseST.add("case_label", "case" + caseIndex);
         caseST.add("cond", case1.cond.accept(this));
-//        System.out.println(case1.cond.accept(this).render());
         caseST.add("endcase_label", "endcase" + caseIndex);
         for (var branch : case1.caseBranches) {
             branch.accept(this);
@@ -278,7 +267,6 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         caseST.add("file", "str_const" + CodeGenConstGenVisitor.strConstFileNameIndex);
         caseBranchIndex++;
         caseIndex++;
-//        System.out.println(caseST.render());
 
         return caseST;
     }
@@ -471,25 +459,19 @@ public class CodeGenVisitor implements ASTVisitor<ST> {
         } else {
             letLocalST.add("expr", letLocal.type.accept(this));
         }
-//        System.out.println(letLocal.getSymbol().getOffset());
-//        System.out.println("letlocal " + letLocal.token);
-//        System.out.println(((AttributeSymbol)letLocal.getSymbol()).getType());
         return letLocalST;
     }
 
     @Override
     public ST visit(CaseBranch caseBranch) {
-//        System.out.println(caseBranch.expression.token);
 
         ST caseBranchST = templates.getInstanceOf("case_branch");
-//        caseBranchST.add("casebranch_label", "casebranch" + caseBranchIndex);
         caseBranchST.add("endcase_label", "endcase" + caseIndex);
         String className = caseBranch.type.token.getText();
         int minIndex = CodeGenConstGenVisitor.classNameToIndexMap.get(className);
         int maxIndex = CodeGenConstGenVisitor.classNameToMaxValueOnSubtree.get(className);
         caseBranchST.add("min_index", minIndex);
         caseBranchST.add("max_index", maxIndex);
-//        caseBranchST.add("nextbranch_label", "casebranch" + (caseBranchIndex + 1));
         caseBranchST.add("casebranch_body", caseBranch.expression.accept(this));
         caseBranchMap.put(minIndex, caseBranchST);
         return caseBranchST;

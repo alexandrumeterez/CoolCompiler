@@ -1,11 +1,22 @@
 package cool.compiler;
 
 import cool.structures.*;
+import org.antlr.v4.runtime.Token;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
+    ClassSymbol getLUB(ClassSymbol type1, ClassSymbol type2) {
+        var parent = ((ClassSymbol) type1).getParentClassSymbol();
+        while (parent != null && !parent.getName().equals(BasicClasses.OBJECT.getName())) {
+            if (type2 == parent) {
+                return type2;
+            }
+            parent = parent.getParentClassSymbol();
+        }
+        return null;
+    }
 
     @Override
     public Symbol visit(TypeId id) {
@@ -42,39 +53,33 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
         }
         var elseT = iff.elseBranch.accept(this);
 
-        if(thenT.getName().equals("SELF_TYPE")) {
+        if (thenT.getName().equals("SELF_TYPE")) {
             var currentScope = iff.getScope();
-            while(!(currentScope instanceof ClassSymbol)){
+            while (!(currentScope instanceof ClassSymbol)) {
                 currentScope = currentScope.getParent();
             }
-            thenT = (ClassSymbol)currentScope;
+            thenT = (ClassSymbol) currentScope;
         }
-        if(elseT.getName().equals("SELF_TYPE")) {
+        if (elseT.getName().equals("SELF_TYPE")) {
             var currentScope = iff.getScope();
-            while(!(currentScope instanceof ClassSymbol)){
+            while (!(currentScope instanceof ClassSymbol)) {
                 currentScope = currentScope.getParent();
             }
-            elseT = (ClassSymbol)currentScope;
+            elseT = (ClassSymbol) currentScope;
         }
 
 
         if (thenT != elseT) {
             // find meething point on path to Object
-            var parent = ((ClassSymbol) elseT).getParentClassSymbol();
-            while (parent != null && !parent.getName().equals(BasicClasses.OBJECT.getName())) {
-                if (thenT == parent) {
-                    return thenT;
-                }
-                parent = parent.getParentClassSymbol();
+            var LUB = getLUB((ClassSymbol) thenT, (ClassSymbol) elseT);
+            if (LUB != null) {
+                return LUB;
+            }
+            LUB = getLUB((ClassSymbol) elseT, (ClassSymbol) thenT);
+            if (LUB != null) {
+                return LUB;
             }
 
-            parent = ((ClassSymbol) thenT).getParentClassSymbol();
-            while (parent != null && !parent.getName().equals(BasicClasses.OBJECT.getName())) {
-                if (elseT == parent) {
-                    return elseT;
-                }
-                parent = parent.getParentClassSymbol();
-            }
 
             return BasicClasses.OBJECT;
         }
@@ -84,19 +89,17 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
 
     @Override
     public Symbol visit(Formal formal) {
-        var name = formal.name;
-        var type = formal.type;
         var methodScope = (MethodSymbol) formal.getScope();
         var classScope = (ClassSymbol) methodScope.getParent();
 
-        if (type.token.getText().equals("SELF_TYPE")) {
-            SymbolTable.error(formal.ctx, type.token, "Method " + methodScope +
-                    " of class " + classScope + " has formal parameter " + name.token.getText() +
-                    " with illegal type " + type.token.getText());
-        } else if (SymbolTable.globals.lookupClassSymbol(type.token.getText()) == null) {
-            SymbolTable.error(formal.ctx, type.token, "Method " + methodScope + " of class " +
-                    classScope + " has formal parameter " + name.token.getText() +
-                    " with undefined type " + type.token.getText());
+        if (formal.type.token.getText().equals("SELF_TYPE")) {
+            SymbolTable.error(formal.ctx, formal.type.token, "Method " + methodScope +
+                    " of class " + classScope + " has formal parameter " + formal.name.token.getText() +
+                    " with illegal type " + formal.type.token.getText());
+        } else if (SymbolTable.globals.lookupClassSymbol(formal.type.token.getText()) == null) {
+            SymbolTable.error(formal.ctx, formal.type.token, "Method " + methodScope + " of class " +
+                    classScope + " has formal parameter " + formal.name.token.getText() +
+                    " with undefined type " + formal.type.token.getText());
         }
         return null;
     }
@@ -130,15 +133,13 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
                 // check parameter types
 
                 for (int i = 0; i < Math.min(funcDef.params.size(), parentMethodSymbol.getParams().size()); i++) {
-                    var formal = funcDef.params.get(i);
-                    var parentFormal = parentMethodSymbol.getParams().get(i);
-                    if (!formal.type.token.getText().equals(parentFormal)) {
-                        SymbolTable.error(funcDef.ctx, formal.type.token, "Class " +
+                    if (!funcDef.params.get(i).type.token.getText().equals(parentMethodSymbol.getParams().get(i))) {
+                        SymbolTable.error(funcDef.ctx, funcDef.params.get(i).type.token, "Class " +
                                 classScope + " overrides method " + name.token.getText() +
                                 " but changes type of formal parameter " +
-                                formal.name.token.getText() + " from " +
-                                parentFormal + " to " +
-                                formal.type.token.getText());
+                                funcDef.params.get(i).name.token.getText() + " from " +
+                                parentMethodSymbol.getParams().get(i) + " to " +
+                                funcDef.params.get(i).type.token.getText());
                     }
                 }
 
@@ -180,12 +181,6 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
             }
             var parent = ((ClassSymbol) bodyType).getParentClassSymbol();
             while (parent != null) {
-                if (parent.getName().equals(BasicClasses.OBJECT.getName())) {
-                    if (methodReturnType == parent) {
-                        return methodReturnType;
-                    }
-                    break;
-                }
                 if (methodReturnType == parent) {
                     return methodReturnType;
                 }
@@ -215,15 +210,6 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
     public Symbol visit(AssignExpr assignExpr) {
         var left = assignExpr.name.accept(this);
         var right = assignExpr.e.accept(this);
-        // check if the left is SELF_TYPE
-//        if (left.getName().equals("SELF_TYPE")) {
-//            // if left is self_type, then set left as the type of the class it's in
-//            var currentScope = assignExpr.getScope();
-//            while (!(currentScope instanceof ClassSymbol)) {
-//                currentScope = currentScope.getParent();
-//            }
-//            left = SymbolTable.globals.lookupClassSymbol(((ClassSymbol) currentScope).getName());
-//        }
 
 
         // if there is no assignment, then return the left type
@@ -234,23 +220,11 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
             return right;
         }
 
-//        // check if the right is SELF_TYPE
-//        if (right.getName().equals("SELF_TYPE")) {
-//            // if right is self_type, then set right as the type of the class it's in
-//            var currentScope = assignExpr.getScope();
-//            while (!(currentScope instanceof ClassSymbol)) {
-//                currentScope = currentScope.getParent();
-//            }
-//            right = SymbolTable.globals.lookupClassSymbol(((ClassSymbol) currentScope).getName());
-//        }
-
         // search on the type tree to see if the right expression
         // matches the type with the left
         var parent = ((ClassSymbol) right).getParentClassSymbol();
-//        System.out.println(assignExpr.e.token.getLine() + ":" + assignExpr.e.token.getCharPositionInLine() + " " + right + " " + parent);
 
         while (parent != null && !parent.getName().equals(BasicClasses.OBJECT.getName())) {
-//            System.out.println("WHILE " + assignExpr.e.token.getLine() + ":" + assignExpr.e.token.getCharPositionInLine() + " " + right + " " + parent);
             if (left == parent) {
                 return left;
             }
@@ -274,7 +248,6 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
         var caller = dispatch.object;
         var callerType = (ClassSymbol) caller.accept(this);
         var deepestCallerType = callerType;
-//        System.out.println(callerType);
         // check if callerType is self type
         if (callerType.getName().equals("SELF_TYPE")) {
             // set caller type as the type of the class the expression is in
@@ -333,7 +306,6 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
 
         var call = dispatch.call;
 
-//        System.out.println(callSymbol.getType());
 
         if (callSymbol == null) {
             SymbolTable.error(call.ctx, call.name.token, "Undefined method " +
@@ -383,7 +355,6 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
         }
 
         // if the return type is self type
-//        System.out.println(callSymbol.getType());
         if (callSymbol.getType().getName().equals("SELF_TYPE")) {
             // check the caller type
             // if caller type is self_type, then return the type of the class where the dispatch appears
@@ -406,7 +377,6 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
         var parentClassSymbol = call.getParentClassSymbol();
         var callSymbol = (MethodSymbol) call.getSymbol();
         // check if method exists in parent class
-//        System.out.println("HERE" + call.getParentClassSymbol().lookupMethodSymbol(call.name.token.getText()));
         if (callSymbol == null) {
             call.setSymbol(call.getParentClassSymbol().lookupMethodSymbol(call.name.token.getText()));
         }
@@ -436,7 +406,7 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
             if (callArgumentType != null) {
 
                 var parent = ((ClassSymbol) callArgumentType).getParentClassSymbol();
-                if(!callArgumentType.getName().equals(methodFormalType.getName())) {
+                if (!callArgumentType.getName().equals(methodFormalType.getName())) {
                     while (parent != null) {
                         if (methodFormalType == parent) {
                             callArgumentType = methodFormalType;
@@ -489,16 +459,26 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
         return let.let_block_expr.accept(this);
     }
 
+
     @Override
     public Symbol visit(Case case1) {
         case1.cond.accept(this);
         ClassSymbol returnType = null;
         for (var c : case1.caseBranches) {
             var branchType = (ClassSymbol) c.accept(this);
-            var returnParent = returnType == null ? null : ((ClassSymbol) returnType).getParentClassSymbol();
-            var branchParent = branchType == null ? null : ((ClassSymbol) branchType).getParentClassSymbol();
-            //System.out.println(returnType + " " + branchType);
-            //System.out.println();
+            ClassSymbol returnParent;
+            if (returnType == null) {
+                returnParent = null;
+            } else {
+                returnParent = returnType.getParentClassSymbol();
+            }
+            ClassSymbol branchParent;
+            if (branchType == null) {
+                branchParent = null;
+            } else {
+                branchParent = branchType.getParentClassSymbol();
+            }
+
             if (returnType == null) {
                 returnType = branchType;
                 continue;
@@ -506,23 +486,25 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
             if (branchType == null || branchType == returnType) {
                 continue;
             }
+
+            boolean matched = false;
             while (branchParent != null) {
                 if (branchParent.getName().equals(BasicClasses.OBJECT.getName())) {
                     break;
                 }
                 if (returnType == branchParent) {
-                    returnType = branchParent;
-                    returnParent = null;
+                    matched = true;
                     break;
                 }
                 branchParent = (ClassSymbol) branchParent.getParentClassSymbol();
             }
+
+            if (matched) {
+                continue;
+            }
+
             while (returnParent != null) {
-                if (returnParent.getName().equals(BasicClasses.OBJECT.getName())) {
-                    returnType = BasicClasses.OBJECT;
-                    break;
-                }
-                if (branchType == returnParent) {
+                if (branchType == returnParent || returnParent == BasicClasses.OBJECT) {
                     returnType = returnParent;
                     break;
                 }
@@ -534,11 +516,10 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
 
     @Override
     public Symbol visit(NewType newType) {
-        var type = newType.type;
 
-        if (SymbolTable.globals.lookupClassSymbol(type.token.getText()) == null) {
-            SymbolTable.error(newType.ctx, type.token,
-                    "new is used with undefined type " + type.token.getText());
+        if (SymbolTable.globals.lookupClassSymbol(newType.type.token.getText()) == null) {
+            SymbolTable.error(newType.ctx, newType.type.token,
+                    "new is used with undefined type " + newType.type.token.getText());
         }
         return newType.type.accept(this);
     }
@@ -549,22 +530,24 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
         return BasicClasses.BOOL;
     }
 
+    void checkBadOperandType(ASTNode op, ASTNode left, ASTNode right, String operation, Symbol leftType, Symbol rightType) {
+        if (leftType != BasicClasses.INT) {
+            SymbolTable.error(op.ctx, left.token,
+                    "Operand of " + operation + " has type " + leftType
+                            + " instead of Int");
+        }
+        if (rightType != BasicClasses.INT) {
+            SymbolTable.error(op.ctx, right.token,
+                    "Operand of " + operation + " has type " + rightType
+                            + " instead of Int");
+        }
+    }
+
     @Override
     public Symbol visit(Mult mult) {
         var leftType = mult.left.accept(this);
         var rightType = mult.right.accept(this);
-        if (leftType != BasicClasses.INT) {
-            SymbolTable.error(mult.ctx, mult.left.token,
-                    "Operand of " + mult.token.getText()
-                            + " has type " + leftType
-                            + " instead of Int");
-        }
-        if (rightType != BasicClasses.INT) {
-            SymbolTable.error(mult.ctx, mult.right.token,
-                    "Operand of " + mult.token.getText()
-                            + " has type " + rightType.getName()
-                            + " instead of Int");
-        }
+        checkBadOperandType(mult, mult.left, mult.right, mult.token.getText(), leftType, rightType);
         return BasicClasses.INT;
     }
 
@@ -572,16 +555,8 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
     public Symbol visit(Div division) {
         var leftType = division.left.accept(this);
         var rightType = division.right.accept(this);
-        if (leftType != BasicClasses.INT) {
-            SymbolTable.error(division.ctx, division.left.token,
-                    "Operand of " + division.token.getText() + " has type "
-                            + leftType.getName() + " instead of Int");
-        }
-        if (rightType != BasicClasses.INT) {
-            SymbolTable.error(division.ctx, division.right.token,
-                    "Operand of " + division.token.getText() + " has type "
-                            + rightType.getName() + " instead of Int");
-        }
+        checkBadOperandType(division, division.left, division.right, division.token.getText(), leftType, rightType);
+
         return BasicClasses.INT;
     }
 
@@ -592,16 +567,8 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
         if (leftType == null || rightType == null) {
             return BasicClasses.INT;
         }
-        if (leftType != BasicClasses.INT) {
-            SymbolTable.error(addition.ctx, addition.left.token,
-                    "Operand of " + addition.token.getText() + " has type "
-                            + leftType.getName() + " instead of Int");
-        }
-        if (rightType != BasicClasses.INT) {
-            SymbolTable.error(addition.ctx, addition.right.token,
-                    "Operand of " + addition.token.getText() + " has type "
-                            + rightType.getName() + " instead of Int");
-        }
+        checkBadOperandType(addition, addition.left, addition.right, addition.token.getText(), leftType, rightType);
+
         return BasicClasses.INT;
     }
 
@@ -609,16 +576,8 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
     public Symbol visit(Minus subtraction) {
         var leftType = subtraction.left.accept(this);
         var rightType = subtraction.right.accept(this);
-        if (leftType != BasicClasses.INT) {
-            SymbolTable.error(subtraction.ctx, subtraction.left.token,
-                    "Operand of " + subtraction.token.getText() + " has type "
-                            + leftType + " instead of Int");
-        }
-        if (rightType != BasicClasses.INT) {
-            SymbolTable.error(subtraction.ctx, subtraction.right.token,
-                    "Operand of " + subtraction.token.getText() + " has type "
-                            + rightType + " instead of Int");
-        }
+        checkBadOperandType(subtraction, subtraction.left, subtraction.right, subtraction.token.getText(), leftType, rightType);
+
         return BasicClasses.INT;
     }
 
@@ -637,32 +596,22 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
     public Symbol visit(Relational relational) {
         var leftType = relational.left.accept(this);
         var rightType = relational.right.accept(this);
-        if (leftType != BasicClasses.INT) {
-            SymbolTable.error(relational.ctx, relational.left.token,
-                    "Operand of " + relational.operation + " has type "
-                            + leftType.getName() + " instead of Int");
-        }
-        if (rightType != BasicClasses.INT) {
-            SymbolTable.error(relational.ctx, relational.right.token,
-                    "Operand of " + relational.operation + " has type "
-                            + rightType.getName() + " instead of Int");
-        }
+        checkBadOperandType(relational, relational.left, relational.right, relational.operation, leftType, rightType);
+
         return BasicClasses.BOOL;
+    }
+
+    boolean isBasicType(Symbol type) {
+        return type.getName().equals("Int") || type.getName().equals("Bool") || type.getName().equals("String");
     }
 
     @Override
     public Symbol visit(Equal equal) {
         var leftType = equal.left.accept(this);
         var rightType = equal.right.accept(this);
-        if (leftType == BasicClasses.INT || leftType == BasicClasses.BOOL
-                || leftType == BasicClasses.STRING) {
+
+        if (isBasicType(leftType) || isBasicType(rightType)) {
             if (leftType != rightType) {
-                SymbolTable.error(equal.ctx, equal.token, "Cannot compare "
-                        + leftType.getName() + " with " + rightType.getName());
-            }
-        } else if (rightType == BasicClasses.INT || rightType == BasicClasses.BOOL
-                || rightType == BasicClasses.STRING) {
-            if (rightType != leftType) {
                 SymbolTable.error(equal.ctx, equal.token, "Cannot compare "
                         + leftType.getName() + " with " + rightType.getName());
             }
@@ -742,12 +691,9 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
                 return null;
             }
 
-            var parent = ((ClassSymbol) rvalueType).getParentClassSymbol();
-            while (parent != null && !parent.getName().equals(BasicClasses.OBJECT.getName())) {
-                if (lvalueType == parent) {
-                    return lvalueType;
-                }
-                parent = parent.getParentClassSymbol();
+            var LUB = getLUB((ClassSymbol) rvalueType, (ClassSymbol) lvalueType);
+            if (LUB != null) {
+                return LUB;
             }
             if (lvalueType != rvalueType) {
                 SymbolTable.error(varDef.ctx, varDef.init.token, "Type " + rvalueType +
@@ -768,12 +714,10 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
 
     @Override
     public Symbol visit(LetLocal letLocal) {
-        var name = letLocal.name;
-        var type = letLocal.type;
-        if (!(type.token.getText().equals("SELF_TYPE")) && SymbolTable.globals.lookupClassSymbol(type.token.getText()) == null) {
-            SymbolTable.error(letLocal.ctx, type.token,
-                    "Let variable " + name.token.getText()
-                            + " has undefined type " + type.token.getText());
+        if (!(letLocal.type.token.getText().equals("SELF_TYPE")) && SymbolTable.globals.lookupClassSymbol(letLocal.type.token.getText()) == null) {
+            SymbolTable.error(letLocal.ctx, letLocal.type.token,
+                    "Let variable " + letLocal.name.token.getText()
+                            + " has undefined type " + letLocal.type.token.getText());
         }
         var nameType = ((AttributeSymbol) letLocal.getSymbol()).getType();
         if (nameType == null) {
@@ -784,18 +728,16 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
             if (expressionType == null) {
                 return nameType;
             }
-            var parent = ((ClassSymbol) expressionType).getParentClassSymbol();
-            while (parent != null && !parent.getName().equals(BasicClasses.OBJECT.getName())) {
-                if (nameType == parent) {
-                    return nameType;
-                }
-                parent = parent.getParentClassSymbol();
+            var LUB = getLUB((ClassSymbol) expressionType, (ClassSymbol) nameType);
+            if (LUB != null) {
+                return LUB;
             }
+
             if (nameType != expressionType) {
                 SymbolTable.error(letLocal.ctx, letLocal.e.token, "Type "
                         + expressionType
                         + " of initialization expression of identifier "
-                        + name.token.getText()
+                        + letLocal.name.token.getText()
                         + " is incompatible with declared type "
                         + nameType);
             }
@@ -805,18 +747,17 @@ public class ResolutionPassVisitor implements ASTVisitor<Symbol> {
 
     @Override
     public Symbol visit(CaseBranch caseBranch) {
-        var name = caseBranch.name;
-        var type = caseBranch.type;
-        if (type.token.getText().equals("SELF_TYPE")) {
-            SymbolTable.error(caseBranch.ctx, type.token,
-                    "Case variable " + name.token.getText()
-                            + " has illegal type " + type.token.getText());
+        if (caseBranch.type.token.getText().equals("SELF_TYPE")) {
+            SymbolTable.error(caseBranch.ctx, caseBranch.type.token,
+                    "Case variable " + caseBranch.name.token.getText()
+                            + " has illegal type " + caseBranch.type.token.getText());
             return null;
-        } else if (SymbolTable.globals
-                .lookupClassSymbol(type.token.getText()) == null) {
-            SymbolTable.error(caseBranch.ctx, type.token,
-                    "Case variable " + name.token.getText()
-                            + " has undefined type " + type.token.getText());
+        }
+        if (SymbolTable.globals
+                .lookupClassSymbol(caseBranch.type.token.getText()) == null) {
+            SymbolTable.error(caseBranch.ctx, caseBranch.type.token,
+                    "Case variable " + caseBranch.name.token.getText()
+                            + " has undefined type " + caseBranch.type.token.getText());
         }
         return caseBranch.expression.accept(this);
     }

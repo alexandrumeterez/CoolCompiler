@@ -16,7 +16,6 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
     public Void visit(ObjectId objectId) {
         objectId.setScope(currentScope);
         objectId.setSymbol(objectId.getScope().lookupAttributeSymbol(objectId.token.getText()));
-//        System.out.println("defobjectid " + objectId.token + currentScope +" "+objectId.getSymbol());
 
         return null;
     }
@@ -34,21 +33,21 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
 
     @Override
     public Void visit(Formal formal) {
-        var name = formal.name;
-        var attributeSymbol = new AttributeSymbol(name.token.getText());
+        var attributeSymbol = new AttributeSymbol(formal.name.token.getText());
         attributeSymbol.setType(SymbolTable.globals.lookupClassSymbol(formal.type.token.getText()));
         attributeSymbol.setOffset(offset);
         attributeSymbol.setLocation("fp");
         var currentMethodScope = (MethodSymbol) currentScope;
         var currentMethodClassScope = (ClassSymbol) currentMethodScope.getParent();
-        if (name.token.getText().equals("self")) {
+        if (formal.name.token.getText().equals("self")) {
             SymbolTable.error(formal.ctx, formal.token, "Method " + currentMethodScope + " of class " + currentMethodClassScope
-                    + " has formal parameter with illegal name " + name.token.getText());
+                    + " has formal parameter with illegal name " + formal.name.token.getText());
         }
-        if (!currentScope.add(attributeSymbol)) {
+        boolean notExists = currentScope.add(attributeSymbol);
+        if (!notExists) {
             SymbolTable.error(formal.ctx, formal.token,
                     "Method " + currentMethodScope + " of class " + currentMethodClassScope +
-                            " redefines formal parameter " + name.token.getText());
+                            " redefines formal parameter " + formal.name.token.getText());
         }
         formal.setScope(currentScope);
         formal.setSymbol(attributeSymbol);
@@ -64,13 +63,12 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
 
         methodSymbol.setType(SymbolTable.globals.lookupClassSymbol(funcDef.return_type.token.getText()));
         //check if method is redefined
-        if (!currentScope.add(methodSymbol)) {
+        boolean notExists = currentScope.add(methodSymbol);
+        if (!notExists) {
             SymbolTable.error(funcDef.ctx, funcDef.token, "Class " + currentScope + " redefines method " + name.token.getText());
-//            return null;
         }
 
         // enter method scope
-//        System.out.println((ClassSymbol)currentScope);
 
         currentScope = methodSymbol;
         for(var v : funcDef.params) {
@@ -124,9 +122,9 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
         for (var member : classDef.features) {
             member.accept(this);
         }
-        var self = new AttributeSymbol("self");
-        self.setType(SymbolTable.globals.lookupClassSymbol("SELF_TYPE"));
-        classSymbol.add(self);
+        AttributeSymbol selfAttribute = new AttributeSymbol("self");
+        selfAttribute.setType(SymbolTable.globals.lookupClassSymbol("SELF_TYPE"));
+        classSymbol.add(selfAttribute);
         currentScope = currentScope.getParent();
 
         return null;
@@ -157,13 +155,10 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
     public Void visit(Call call) {
         for (var a : call.args) {
             a.accept(this);
-//            System.out.println(a.token + " " + a.getSymbol());
         }
 
         call.setScope(currentScope);
         call.setParentClassSymbolFromCurrentScope(currentScope);
-//        System.out.println(call.token);
-//        System.out.println(call.getParentClassSymbol());
 
         // set for special classes
         var functionName = call.name.token.getText();
@@ -330,19 +325,15 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
 
     @Override
     public Void visit(VarDef varDef) {
-        var name = varDef.name;
-        var attributeSymbol = new AttributeSymbol(name.token.getText());
-//        if(varDef.type.token.getText().equals("SELF_TYPE")) {
-//            attributeSymbol.setType((ClassSymbol) currentScope);
-//        } else {
+        var attributeSymbol = new AttributeSymbol(varDef.name.token.getText());
         attributeSymbol.setType(SymbolTable.globals.lookupClassSymbol(varDef.type.token.getText()));
-//        }
 
-        if (name.token.getText().equals("self")) {
-            SymbolTable.error(varDef.ctx, varDef.token, "Class " + currentScope + " has attribute with illegal name " + name.token.getText());
+        if (varDef.name.token.getText().equals("self")) {
+            SymbolTable.error(varDef.ctx, varDef.token, "Class " + currentScope + " has attribute with illegal name " + varDef.name.token.getText());
         }
-        if (!currentScope.add(attributeSymbol)) {
-            SymbolTable.error(varDef.ctx, varDef.token, "Class " + currentScope + " redefines attribute " + name.token.getText());
+        boolean notExists = currentScope.add(attributeSymbol);
+        if (!notExists) {
+            SymbolTable.error(varDef.ctx, varDef.token, "Class " + currentScope + " redefines attribute " + varDef.name.token.getText());
             return null;
         }
 
@@ -362,16 +353,13 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
 
     @Override
     public Void visit(LetLocal letLocal) {
-
-        var name = letLocal.name;
-        var letSymbol = new MethodSymbol(currentScope, "let_" + name.token.getText());
-        var letLocalSymbol = new AttributeSymbol(name.token.getText());
+        var letSymbol = new MethodSymbol(currentScope, "let_" + letLocal.name.token.getText());
+        var letLocalSymbol = new AttributeSymbol(letLocal.name.token.getText());
         letLocalSymbol.setType(SymbolTable.globals.lookupClassSymbol(letLocal.type.token.getText()));
         letLocalSymbol.setOffset(letOffset);
-//        System.out.println(letLocalSymbol + " " + letOffset);
         letLocalSymbol.setLocation("fp");
-        if (name.token.getText().equals("self")) {
-            SymbolTable.error(letLocal.ctx, letLocal.token, "Let variable has illegal name " + name.token.getText());
+        if (letLocal.name.token.getText().equals("self")) {
+            SymbolTable.error(letLocal.ctx, letLocal.token, "Let variable has illegal name " + letLocal.name.token.getText());
         }
         letLocal.setScope(letSymbol);
         if (letLocal.e != null) {
@@ -386,16 +374,15 @@ public class DefinitionPassVisitor implements ASTVisitor<Void> {
 
     @Override
     public Void visit(CaseBranch caseBranch) {
-        var name = caseBranch.name;
         var caseBranchScope = new MethodSymbol(currentScope, "caseBranch");
-        var caseBranchAttributeSymbol = new AttributeSymbol(name.token.getText());
+        var caseBranchAttributeSymbol = new AttributeSymbol(caseBranch.name.token.getText());
         caseBranchAttributeSymbol.setType(SymbolTable.globals.lookupClassSymbol(caseBranch.type.token.getText()));
         caseBranchAttributeSymbol.setLocation("fp");
         caseBranchAttributeSymbol.setOffset(-4);
         currentScope = caseBranchScope;
         currentScope.add(caseBranchAttributeSymbol);
-        if (name.token.getText().equals("self")) {
-            SymbolTable.error(caseBranch.ctx, caseBranch.token, "Case variable has illegal name " + name.token.getText());
+        if (caseBranch.name.token.getText().equals("self")) {
+            SymbolTable.error(caseBranch.ctx, caseBranch.token, "Case variable has illegal name " + caseBranch.name.token.getText());
         }
         caseBranch.setScope(currentScope);
         caseBranch.setSymbol(caseBranchAttributeSymbol);
